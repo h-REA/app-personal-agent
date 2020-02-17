@@ -97,7 +97,7 @@ const GlobalStyle = createGlobalStyle`
       border-radius: 0;
       background: rgba(0,0,0,.1);
   }
- 
+
 `;
 
 const GenericAlert = styled.div`
@@ -127,7 +127,9 @@ const EhnanchedNotifications = compose(
 ReactDOM.render(
   <ThemeProvider theme={Dark}>
     <ApolloProvider client={client}>
-      <Router>
+      <GlobalStyle />
+      <AppTemplate />
+    {/*  <Router>
         <div>
           <GlobalStyle />
           <Query query={getNotification}>
@@ -144,7 +146,7 @@ ReactDOM.render(
             />
           </Switch>
         </div>
-      </Router>
+      </Router> */ }
     </ApolloProvider>
   </ThemeProvider>,
   document.getElementById("root")
