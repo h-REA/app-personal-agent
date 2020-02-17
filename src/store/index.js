@@ -1,10 +1,12 @@
 import {ApolloClient} from 'apollo-client'
-import {HttpLink} from 'apollo-link-http'
+// import {HttpLink} from 'apollo-link-http'
+import { SchemaLink } from 'apollo-link-schema'
 import {InMemoryCache, IntrospectionFragmentMatcher} from 'apollo-cache-inmemory'
 import introspectionQueryResultData from '../fragmentTypes.json'
 import { defaults, resolvers } from "./resolvers";
 import {withClientState} from 'apollo-link-state'
 import {ApolloLink} from 'apollo-link'
+import schema from '@valueflows/vf-graphql-holochain'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData
@@ -26,10 +28,11 @@ const stateLink = withClientState({
 
 const link = ApolloLink.from([
   stateLink,
-  new HttpLink({
+  new SchemaLink({ schema }),
+  // new HttpLink({
   // uri: 'https://ocp.freedomcoop.eu/api/graph'
-  uri: 'https://testocp.freedomcoop.eu/api/graph'
-  })
+  // uri: 'https://testocp.freedomcoop.eu/api/graph'
+  // })
 ])
 
 export const client = new ApolloClient({

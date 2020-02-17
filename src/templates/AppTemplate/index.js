@@ -21,23 +21,18 @@ const Surface = styled.div`
 `;
 
 const Whole = styled.div`
-  
+
 `;
 
 const AppTemplate = props => {
   return (
-    <Query
-      query={agentRelationships}
-      variables={{
-        token: localStorage.getItem("oce_token")
-      }}
-    >
+    <Query query={agentRelationships}>
       {({ loading, error, data, refetch, client }) => {
         if (loading) return <LoadingMini />;
         if (error) return (<ErrorMini refetch={refetch} message={`Error! ${error.message}`} />)
         return (
           <Whole>
-            <Header 
+            <Header
               history={props.history}
               providerId={data.viewer.myAgent.id}
               providerImage={data.viewer.myAgent.image}
@@ -85,8 +80,7 @@ const AppTemplate = props => {
 };
 
 const agentRelationships = gql`
-  query($token: String) {
-    viewer(token: $token) {
+  query {
       myAgent {
         id
         name
@@ -99,7 +93,6 @@ const agentRelationships = gql`
           }
         }
       }
-    }
   }
 `;
 
