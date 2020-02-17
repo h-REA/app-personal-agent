@@ -19,7 +19,6 @@ export default compose(
         let commCache = store.readQuery({
           query: getComm,
           variables: {
-            token: localStorage.getItem("oce_token"),
             id: intentId
           }
         });
@@ -36,7 +35,6 @@ export default compose(
           onClick={() =>
             addProvider({
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: intentId,
                 providerId: providerId
               }
@@ -94,7 +92,6 @@ export const DeleteProvider = compose(
           onClick={() =>
             addProvider({
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: intentId,
                 providerId: 0
               }

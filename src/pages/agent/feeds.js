@@ -29,7 +29,6 @@ export default ({ id, openValidationModal, providerId }) => (
   <Query
     query={getFeed}
     variables={{
-      token: localStorage.getItem("oce_token"),
       id: id
     }}
   >
@@ -41,9 +40,9 @@ export default ({ id, openValidationModal, providerId }) => (
         );
       return (
         <FeedList>
-          {data.viewer.agent.agentEconomicEvents.map((ev, i) => (
+          {data.agent.agentEconomicEvents.map((ev, i) => (
             <Feed
-              scopeId={data.viewer.agent.id}
+              scopeId={data.agent.id}
               image={ev.provider.image}
               commitmentId={ev.fulfills.length > 0 ? ev.fulfills.map(f => f.fulfills.id)[0] : null}
               key={i}

@@ -48,7 +48,6 @@ const wrapperComponent = compose(
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
       let date = moment(values.date).format("YYYY-MM-DD");
       let eventMutationVariables = {
-        token: localStorage.getItem("oce_token"),
         id: props.providerId,
         providerId: props.providerId,
         receiverId: props.scopeId,
@@ -69,14 +68,12 @@ const wrapperComponent = compose(
             let EventsCache = store.readQuery({
               query: queryEvents,
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: props.scopeId
               }
             });
             let CommitmentCache = store.readQuery({
               query: getComm,
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: props.commitmentId
               }
             });
@@ -127,26 +124,22 @@ const wrapperComponent = compose(
               }
             };
             // Add the last economicevent to the events list cache, related to its commitment
-            EventsCache.viewer.agent.agentEconomicEvents.unshift(ev);
-            CommitmentCache.viewer.commitment.fulfilledBy.unshift({
+            EventsCache.agent.agentEconomicEvents.unshift(ev);
+            CommitmentCache.commitment.fulfilledBy.unshift({
               fulfilledBy: ev,
               __typename: "Fulfillment"
             });
             store.writeQuery({
               query: queryEvents,
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: props.scopeId
               },
-              data: { viewer: EventsCache.viewer }
             });
             store.writeQuery({
               query: getComm,
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: props.scopeId
               },
-              data: { viewer: CommitmentCache.viewer }
             });
             return null
           }

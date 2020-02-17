@@ -39,7 +39,6 @@ export default ({ toggleSkills, providerId }) => (
       <Query
         query={GET_SKILLS}
         variables={{
-          token: localStorage.getItem("oce_token")
         }}
       >
         {({ loading, error, data, refetch, client }) => {
@@ -51,7 +50,7 @@ export default ({ toggleSkills, providerId }) => (
                 message={`Error! ${error.message}`}
               />
             );
-          let skills = data.viewer.myAgent.agentSkillRelationships.map(s => ({
+          let skills = data.myAgent.agentSkillRelationships.map(s => ({
             value: s.resourceClassification.id,
             label: s.resourceClassification.name
           }));
@@ -68,11 +67,11 @@ export default ({ toggleSkills, providerId }) => (
 
 
 const Body = s.div`
-  
+
 `;
 
 const SkillsWrapper = s.div`
-  
+
 `;
 
 const Wrapper = s.div`

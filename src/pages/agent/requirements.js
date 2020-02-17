@@ -12,7 +12,6 @@ export default compose(
   <Query
     query={getCommitments}
     variables={{
-      token: localStorage.getItem("oce_token"),
       id: props.param
     }}
   >
@@ -22,7 +21,7 @@ export default compose(
         return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
         );
-      let intents = data.viewer.agent.agentCommitments;
+      let intents = data.agent.agentCommitments;
       let filteredIntents = [];
       if (props.filter === 'active') {
         filteredIntents = intents.filter(i => !i.isFinished);
@@ -37,7 +36,7 @@ export default compose(
       } else {
         filteredIntents = intents;
       }
-            
+
       return (
         <div style={{ display: "flex", height: "100%" }}>
           <PropsRoute
@@ -60,7 +59,7 @@ export default compose(
             isCompletedOpen={props.isCompletedOpen}
             handleCompletedOpen={props.handleCompletedOpen}
           />
-         
+
         </div>
       );
     }}

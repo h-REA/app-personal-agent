@@ -24,7 +24,6 @@ export default ({ toggleInfo }) => (
   <Query
     query={GET_AGENT}
     variables={{
-      token: localStorage.getItem("oce_token")
     }}
   >
     {({ loading, error, data, refetch, client }) => {
@@ -41,7 +40,7 @@ export default ({ toggleInfo }) => (
             </Span>
             <Title>Edit general information</Title>
           </Header>
-          <InfoForm agent={data.viewer.myAgent}/>
+          <InfoForm agent={data.myAgent}/>
         </Wrapper>
       );
     }}
@@ -68,7 +67,7 @@ const Span = s.div`
   cursor: pointer;
   `;
 
-const Title = s.h3`  
+const Title = s.h3`
   display: inline-block;
   color: ${props => props.theme.color.p900};
   letter-spacing: 0.5px;

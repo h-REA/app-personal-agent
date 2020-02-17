@@ -58,7 +58,7 @@ export default compose(
       affectedResourceClassifiedAsId: Yup.object().required(
         "Classification is a required field"
       )
-    })  
+    })
 })
 )(({ intent, values, onError, onSuccess, setFieldValue, handleSentenceOpen, client }) => {
   const promiseOptions = (client, val) => {
@@ -68,7 +68,7 @@ export default compose(
         variables: { token: localStorage.getItem("oce_token") }
       })
       .then(res => {
-        let options = res.data.viewer.allResourceClassifications.map(
+        let options = res.data.allResourceClassifications.map(
           resource => ({
             value: resource.id,
             label: resource.name
@@ -220,7 +220,6 @@ export default compose(
               onClick={() =>
                 editSentence({
                   variables: {
-                    token: localStorage.getItem("oce_token"),
                     id: intent.id,
                     action: values.action.value.toLowerCase(),
                     committedResourceClassifiedAsId: values.affectedResourceClassifiedAsId.value,

@@ -57,7 +57,6 @@ export default compose(
             value={moment(due)}
             action={(value) => editDueDate({
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: intentId,
                 due: moment(value).format("YYYY-MM-DD")
               }

@@ -34,7 +34,6 @@ const Sidebar = props => {
       <Query
         query={SidebarData}
         variables={{
-          token: localStorage.getItem("oce_token"),
           id: props.param ? props.param : props.providerId
         }}
       >
@@ -50,13 +49,13 @@ const Sidebar = props => {
           return (
             <React.Fragment>
               <Profile
-                providerName={data.viewer.agent.name}
-                providerImage={data.viewer.agent.image}
-                providerId={data.viewer.agent.id}
+                providerName={data.agent.name}
+                providerImage={data.agent.image}
+                providerId={data.agent.id}
                 location={props.location}
-                type={data.viewer.agent.type}
+                type={data.agent.type}
               />
-              <Menu>  
+              <Menu>
                   <List>
                     <Item>
                       <NavLink

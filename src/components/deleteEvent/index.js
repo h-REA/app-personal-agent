@@ -55,7 +55,6 @@ export default compose(
           onClick={() =>
             deleteEvent({
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: eventId
               }
             })

@@ -57,7 +57,6 @@ const Inventory = props => {
   <Query
     query={getReources}
     variables={{
-      token: localStorage.getItem("oce_token"),
       id: Number(props.providerId)
     }}
   >
@@ -67,7 +66,7 @@ const Inventory = props => {
         return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
         );
-      var datat = data.viewer.agent.ownedEconomicResources.map(r => ({
+      var datat = data.agent.ownedEconomicResources.map(r => ({
           id: r.id,
           name: r.resourceClassifiedAs.name,
           quantity: r.currentQuantity.numericValue,

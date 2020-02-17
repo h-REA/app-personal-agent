@@ -34,9 +34,9 @@ const AppTemplate = props => {
           <Whole>
             <Header
               history={props.history}
-              providerId={data.viewer.myAgent.id}
-              providerImage={data.viewer.myAgent.image}
-              agents={data.viewer.myAgent.agentRelationships}
+              providerId={data.myAgent.id}
+              providerImage={data.myAgent.image}
+              agents={data.myAgent.agentRelationships}
             />
           <Surface>
             <Switch>
@@ -44,10 +44,10 @@ const AppTemplate = props => {
                 component={Agent}
                 location={props.location}
                 path="/agent/:id"
-                providerImage={data.viewer.myAgent.image}
+                providerImage={data.myAgent.image}
                 client={client}
-                providerId={data.viewer.myAgent.id}
-                providerName={data.viewer.myAgent.name}
+                providerId={data.myAgent.id}
+                providerName={data.myAgent.name}
                 toggleValidationModal={props.toggleValidationModal}
                 handleProcess={props.handleProcess}
                 processModalIsOpen={props.processModalIsOpen}
@@ -57,9 +57,9 @@ const AppTemplate = props => {
                 path={props.match.path}
                 location={props.location}
                 client={client}
-                providerId={data.viewer.myAgent.id}
-                providerImage={data.viewer.myAgent.image}
-                providerName={data.viewer.myAgent.name}
+                providerId={data.myAgent.id}
+                providerImage={data.myAgent.image}
+                providerName={data.myAgent.name}
                 toggleValidationModal={props.toggleValidationModal}
                 handleProcess={props.handleProcess}
                 processModalIsOpen={props.processModalIsOpen}
@@ -69,7 +69,7 @@ const AppTemplate = props => {
               modalIsOpen={props.validationModalIsOpen}
               toggleModal={props.toggleValidationModal}
               contributionId={props.validationModalId}
-              myId={data.viewer.myAgent.id}
+              myId={data.myAgent.id}
             />
           </Surface>
           </Whole>

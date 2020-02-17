@@ -46,7 +46,6 @@ const wrapperComponent = compose(
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
       let date = moment(values.date).format("YYYY-MM-DD");
       let eventMutationVariables = {
-        token: localStorage.getItem("oce_token"),
         id: props.providerId,
         providerId: props.providerId,
         receiverId: props.scopeId,
@@ -101,7 +100,7 @@ const wrapperComponent = compose(
               affects: data.createEconomicEvent.economicEvent.affects,
               affectedQuantity: data.createEconomicEvent.economicEvent.affectedQuantity
             };
-            
+
             commitment.fulfilledBy.unshift({
               fulfilledBy: ev,
               __typename: "Fulfillment"

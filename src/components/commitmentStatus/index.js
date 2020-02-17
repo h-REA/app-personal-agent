@@ -37,11 +37,10 @@ export default compose(
           return onSuccess();
         }}
       >
-        {(editStatus, { data }) => ( 
+        {(editStatus, { data }) => (
             <Status checked={isFinished} onClick={() =>
               editStatus({
                 variables: {
-                  token: localStorage.getItem("oce_token"),
                   id: intentId,
                   isFinished: !isFinished
                 }

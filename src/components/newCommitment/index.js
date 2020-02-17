@@ -45,7 +45,6 @@ export default compose(
       let start = moment(values.start).format("YYYY-MM-DD");
       setSubmitting(true);
       let MutationVariables = {
-        token: localStorage.getItem("oce_token"),
         action: values.action.toLowerCase(),
         start: start,
         due: date,
@@ -65,18 +64,16 @@ export default compose(
             let comm = store.readQuery({
               query: getCommitments,
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: props.scopeId
               }
             });
-            comm.viewer.agent.agentCommitments.push(
+            comm.agent.agentCommitments.push(
               data.createCommitment.commitment
             );
             store.writeQuery({
               query: getCommitments,
               data: comm,
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: props.scopeId
               }
             });
@@ -143,7 +140,7 @@ export default compose(
             </CommitmentWrapper>
         </Wrapper>
           <div>
-           
+
             {values.action ? (
               <Actions style={{ margin: "0 10px" }}>
                 <LogEvent

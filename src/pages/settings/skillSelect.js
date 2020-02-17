@@ -87,12 +87,11 @@ export default compose(
         o => !values.agentSkills.some(o2 => o.value === o2.value)
       );
       if (removed.length > 0) {
-        let relToDelete = data.viewer.myAgent.agentSkillRelationships.filter(
+        let relToDelete = data.myAgent.agentSkillRelationships.filter(
           r => r.resourceClassification.id === removed[0].value)
         removed.map(r => {
             return removeSkillMutation({
               variables: {
-                token: localStorage.getItem("oce_token"),
                 id: Number(relToDelete[0].id)
               }
             })
@@ -106,7 +105,6 @@ export default compose(
       } else {
         addSkillMutation({
           variables: {
-            token: localStorage.getItem("oce_token"),
             skillId: added[0].value,
             agentId: providerId
           },
@@ -114,10 +112,9 @@ export default compose(
             let skills = store.readQuery({
               query: GET_SKILLS,
               variables: {
-                token: localStorage.getItem("oce_token")
               }
             });
-            skills.viewer.myAgent.agentSkills.push(
+            skills.myAgent.agentSkills.push(
               data.createAgentResourceClassification.agentResourceClassification
                 .resourceClassification
             );
@@ -125,7 +122,6 @@ export default compose(
               query: GET_SKILLS,
               data: skills,
               variables: {
-                token: localStorage.getItem("oce_token")
               }
             });
           }

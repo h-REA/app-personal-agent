@@ -61,7 +61,6 @@ export default compose(
           onClick={() =>
             createValidation({
               variables: {
-                token: localStorage.getItem("oce_token"),
                 validatedById: providerId,
                 economicEventId: eventId,
                 note: note
@@ -106,7 +105,6 @@ export const DeleteValidation = compose(
         onClick={() =>
           deleteValidation({
             variables: {
-              token: localStorage.getItem("oce_token"),
               id: validationId
             }
           })

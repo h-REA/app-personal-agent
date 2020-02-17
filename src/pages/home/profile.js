@@ -12,7 +12,6 @@ export default props => (
   <Query
     query={getFeed}
     variables={{
-      token: localStorage.getItem("oce_token"),
       id: props.providerId
     }}
   >
@@ -22,7 +21,7 @@ export default props => (
         return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
         );
-      let feed = data.viewer.agent.agentEconomicEvents;
+      let feed = data.agent.agentEconomicEvents;
       return (
         <Contribution>
           <Tagline><Span style={{backgroundImage: `url(${Beer})`}}/>Activities</Tagline>

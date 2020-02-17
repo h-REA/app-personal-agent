@@ -156,7 +156,6 @@ export default compose(
       let start = moment(values.start).format("YYYY-MM-DD");
       setSubmitting(true);
       let vars = {
-        token: localStorage.getItem("oce_token"),
         name: values.title,
         note: props.note,
         scope: props.scopeId,
@@ -173,7 +172,6 @@ export default compose(
               let due = moment(input.due).format("YYYY-MM-DD");
               let start = moment(input.start).format("YYYY-MM-DD");
               let inputVars = {
-                token: localStorage.getItem("oce_token"),
                 action: input.action.toLowerCase(),
                 due: due,
                 start: start,

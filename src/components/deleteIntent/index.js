@@ -18,20 +18,16 @@ export default compose(
         console.log(scopeId)
         let comm = store.readQuery({
             query: getCommitments,
-            variables: {
-              token: localStorage.getItem("oce_token"),
-              id: scopeId
+            variables: {id: scopeId
             }
           });
-          let i =comm.viewer.agent.agentCommitments.findIndex(comm => comm.id === intentId)
-          let newlist = comm.viewer.agent.agentCommitments.splice(i, 1)
+          let i =comm.agent.agentCommitments.findIndex(comm => comm.id === intentId)
+          let newlist = comm.agent.agentCommitments.splice(i, 1)
           console.log(newlist)
           store.writeQuery({
             query: getCommitments,
             data: newlist,
-            variables: {
-              token: localStorage.getItem("oce_token"),
-              id: scopeId
+            variables: {id: scopeId
             }
           });
       toggleModal()
@@ -42,9 +38,7 @@ export default compose(
       <div
         onClick={() =>
           deleteCommitment({
-            variables: {
-              token: localStorage.getItem("oce_token"),
-              id: intentId,
+            variables: {id: intentId,
             }
           })
         }

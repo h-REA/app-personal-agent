@@ -13,7 +13,6 @@ export default compose(
   <Query
     query={getAgentProcesses}
     variables={{
-      token: localStorage.getItem("oce_token"),
       id: props.providerId
     }}
   >
@@ -24,7 +23,7 @@ export default compose(
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
         );
       let filteredProcesses= []
-      let processes = data.viewer.agent.agentProcesses;
+      let processes = data.agent.agentProcesses;
       if (props.filter === 'active') {
         filteredProcesses = processes.filter(i => !i.isFinished);
       } else if (props.filter === 'completed') {

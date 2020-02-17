@@ -183,7 +183,6 @@ const Wallet = props => (
   <Query
     query={getRelationship}
     variables={{
-      token: localStorage.getItem("oce_token"),
       id: 1032
     }}
     onCompleted={data => props.getTxs(data)}
@@ -218,7 +217,7 @@ const Wallet = props => (
               <Transfer
                 isWallet={true}
                 id={props.id}
-                agents={data.viewer.agent.agentRelationships}
+                agents={data.agent.agentRelationships}
                 txs={props.txs}
                 addTx={props.addTx}
                 onTxs={props.onTxs}
@@ -318,7 +317,7 @@ export default compose(
       )
         .then(res => res.json())
         .then(res => {
-          let txs = res.transactions.map(o => props.addTx(data.viewer.agent.agentRelationships, o));
+          let txs = res.transactions.map(o => props.addTx(data.agent.agentRelationships, o));
           let newTxs = txs.filter(tx => tx.provider && tx.receiver);
           return props.onTxs(newTxs);
         })
@@ -328,7 +327,6 @@ export default compose(
   graphql(getRelationship, {
     options: props => ({
       variables: {
-        token: localStorage.getItem("oce_token"),
         id: 1032
       }
     }),

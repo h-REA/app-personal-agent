@@ -34,14 +34,13 @@ export default props => {
             <Query
               query={getSkillsCommitments}
               variables={{
-                token: localStorage.getItem("oce_token"),
                 id: props.providerId
               }}
             >
               {({ loading, error, data, client, refetch }) => {
                 if (loading) return <LoadingMini />
                 if (error) return <ErrorMini refetch={refetch} message={`Error! ${error.message}`}/>
-                let intents = data.viewer.person.commitmentsMatchingSkills
+                let intents = data.person.commitmentsMatchingSkills
                 let allIntents = intents
                 .filter(int =>
                     int.provider ? int.provider.id === props.providerId : null

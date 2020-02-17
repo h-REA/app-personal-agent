@@ -9,7 +9,6 @@ export default ({ scopeId, setFieldValue, field }) => {
     <Query
       query={getProcessesByAgent}
       variables={{
-        token: localStorage.getItem("oce_token"),
         id: scopeId
       }}
     >
@@ -25,7 +24,7 @@ export default ({ scopeId, setFieldValue, field }) => {
               setFieldValue("process", { value: val.value, label: val.label })
             }
             value={field.value}
-            options={data.viewer.agent.agentProcesses.map(process => ({
+            options={data.agent.agentProcesses.map(process => ({
               value: process.id,
               label: process.name
             }))}

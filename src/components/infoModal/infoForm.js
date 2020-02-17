@@ -38,7 +38,6 @@ export default compose(
               email: values.email,
               image: values.image,
               note: values.note,
-              token: localStorage.getItem("oce_token")
             }
           })
           .then(res => props.onSuccess())

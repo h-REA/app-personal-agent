@@ -70,7 +70,6 @@ export default compose(
             onClick={() =>
               editSentence({
                 variables: {
-                  token: localStorage.getItem("oce_token"),
                   id: intent.id,
                   note: values.note
                 }

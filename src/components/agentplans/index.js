@@ -52,8 +52,7 @@ const AgentPlans = props => {
       <Query
         query={query}
         variables={{
-          token: localStorage.getItem("oce_token"),
-          id: props.id 
+          id: props.id
         }}
       >
         {({ loading, error, data, refetch }) => {
@@ -68,7 +67,7 @@ const AgentPlans = props => {
           return (
             <div style={{padding: '8px'}}>
             {
-              data.viewer.agent.agentPlans.map((plan, i) => (
+              data.agent.agentPlans.map((plan, i) => (
                 <Plan key={i} plan={plan} />
               ))
             }

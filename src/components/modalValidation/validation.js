@@ -30,7 +30,6 @@ export default compose(
     <Query
       query={GetEvent}
       variables={{
-        token: localStorage.getItem("oce_token"),
         id: Number(contributionId)
       }}
     >
@@ -49,41 +48,41 @@ export default compose(
               <Photo
                 style={{
                   backgroundImage: `url(${
-                    data.viewer.economicEvent.provider.image
+                    data.economicEvent.provider.image
                   })`
                 }}
               />
               <SentenceInfo>
                 <SentenceText>
                   <NavLink
-                    to={`/agent/${data.viewer.economicEvent.provider.id}`}
+                    to={`/agent/${data.economicEvent.provider.id}`}
                   >
-                    {data.viewer.economicEvent.provider.name}
+                    {data.economicEvent.provider.name}
                   </NavLink>{" "}
-                  {data.viewer.economicEvent.action}{" "}
+                  {data.economicEvent.action}{" "}
                   <b>
-                    {data.viewer.economicEvent.affectedQuantity.numericValue +
+                    {data.economicEvent.affectedQuantity.numericValue +
                       " " +
-                      data.viewer.economicEvent.affectedQuantity.unit.name}
+                      data.economicEvent.affectedQuantity.unit.name}
                   </b>{" "}
-                  {data.viewer.economicEvent.inputOf ? 
-                  `${<i>of</i>}  ${data.viewer.economicEvent.inputOf.name}`
+                  {data.economicEvent.inputOf ?
+                  `${<i>of</i>}  ${data.economicEvent.inputOf.name}`
                   : null}
-                  
+
                 </SentenceText>
-                <Note>{data.viewer.economicEvent.note}</Note>
+                <Note>{data.economicEvent.note}</Note>
                 <Secondary>
                   <Date>
-                    {moment(data.viewer.economicEvent.start).format("DD MMM")}
+                    {moment(data.economicEvent.start).format("DD MMM")}
                   </Date>
-                  { data.viewer.economicEvent.inputOf && data.viewer.economicEvent.inputOf.processPlan ? (
+                  { data.economicEvent.inputOf && data.economicEvent.inputOf.processPlan ? (
                     <Plan>
                       <NavLink
                         to={`/plan/${
-                           data.viewer.economicEvent.inputOf.processPlan.id
+                           data.economicEvent.inputOf.processPlan.id
                         }`}
                       >
-                        { data.viewer.economicEvent.inputOf.processPlan.name}
+                        { data.economicEvent.inputOf.processPlan.name}
                       </NavLink>
                     </Plan>
                   ) : null}
@@ -92,7 +91,7 @@ export default compose(
             </Sentence>
 
             <Validations>
-              {data.viewer.economicEvent.validations.map((val, i) => {
+              {data.economicEvent.validations.map((val, i) => {
                 return (
                   <ValidationsItem key={i}>
                     <ValMain>
@@ -105,16 +104,16 @@ export default compose(
                     </ValMain>
                     <ValMainNote>{val.note}</ValMainNote>
                     {Number(val.validatedBy.id) === Number(myId) ? (
-                      <DeleteValidation validationId={val.id} eventId={data.viewer.economicEvent.id}/>
+                      <DeleteValidation validationId={val.id} eventId={data.economicEvent.id}/>
                     ) : null}
                   </ValidationsItem>
                 );
               })}
             </Validations>
-            {data.viewer.economicEvent.validations.findIndex(
+            {data.economicEvent.validations.findIndex(
               item => Number(item.validatedBy.id) === Number(myId)
-            ) !== -1 ? null : data.viewer.economicEvent.validations.length >=
-            2 ? null : data.viewer.economicEvent.provider.id === myId ? null : (
+            ) !== -1 ? null : data.economicEvent.validations.length >=
+            2 ? null : data.economicEvent.provider.id === myId ? null : (
               <div>
                 <div
                   style={{

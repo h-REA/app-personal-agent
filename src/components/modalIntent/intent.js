@@ -32,7 +32,6 @@ const Intent = ({
     <Query
       query={getComm}
       variables={{
-        token: localStorage.getItem("oce_token"),
         id: intentId
       }}
     >
@@ -42,7 +41,7 @@ const Intent = ({
           return (
             <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
           );
-        let intent = data.viewer.commitment;
+        let intent = data.commitment;
         return (
           <Wrapper>
             <First>
@@ -174,7 +173,7 @@ const Intent = ({
                 resource={intent.resourceClassifiedAs.name}
               />
             </Actions>
-            {intent.isDeletable ? 
+            {intent.isDeletable ?
             <DeleteIntent>
               <ButtonDeleteIntent toggleModal={toggleModal} intentId={intentId} scopeId={scopeId}/>
             </DeleteIntent>

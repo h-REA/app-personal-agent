@@ -44,7 +44,6 @@ export default compose(
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
       let date = moment(values.date).format("YYYY-MM-DD");
       let eventMutationVariables = {
-        token: localStorage.getItem("oce_token"),
         id: props.providerId,
         createResource: true,
         providerId: props.providerId,

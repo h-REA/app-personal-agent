@@ -22,13 +22,12 @@ export const getResourcesByAction = (client, action, id, val) => {
     .query({
       query: getResourcesByContextByAction,
       variables: {
-        token: localStorage.getItem("oce_token"),
         action: action.toLowerCase(),
         id: id
       }
     })
     .then(res => {
-      let options = res.data.viewer.agent.agentDefinedResourceClassifications.map(
+      let options = res.data.agent.agentDefinedResourceClassifications.map(
         resource => {
           return (
             {
@@ -55,7 +54,7 @@ export const getAllResources = (client,id, val) => {
       variables: { token: localStorage.getItem("oce_token"), id: id}
     })
     .then(res => {
-      let options = res.data.viewer.agent.agentDefinedResourceClassifications.map(
+      let options = res.data.agent.agentDefinedResourceClassifications.map(
         resource => ({
           value: resource.id,
           label: resource.name
@@ -73,11 +72,10 @@ export const getRelationships = (client, val) => {
     .query({
       query: agentRelationships,
       variables: {
-        token: localStorage.getItem("oce_token")
       }
     })
     .then(res => {
-      let options = res.data.viewer.myAgent.agentRelationships
+      let options = res.data.myAgent.agentRelationships
         .map(plan => ({
           value: plan.object.id,
           label: plan.object.name

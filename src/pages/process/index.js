@@ -12,7 +12,6 @@ const Process = props => (
   <Query
     query={getProcess}
     variables={{
-      token: localStorage.getItem("oce_token"),
       id: Number(props.id)
     }}
   >
@@ -23,38 +22,38 @@ const Process = props => (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
         );
       let percentage =
-        (data.viewer.process.committedInputs.filter(i => i.isFinished).length *
+        (data.process.committedInputs.filter(i => i.isFinished).length *
           100) /
-        data.viewer.process.committedInputs.length;
+        data.process.committedInputs.length;
       return (
         <Body>
           <Wrapper isopen={props.isopen}>
             <Header
-              title={data.viewer.process.name}
-              note={data.viewer.process.note}
-              from={moment(data.viewer.process.plannedStart).format("DD MMM")}
-              to={moment(data.viewer.process.plannedFinish).format("DD MMM")}
-              scope={data.viewer.process.scope}
-              plan={data.viewer.process.processPlan}
-              agents={data.viewer.process.workingAgents}
+              title={data.process.name}
+              note={data.process.note}
+              from={moment(data.process.plannedStart).format("DD MMM")}
+              to={moment(data.process.plannedFinish).format("DD MMM")}
+              scope={data.process.scope}
+              plan={data.process.processPlan}
+              agents={data.process.workingAgents}
             />
-            
+
             <Output
               providerId={props.providerId}
-              outputs={data.viewer.process.committedOutputs}
+              outputs={data.process.committedOutputs}
               percentage={percentage}
-              scopeId={data.viewer.process.scope.id}
-              processId={data.viewer.process.id}
+              scopeId={data.process.scope.id}
+              processId={data.process.id}
             />
             <Content>
               <Actions
                 providerImage={props.providerImage}
                 providerId={props.providerId}
-                scope={data.viewer.process.scope}
-                inputs={data.viewer.process.committedInputs}
+                scope={data.process.scope}
+                inputs={data.process.committedInputs}
                 client={client}
-                events={data.viewer.process.unplannedEconomicEvents}
-                processId={data.viewer.process.id}
+                events={data.process.unplannedEconomicEvents}
+                processId={data.process.id}
               />
             </Content>
           </Wrapper>
