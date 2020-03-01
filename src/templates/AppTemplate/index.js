@@ -32,15 +32,15 @@ const AppTemplate = props => {
         if (error) return (<ErrorMini refetch={refetch} message={`Error! ${error.message}`} />)
         return (
           <Whole>
-            <Header
+            { /* <Header
               history={props.history}
               providerId={data.myAgent.id}
               providerImage={data.myAgent.image}
               agents={data.myAgent.agentRelationships}
-            />
+            /> */ }
           <Surface>
             <Switch>
-              <PropsRoute
+              { /* <PropsRoute
                 component={Agent}
                 location={props.location}
                 path="/agent/:id"
@@ -51,10 +51,10 @@ const AppTemplate = props => {
                 toggleValidationModal={props.toggleValidationModal}
                 handleProcess={props.handleProcess}
                 processModalIsOpen={props.processModalIsOpen}
-              />
+              /> */ }
               <PropsRoute
                 component={Home}
-                path={props.match.path}
+                path={'/'}
                 location={props.location}
                 client={client}
                 providerId={data.myAgent.id}
@@ -65,12 +65,12 @@ const AppTemplate = props => {
                 processModalIsOpen={props.processModalIsOpen}
               />
             </Switch>
-            <ValidationModal
+            { /* <ValidationModal
               modalIsOpen={props.validationModalIsOpen}
               toggleModal={props.toggleValidationModal}
               contributionId={props.validationModalId}
               myId={data.myAgent.id}
-            />
+            /> */ }
           </Surface>
           </Whole>
         );
