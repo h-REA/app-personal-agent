@@ -57,7 +57,7 @@ const Inventory = props => {
   <Query
     query={getReources}
     variables={{
-      id: Number(props.providerId),
+      id: props.providerId,
     }}
   >
     {({ loading, error, data, refetch, client }) => {
@@ -65,7 +65,7 @@ const Inventory = props => {
       if (error) {
  return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        ) 
+        )
 }
       const datat = data.agent.ownedEconomicResources.map(r => ({
           id: r.id,
