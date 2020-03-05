@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 const GetClaims = gql`
-query ($token: String, $id: Int, $month: Int, $year: Int) {
-    viewer(token: $token) {
+query ($id: ID, $month: Int, $year: Int) {
       agent(id: $id) {
         id
         eventsCount(month:$month, year:$year)
@@ -41,7 +40,6 @@ query ($token: String, $id: Int, $month: Int, $year: Int) {
           }
         }
       }
-    }
   }
   `
 

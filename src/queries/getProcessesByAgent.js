@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 const Plan = gql`
-query ($token: String, $id: Int) {
-    viewer(token: $token) {
+query ($id: ID) {
       agent(id: $id) {
         id
         agentProcesses {
@@ -10,7 +9,6 @@ query ($token: String, $id: Int) {
           name
         }
       }
-    }
-  } 
+  }
 `
 export default Plan

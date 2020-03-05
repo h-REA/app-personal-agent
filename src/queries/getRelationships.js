@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 const relationshipQuery = gql`
-query ($token: String, $id: Int) {
-    viewer(token: $token) {
+query ($id: ID) {
       agent (id: $id) {
         id
         agentRelationships {
@@ -23,7 +22,6 @@ query ($token: String, $id: Int) {
           }
         }
       }
-    }
   }
 `
 

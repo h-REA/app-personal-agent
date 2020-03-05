@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 const GetProcessClaim = gql`
-query ($token: String, $id: Int) {
-  viewer(token: $token) {
+query ($id: ID) {
     process(id: $id) {
         name
         id
@@ -69,7 +68,6 @@ query ($token: String, $id: Int) {
           }
         }
     }
-  }
 }
 `
 

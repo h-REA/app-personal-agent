@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 const GetClaim = gql`
-query ($token: String, $id: Int) {
-  viewer(token: $token) {
+query ($id: ID) {
     plan(id: $id) {
       name
       id
@@ -61,7 +60,6 @@ query ($token: String, $id: Int) {
         }
       }
     }
-  }
 }
 `
 

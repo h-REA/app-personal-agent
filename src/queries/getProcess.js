@@ -2,8 +2,7 @@ import gql from "graphql-tag"
 import { event } from "../fragments/economicEvents"
 
 const getProcess = gql`
-  query($token: String, $id: Int) {
-    viewer(token: $token) {
+  query($id: ID) {
       process(id: $id) {
         id
         name
@@ -83,7 +82,6 @@ const getProcess = gql`
           }
         }
       }
-    }
   }
   ${event}`
 

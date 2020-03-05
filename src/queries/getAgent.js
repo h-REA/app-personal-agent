@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 export default gql`
-query ($token: String, $id: Int) {
-    viewer(token: $token) {
+query ($id: ID) {
       agent(id: $id) {
         id
         name
@@ -23,6 +22,5 @@ query ($token: String, $id: Int) {
           }
         }
       }
-    }
   }
 `

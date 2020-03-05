@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 const GetCommitmentClaim = gql`
-query ($token: String, $id: Int!) {
-    viewer(token: $token) {
+query ($id: ID!) {
       commitment(id: $id) {
         inputOf {
           name
@@ -69,7 +68,6 @@ query ($token: String, $id: Int!) {
           }
         }
       }
-    }
   }`
 
 export default GetCommitmentClaim

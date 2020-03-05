@@ -2,8 +2,7 @@ import gql from "graphql-tag"
 import { event } from "../fragments/economicEvents"
 
 export default gql`
-  query($token: String, $id: Int) {
-    viewer(token: $token) {
+  query($id: ID) {
       agent(id: $id) {
         id
         name
@@ -91,7 +90,6 @@ export default gql`
           }
         }
       }
-    }
   }
   ${event}
 `

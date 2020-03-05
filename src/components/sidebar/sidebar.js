@@ -16,15 +16,13 @@ import Matched from '../../atoms/eyes.png'
 import Plan from '../../atoms/dizzy.png'
 
 const SidebarData = gql`
-  query($token: String, $id: Int) {
-    viewer(token: $token) {
+  query($id: ID) {
       agent(id: $id) {
         id
         image
         name
         type
       }
-    }
   }
 `
 

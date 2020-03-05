@@ -1,8 +1,7 @@
 import gql from "graphql-tag"
 
 export default gql`
-  query($token: String, $id: Int) {
-    viewer(token: $token) {
+  query($id: ID) {
       agent(id: $id) {
         id
         agentDefinedResourceClassifications {
@@ -16,13 +15,11 @@ export default gql`
           }
         }
       }
-    }
   }
 `
 
 export const getResourcesByContextByAction = gql`
-  query($token: String, $action: String, $id: Int) {
-    viewer(token: $token) {
+  query($action: String, $id: Int) {
       agent(id: $id) {
         id
         agentDefinedResourceClassifications(action: $action) {
@@ -36,6 +33,5 @@ export const getResourcesByContextByAction = gql`
           }
         }
       }
-    }
   }
 `

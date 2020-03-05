@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
 const GetEventClaim = gql`
-query ($token: String, $id: Int!) {
-    viewer(token: $token) {
+query ($id: ID!) {
       economicEvent(id: $id) {
         scope {
             id
@@ -63,8 +62,7 @@ query ($token: String, $id: Int!) {
             }
             note
           }
-        
-    }
+
   }`
 
 export default GetEventClaim

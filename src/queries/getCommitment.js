@@ -2,8 +2,7 @@ import gql from 'graphql-tag'
 import { event } from "../fragments/economicEvents"
 
 const GetCommitment = gql`
-query ($token: String, $id: Int!) {
-    viewer(token: $token) {
+query ($id: ID!) {
       commitment(id: $id) {
         id
         isFinished
@@ -17,7 +16,7 @@ query ($token: String, $id: Int!) {
           note
           name
           id
-        }        
+        }
         provider {
           id
           name
@@ -46,7 +45,6 @@ query ($token: String, $id: Int!) {
           id
         }
       }
-    }
   }
   ${event}
   `
