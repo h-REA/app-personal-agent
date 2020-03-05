@@ -17,18 +17,19 @@ export default compose(
 )(props => {
   return (
     <Body>
-      <Sidebar
+      { /* <Sidebar
         profile="true"
         param={props.match.params.id}
         providerImage={props.providerImage}
         providerName={props.providerName}
         providerId={props.providerId}
         location={props.location}
-      />
+      /> */ }
       <Wrapper>
         <Content>
           <Inside>
             <Overview>
+              { /*
               <PropsRoute
                 component={Requirements}
                 path={"/requirements"}
@@ -54,6 +55,7 @@ export default compose(
                 event={props.event}
                 exact={true}
               />
+               */ }
               <PropsRoute
                 component={Inventory}
                 path={"/inventory"}
