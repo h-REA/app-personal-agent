@@ -85,7 +85,7 @@ const agentRelationships = gql`
         id
         name
         image
-        agentRelationships {
+        relationshipsAsSubject {
           id
           object {
             id
