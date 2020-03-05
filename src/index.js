@@ -128,9 +128,10 @@ ReactDOM.render(
   <ThemeProvider theme={Dark}>
     <ApolloProvider client={client}>
       <GlobalStyle />
-      <AppTemplate />
-    {/*  <Router>
-        <div>
+      <Router>
+        <AppTemplate />
+      </Router>
+    {/* <div>
           <GlobalStyle />
           <Query query={getNotification}>
             {({ data: { notifications } }) => {
@@ -145,8 +146,7 @@ ReactDOM.render(
               redirectTo="/login"
             />
           </Switch>
-        </div>
-      </Router> */ }
+        </div> */ }
     </ApolloProvider>
   </ThemeProvider>,
   document.getElementById("root")
