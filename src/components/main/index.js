@@ -1,14 +1,14 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { PropsRoute } from "../../helpers/router";
-import Agent from "../../pages/agent";
-import Home from "../../pages/home";
-import Wallet from "../../pages/wallet";
-import media from "styled-media-query";
-import { ApolloConsumer } from "react-apollo";
-import Plan from "../../pages/plan";
-import committed from "../../pages/committed";
-import matched from "../../pages/matched";
+import React from "react"
+import styled, { css } from "styled-components"
+import { PropsRoute } from "../../helpers/router"
+import Agent from "../../pages/agent"
+import Home from "../../pages/home"
+import Wallet from "../../pages/wallet"
+import media from "styled-media-query"
+import { ApolloConsumer } from "react-apollo"
+import Plan from "../../pages/plan"
+import committed from "../../pages/committed"
+import matched from "../../pages/matched"
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
       display: none;
     `} 
   `};
-`;
+`
 
 export default props => {
   return (
@@ -30,7 +30,7 @@ export default props => {
         <Wrapper isSidebarOpen={props.isSidebarOpen}>
           <PropsRoute
             component={Home}
-            exact
+            exact={true}
             path={props.match.path}
             onToggleSidebar={props.onToggleSidebar}
             togglePanel={props.togglePanel}
@@ -45,7 +45,7 @@ export default props => {
             component={Agent}
             onToggleSidebar={props.onToggleSidebar}
             path="/agent/:id"
-            exact
+            exact={true}
             data={props}
             togglePanel={props.togglePanel}
             providerImage={props.providerImage}
@@ -56,10 +56,10 @@ export default props => {
             toggleValidationModal={props.toggleValidationModal}
           />
           <PropsRoute
-            exact
-            path='/committed'
+            exact={true}
+            path="/committed"
             component={committed}
-            profile
+            profile={true}
             onToggleSidebar={props.onToggleSidebar}
             toggleValidationModal={props.toggleValidationModal}
             togglePanel={props.togglePanel}
@@ -70,10 +70,10 @@ export default props => {
             providerName={props.providerName}
           />
           <PropsRoute
-            exact
-            path='/matched'
+            exact={true}
+            path="/matched"
             component={matched}
-            profile
+            profile={true}
             onToggleSidebar={props.onToggleSidebar}
             toggleValidationModal={props.toggleValidationModal}
             togglePanel={props.togglePanel}
@@ -88,7 +88,7 @@ export default props => {
             onToggleSidebar={props.onToggleSidebar}
             path="/agent/:id/committed"
             component={committed}
-            exact
+            exact={true}
             toggleValidationModal={props.toggleValidationModal}
             togglePanel={props.togglePanel}
             providerImage={props.providerImage}
@@ -101,7 +101,7 @@ export default props => {
             onToggleSidebar={props.onToggleSidebar}
             path="/agent/:id/matched"
             component={matched}
-            exact
+            exact={true}
             toggleValidationModal={props.toggleValidationModal}
             togglePanel={props.togglePanel}
             providerImage={props.providerImage}
@@ -134,7 +134,7 @@ export default props => {
         </Wrapper>
       )}
     </ApolloConsumer>
-  );
-};
+  )
+}
 
 

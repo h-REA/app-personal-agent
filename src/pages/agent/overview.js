@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import Feed from "../../components/FeedItem";
-import moment from "moment";
-import { clearFix } from "polished";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import getFeed from "../../queries/getFeed";
+import React from "react"
+import styled from "styled-components"
+import Feed from "../../components/FeedItem"
+import moment from "moment"
+import { clearFix } from "polished"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import getFeed from "../../queries/getFeed"
 import Beer from '../../atoms/beers.png'
 
 export default props => {
@@ -13,19 +13,20 @@ export default props => {
   <Query
     query={getFeed}
     variables={{
-      id: props.param
+      id: props.param,
     }}
   >
     {({ loading, error, data, refetch }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
-      let feed = data.agent.agentEconomicEvents;
+        ) 
+}
+      const feed = data.agent.agentEconomicEvents
       return (
         <Contribution>
-          <Tagline><Span style={{backgroundImage: `url(${Beer})`}}/>Activities</Tagline>
+          <Tagline><Span style={{ backgroundImage: `url(${Beer})` }}/>Activities</Tagline>
           <Events>
             {feed.map((ev, i) => (
               <Feed
@@ -42,7 +43,7 @@ export default props => {
                 id={ev.id}
                 loggedUserId={props.providerId}
                 providerId={ev.provider ? ev.provider.id : null}
-                withDelete
+                withDelete={true}
                 validations={ev.validations}
                 primary={
                   <FeedItem>
@@ -62,10 +63,11 @@ export default props => {
             ))}
           </Events>
         </Contribution>
-      );
+      )
     }}
   </Query>
-)};
+) 
+}
 
 const Tagline = styled.h3`
 letter-spacing: 1px;
@@ -86,7 +88,7 @@ border-radius: 2px 2px 0 0;
 font-weight: bold;
 padding: 0 10px;
 color: #0000004d;
-`;
+`
 const Span = styled.span`
 vertical-align: middle;
   cursor: pointer;
@@ -101,7 +103,7 @@ vertical-align: middle;
 const Events = styled.div`
   ${clearFix()};
   position: relative;
-`;
+`
 const Contribution = styled.div`
   background: #fff;
   padding: 8px;
@@ -111,14 +113,14 @@ const Contribution = styled.div`
     font-weight: 400;
     letter-spacing: 1px;
   }
-`;
+`
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color: ${props => props.theme.color.p900};
-`;
+`
 
 const B = styled.b`
   font-weight: 500;
   color: #32211b;
-`;
+`

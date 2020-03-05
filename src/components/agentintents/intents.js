@@ -1,19 +1,19 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { clearFix } from "polished";
+import React from "react"
+import styled, { css } from "styled-components"
+import { clearFix } from "polished"
 import Icons from '../../atoms/icons'
-import moment from "moment";
-import Feed from "../../components/FeedItem";
-import LogEvent from "../../components/logEvent/index";
-import CommitmentStatus from "../../components/commitmentStatus";
-import AddProvider, { DeleteProvider } from "../../components/addProvider";
-import { compose, withState, withHandlers } from "recompose";
-import OutsideClickHandler from "react-outside-click-handler";
-import EditNote from "../modalIntent/editNote";
-import EditSentence from "../modalIntent/editSentence";
-import ButtonDeleteIntent from "../deleteIntent";
-import EditDueDate from "../editDueDate";
-import { NavLink } from "react-router-dom";
+import moment from "moment"
+import Feed from "../../components/FeedItem"
+import LogEvent from "../../components/logEvent/index"
+import CommitmentStatus from "../../components/commitmentStatus"
+import AddProvider, { DeleteProvider } from "../../components/addProvider"
+import { compose, withState, withHandlers } from "recompose"
+import OutsideClickHandler from "react-outside-click-handler"
+import EditNote from "../modalIntent/editNote"
+import EditSentence from "../modalIntent/editSentence"
+import ButtonDeleteIntent from "../deleteIntent"
+import EditDueDate from "../editDueDate"
+import { NavLink } from "react-router-dom"
 import Process from '../../atoms/shooting_star.png'
 import Pencil from '../../atoms/pencil.png'
 
@@ -27,16 +27,16 @@ export default compose(
     handlePopup: props => () => props.isOpen(!props.popup),
     handleAddEvent: props => () => props.onAddEvent(!props.addEvent),
     handleNoteOpen: props => () => {
-      props.isOpen(false);
-      props.onNoteOpen(!props.isNoteOpen);
+      props.isOpen(false)
+      props.onNoteOpen(!props.isNoteOpen)
     },
     handleFeedOpen: props => () => {
-      props.onFeedOpen(!props.isFeedOpen);
+      props.onFeedOpen(!props.isFeedOpen)
     },
     handleSentenceOpen: props => () => {
-      props.isOpen(false);
-      props.onSentenceOpen(!props.isSentenceOpen);
-    }
+      props.isOpen(false)
+      props.onSentenceOpen(!props.isSentenceOpen)
+    },
   })
 )(
   ({
@@ -55,7 +55,7 @@ export default compose(
     scopeId,
     myId,
     client,
-    providerImage
+    providerImage,
   }) => {
     return (
       <Intent isFinished={data.isFinished}>
@@ -63,7 +63,7 @@ export default compose(
           {data.inputOf ? (
             <ProcessContainer>
               <NavLink to={`/process/${data.inputOf.id}`}>
-                <ContainerTitle style={{backgroundImage: `url(${Process})`}} />
+                <ContainerTitle style={{ backgroundImage: `url(${Process})` }} />
                 <Content>{data.inputOf.name}</Content>
               </NavLink>
             </ProcessContainer>
@@ -71,7 +71,7 @@ export default compose(
           {data.outputOf ? (
             <ProcessContainer>
               <NavLink to={`/process/${data.outputOf.id}`}>
-              <ContainerTitle style={{backgroundImage: `url(${Process})`}} />
+              <ContainerTitle style={{ backgroundImage: `url(${Process})` }} />
                 <Content>{data.outputOf.name}</Content>
               </NavLink>
             </ProcessContainer>
@@ -163,8 +163,8 @@ export default compose(
                 id={ev.fulfilledBy.id}
                 loggedUserId={myId}
                 providerId={ev.fulfilledBy.provider.id}
-                withValidation
-                withDelete
+                withValidation={true}
+                withDelete={true}
                 validations={ev.fulfilledBy.validations}
                 openValidationModal={toggleValidationModal}
                 primary={
@@ -203,20 +203,20 @@ export default compose(
         ) : (
           <Actions>
             <ActionSpan onClick={handleFeedOpen}>
-                <SpanIcon style={{backgroundImage: `url(${Pencil})`}}/>
+                <SpanIcon style={{ backgroundImage: `url(${Pencil})` }}/>
               ({data.fulfilledBy.length})
             </ActionSpan>
           </Actions>
         )}
       </Intent>
-    );
+    )
   }
-);
+)
 
 const B = styled.b`
   font-weight: 500;
   color: #32211B;
-`;
+`
 const ActionSpan = styled.div`
   font-weight: 500;
   color: #282b30;
@@ -227,7 +227,7 @@ const ActionSpan = styled.div`
   margin-top: 10px;
   display: inline-block;
   cursor: pointer;
-`;
+`
 const SpanIcon = styled.div`
   cursor: pointer;
   margin-right: 8px;
@@ -236,21 +236,21 @@ const SpanIcon = styled.div`
   height: 18px;
   background-size: contain;
   vertical-align: sub;
-`;
+`
 
 const WrapperLogEvent = styled.div`
   padding: 10px 0;
   border-top: 1px solid #e9e9e9;
-`;
+`
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color: ${props => props.theme.color.p900};
-`;
+`
 
 const Actions = styled.div`
   padding-bottom: 0px;
-`;
+`
 
 const CloseFeed = styled.div`
   position: absolute;
@@ -270,7 +270,7 @@ const CloseFeed = styled.div`
   width: 40px;
   height: 40px;
   margin-right: -20px;
-`;
+`
 
 const Popup = styled.div`
   position: absolute;
@@ -282,7 +282,7 @@ const Popup = styled.div`
   border-radius: 0px;
   top: -30px;
   z-index: 99999999999999999;
-`;
+`
 const PopupItem = styled.div`
   border-bottom: 1px solid #d0d0d0;
   height: 30px;
@@ -297,7 +297,7 @@ const PopupItem = styled.div`
     color: ${props => props.theme.color.p100};
   }
   color: #4c4d4d;
-`;
+`
 
 const Intent = styled.div`
   ${clearFix()};
@@ -307,16 +307,16 @@ const Intent = styled.div`
   margin: 8px;
   border-radius: 2px;
   background: #fff;
-`;
+`
 const Events = styled.div`
   ${clearFix()};
   position: relative;
-`;
+`
 const Agents = styled.div`
   ${clearFix()};
   float: right;
   margin-left: 4px;
-`;
+`
 const Img = styled.div`
   width: 24px;
   height: 24px;
@@ -326,33 +326,33 @@ const Img = styled.div`
   margin-right: 8px;
   vertical-align: middle;
   background-size: cover;
-`;
+`
 
 const Wrapper = styled.div`
   padding: 8px;
   position: relative;
   cursor: pointer;
-`;
+`
 
 const First = styled.div`
   ${clearFix()};
-`;
+`
 
 const Second = styled.div`
   ${clearFix()};
   position: absolute;
   right: 8px;
   top: 8px;
-`;
+`
 
 const FirstInfo = styled.div`
   ${clearFix()};
-`;
+`
 
 const ProcessContainer = styled.div`
   ${clearFix()};
   padding: 0 8px;
-`;
+`
 const ContainerTitle = styled.h3`
   ${clearFix()};
   display: inline-block;
@@ -363,7 +363,7 @@ const ContainerTitle = styled.h3`
   height: 18px;
   background-size: contain;
   vertical-align: middle;
-`;
+`
 const Content = styled.div`
   ${clearFix()};
   display: inline-block;
@@ -381,7 +381,7 @@ const Content = styled.div`
   margin-top: 4px;
   letter-spacing: .5px;
   text-transform: uppercase;
-`;
+`
 
 const Sentence = styled.h3`
   font-weight: 500;
@@ -401,11 +401,11 @@ const Sentence = styled.h3`
     margin-right: 8px;
     margin-top: 0px;
   }
-`;
+`
 const Infos = styled.div`
   font-weight: 400;
   line-height: 20px;
-`;
+`
 
 const Note = styled.h3`
   margin-top: 5px;
@@ -417,4 +417,4 @@ const Note = styled.h3`
   padding-left: 8px;
   border-left: 1px solid;
   margin-left: 4px;
-`;
+`

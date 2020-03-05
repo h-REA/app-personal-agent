@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 import Icons from '../../atoms/icons'
-import styled from "styled-components";
-import { clearFix } from "polished";
+import styled from "styled-components"
+import { clearFix } from "polished"
 
 const Background = styled.div`
   position: fixed;
@@ -15,7 +15,7 @@ const Background = styled.div`
   justify-content: center;
   overflow: auto;
   cursor: pointer;
-`;
+`
 
 const Dialog = styled.div`
   width: 700px;
@@ -30,25 +30,25 @@ const Dialog = styled.div`
   margin-left: -350px;
   border-radius: 3px;
   outline: none;
-`;
+`
 
 const Action = styled.div`
   ${clearFix()};
   padding-top: 10px;
   padding-right: 10px;
   float: right;
-`;
+`
 
 const Close = styled.div`
   float: right;
   cursor: pointer;
-`;
+`
 
 const Content = styled.div`
   ${clearFix()};
-`;
+`
 
-class Modal extends React.Component  {
+class Modal extends React.Component {
   render() {
   const { isOpen, toggleModal, children } = this.props
   return isOpen ? (
@@ -63,8 +63,8 @@ class Modal extends React.Component  {
         <Content>{children}</Content>
       </Dialog>
     </div>
-  ) : null;
+  ) : null
   }
 };
 
-export default Modal;
+export default Modal

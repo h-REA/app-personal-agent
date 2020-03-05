@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
+import React from "react"
+import styled from "styled-components"
+import media from "styled-media-query"
 import Profile from './overview'
 import Requirements from './requirements'
 import Processes from './processes'
-import { PropsRoute } from "../../helpers/router";
-import Sidebar from "../../components/sidebar/sidebar";
-import { compose, withState, withHandlers } from "recompose";
+import { PropsRoute } from "../../helpers/router"
+import Sidebar from "../../components/sidebar/sidebar"
+import { compose, withState, withHandlers } from "recompose"
 import Inventory from '../inventory'
 import SmartSentence from './smartSentence'
 export default compose(
@@ -17,7 +17,7 @@ export default compose(
       props.onActivity(null)
       return props.onSmartSentence(!props.smartSentence)
     },
-    handleActivity: props => value => props.onActivity(value)
+    handleActivity: props => value => props.onActivity(value),
   })
 )(props => {
   return (
@@ -60,13 +60,13 @@ export default compose(
                   param={props.match.params.id}
                   providerId={props.providerId}
                   event={props.event}
-                  exact
+                  exact={true}
                 />
                 <PropsRoute
                   component={Inventory}
                   path={"/agent/:id/inventory"}
                   providerId={props.match.params.id}
-                  exact
+                  exact={true}
                 />
             </Overview>
           </Inside>
@@ -74,8 +74,8 @@ export default compose(
       </Wrapper>
       {props.smartSentence ? <Overlay onClick={props.handleSmartSentence} /> : null}
     </Body>
-  );
-});
+  )
+})
 
 
 const CoverImage = styled.div`
@@ -110,14 +110,14 @@ const Wrapper = styled.div`
   ${media.lessThan("medium")`
     display: ${props => (props.isopen ? "none" : "flex")}
   `};
-`;
+`
 
 const Content = styled.div`
   will-change: transform;
   display: flex;
   flex: 1;
   // background:#fff;
-`;
+`
 
 const Inside = styled.div`
   display: flex;
@@ -125,7 +125,7 @@ const Inside = styled.div`
   flex-direction: column;
   align-content: center;
   position: relative;
-`;
+`
 
 const Overview = styled.div`
   flex: 1;
@@ -133,10 +133,10 @@ const Overview = styled.div`
   width: 100%;
   margin-top: 16px;
   `};
-`;
+`
 
 const Body = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
-`;
+`

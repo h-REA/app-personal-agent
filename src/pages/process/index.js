@@ -1,30 +1,31 @@
-import React from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
-import Header from "./header";
-import Output from "./outputs";
-import Actions from "./actions";
-import getProcess from "../../queries/getProcess";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import { Query } from "react-apollo";
-import moment from "moment";
+import React from "react"
+import styled from "styled-components"
+import media from "styled-media-query"
+import Header from "./header"
+import Output from "./outputs"
+import Actions from "./actions"
+import getProcess from "../../queries/getProcess"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import { Query } from "react-apollo"
+import moment from "moment"
 const Process = props => (
   <Query
     query={getProcess}
     variables={{
-      id: Number(props.id)
+      id: Number(props.id),
     }}
   >
     {({ loading, error, data, refetch, client }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
-      let percentage =
+        ) 
+}
+      const percentage =
         (data.process.committedInputs.filter(i => i.isFinished).length *
           100) /
-        data.process.committedInputs.length;
+        data.process.committedInputs.length
       return (
         <Body>
           <Wrapper isopen={props.isopen}>
@@ -58,10 +59,10 @@ const Process = props => (
             </Content>
           </Wrapper>
         </Body>
-      );
+      )
     }}
   </Query>
-);
+)
 
 const Wrapper = styled.div`
   display: flex;
@@ -75,17 +76,17 @@ const Wrapper = styled.div`
   ${media.lessThan("medium")`
     display: ${props => (props.isopen ? "none" : "flex")}
   `};
-`;
+`
 const Body = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
-`;
+`
 const Content = styled.div`
   display: grid;
   margin-top: 26px;
   grid-template-columns: 1fr
   grid-column-gap: 24px;
-`;
+`
 
-export default Process;
+export default Process

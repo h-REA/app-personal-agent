@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 export default gql`
   mutation($token: String!, $due: String!, $start: String!, $name: String!, $scope: Int!, $note: String) {
@@ -14,4 +14,4 @@ export default gql`
       }
     }
   }
-`;
+`

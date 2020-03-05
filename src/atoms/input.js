@@ -1,6 +1,6 @@
 import React from 'react'
-import styled, {css} from 'styled-components'
-import {placeholder} from 'polished'
+import styled, { css } from 'styled-components'
+import { placeholder } from 'polished'
 
 const InputCont = styled.input`
   width: 100%;
@@ -9,7 +9,7 @@ const InputCont = styled.input`
   display: block;
   box-sizing: border-box;
   margin: 0;
-  ${placeholder({'color': '#757575'})}
+  ${placeholder({ 'color': '#757575' })}
   color: '#282c37';
   background: '#fff'; 
   padding: 5px;

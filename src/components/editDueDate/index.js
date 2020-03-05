@@ -1,14 +1,14 @@
-import { Mutation } from "react-apollo";
-import React from "react";
-import styled, { css } from "styled-components";
-import getComm from "../../queries/getCommitment";
-import { compose } from "recompose";
-import UPDATE_COMMITMENT from "../../mutations/updateCommitment";
-import moment from "moment";
-import withNotif from "../notification";
-import gql from "graphql-tag";
-import DatePicker from "react-datepicker";
-require("react-datepicker/dist/react-datepicker-cssmodules.css");
+import { Mutation } from "react-apollo"
+import React from "react"
+import styled, { css } from "styled-components"
+import getComm from "../../queries/getCommitment"
+import { compose } from "recompose"
+import UPDATE_COMMITMENT from "../../mutations/updateCommitment"
+import moment from "moment"
+import withNotif from "../notification"
+import gql from "graphql-tag"
+import DatePicker from "react-datepicker"
+require("react-datepicker/dist/react-datepicker-cssmodules.css")
 
 const DueDate = props => {
   return (
@@ -19,13 +19,13 @@ const DueDate = props => {
         dateFormat={"DD MMM"}
       />
     </Wrapper>
-  );
-};
+  )
+}
 
 export default compose(
   withNotif("Due date is successfully updated", "Error! Due date is not updated")
 )(({ intentId, due, onError, onSuccess }) => {
-  let duration = moment.duration(moment(due).diff(moment())).asHours();
+  const duration = moment.duration(moment(due).diff(moment())).asHours()
 
   return (
     <Mutation
@@ -41,14 +41,14 @@ export default compose(
               id
               due
             }
-          `
-        });
-        commitment.due = updateCommitment.commitment.due;
+          `,
+        })
+        commitment.due = updateCommitment.commitment.due
         store.writeQuery({
           query: getComm,
-          data: commitment
-        });
-        return onSuccess();
+          data: commitment,
+        })
+        return onSuccess()
       }}
     >
       {(editDueDate, { data }) => (
@@ -58,15 +58,15 @@ export default compose(
             action={(value) => editDueDate({
               variables: {
                 id: intentId,
-                due: moment(value).format("YYYY-MM-DD")
-              }
+                due: moment(value).format("YYYY-MM-DD"),
+              },
             })}
           />
         </Date>
       )}
     </Mutation>
-  );
-});
+  )
+})
 
 
 const Wrapper = styled.div`
@@ -111,4 +111,4 @@ cursor: pointer;
       background: #ff5630;
       padding: 0 5px;
     `};
-`;
+`

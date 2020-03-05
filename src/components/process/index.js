@@ -1,9 +1,9 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { clearFix } from "polished";
-import { compose, withState, withHandlers } from "recompose";
-import EditDueDate from "../editDueDate";
-import Timeline from "./timeline";
+import React from "react"
+import styled, { css } from "styled-components"
+import { clearFix } from "polished"
+import { compose, withState, withHandlers } from "recompose"
+import EditDueDate from "../editDueDate"
+import Timeline from "./timeline"
 import Crystal from '../../atoms/crystal_ball.png'
 import Plan from '../../atoms/dizzy.png'
 
@@ -17,31 +17,31 @@ export default compose(
     handlePopup: props => () => props.isOpen(!props.popup),
     handleAddEvent: props => () => props.onAddEvent(!props.addEvent),
     handleNoteOpen: props => () => {
-      props.isOpen(false);
-      props.onNoteOpen(!props.isNoteOpen);
+      props.isOpen(false)
+      props.onNoteOpen(!props.isNoteOpen)
     },
     toggleTimeline: props => () => {
-      props.onTimelineOpen(!props.isTimelineOpen);
+      props.onTimelineOpen(!props.isTimelineOpen)
     },
     handleSentenceOpen: props => () => {
-      props.isOpen(false);
-      props.onSentenceOpen(!props.isSentenceOpen);
-    }
+      props.isOpen(false)
+      props.onSentenceOpen(!props.isSentenceOpen)
+    },
   })
 )(({ data, toggleTimeline, isTimelineOpen, handleProcess }) => {
-  let inputs = data.committedInputs.concat(data.committedOutputs);
+  const inputs = data.committedInputs.concat(data.committedOutputs)
   return (
     <Intent >
       <Infos>
         {data.processPlan ? (
           <ProcessContainer>
-            <ContainerTitle style={{backgroundImage: `url(${Plan})`}} />
+            <ContainerTitle style={{ backgroundImage: `url(${Plan})` }} />
             <Content>{data.processPlan.name}</Content>
           </ProcessContainer>
         ) : null}
       </Infos>
       <Wrapper>
-        <First  onClick={() => handleProcess(data.id)}>
+        <First onClick={() => handleProcess(data.id)}>
             <Sentence>{data.name}</Sentence>
           <Note>{data.note}</Note>
         </First>
@@ -61,14 +61,14 @@ export default compose(
       <Actions>
         {inputs.length > 0 ? (
           <TimelineBtn onClick={toggleTimeline}>
-            <SpanIcon style={{backgroundImage: `url(${Crystal})`}}/>
+            <SpanIcon style={{ backgroundImage: `url(${Crystal})` }}/>
             Toggle timeline
           </TimelineBtn>
         ) : null}
       </Actions>
     </Intent>
-  );
-});
+  )
+})
 
 const ContainerTitle = styled.h3`
   ${clearFix()};
@@ -80,7 +80,7 @@ const ContainerTitle = styled.h3`
   height: 18px;
   background-size: contain;
   vertical-align: middle;
-`;
+`
 const SpanIcon = styled.span`
   ${clearFix()};
   cursor: pointer;
@@ -90,7 +90,7 @@ const SpanIcon = styled.span`
   height: 18px;
   background-size: contain;
   vertical-align: sub;
-`;
+`
 
 
 const Actions = styled.div`
@@ -100,7 +100,7 @@ const Actions = styled.div`
   background: #e0f5fcde;
   height: 28px;
   ${clearFix()};
-`;
+`
 
 const TimelineBtn = styled.span`
   cursor: pointer;
@@ -116,7 +116,7 @@ const TimelineBtn = styled.span`
   color: #60757d;
   margin-top: 3px;
   letter-spacing: .5px;
-`;
+`
 
 const Intent = styled.div`
   ${clearFix()};
@@ -130,35 +130,35 @@ const Intent = styled.div`
       background: #7cff8a14;
       border: 1px solid #007a1c;
     `};
-`;
+`
 
 const Wrapper = styled.div`
   padding: 8px;
   position: relative;
   background: #fffffff7;
-`;
+`
 
 const First = styled.div`
   ${clearFix()};
   cursor: pointer;
-`;
+`
 
 const Second = styled.div`
   ${clearFix()};
   position: absolute;
   right: 8px;
   top: 8px;
-`;
+`
 
 const FirstInfo = styled.div`
   ${clearFix()};
-`;
+`
 
 const ProcessContainer = styled.div`
   ${clearFix()};
   background: #fffffff7;
   padding: 0 8px;
-`;
+`
 
 const Content = styled.div`
 ${clearFix()};
@@ -177,7 +177,7 @@ line-height: 26px;
 margin-top: 4px;
 letter-spacing: .5px;
 text-transform: uppercase;
-`;
+`
 
 const Sentence = styled.h3`
   font-weight: 500;
@@ -199,11 +199,11 @@ const Sentence = styled.h3`
     margin-right: 8px;
     margin-top: 0px;
   }
-`;
+`
 const Infos = styled.div`
   font-weight: 400;
   line-height: 20px;
-`;
+`
 
 const Note = styled.h3`
   margin-top: 5px;
@@ -214,4 +214,4 @@ const Note = styled.h3`
   color: #32211b80;
   padding-left: 8px;
   border-left: 1px solid;
-`;
+`

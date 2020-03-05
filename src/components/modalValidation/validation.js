@@ -1,25 +1,25 @@
-import React from "react";
+import React from "react"
 import Icons from '../../atoms/icons'
-import moment from "moment";
-import styled from "styled-components";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../loading";
-import GetEvent from "../../queries/getEvent";
-import { NavLink } from "react-router-dom";
-import { clearFix } from "polished";
-import CreateValidation, {DeleteValidation} from '../toggleValidation'
-import { compose } from "recompose";
-import { Field, withFormik } from "formik";
-import * as Yup from "yup";
+import moment from "moment"
+import styled from "styled-components"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../loading"
+import GetEvent from "../../queries/getEvent"
+import { NavLink } from "react-router-dom"
+import { clearFix } from "polished"
+import CreateValidation, { DeleteValidation } from '../toggleValidation'
+import { compose } from "recompose"
+import { Field, withFormik } from "formik"
+import * as Yup from "yup"
 import Textarea from '../../atoms/textarea'
 export default compose(
   withFormik({
     mapPropsToValues: props => ({
-      note: ""
+      note: "",
     }),
     validationSchema: Yup.object().shape({
-      note: Yup.string()
-    })
+      note: Yup.string(),
+    }),
   }),
 )(({
   contributionId,
@@ -30,15 +30,16 @@ export default compose(
     <Query
       query={GetEvent}
       variables={{
-        id: Number(contributionId)
+        id: Number(contributionId),
       }}
     >
       {({ loading, error, data, refetch }) => {
-        if (loading) return <LoadingMini />;
-        if (error)
-          return (
+        if (loading) return <LoadingMini />
+        if (error) {
+ return (
             <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-          );
+          ) 
+}
         return (
           <div
             style={{ padding: "16px", paddingBottom: 0, marginBottom: "-20px" }}
@@ -49,7 +50,7 @@ export default compose(
                 style={{
                   backgroundImage: `url(${
                     data.economicEvent.provider.image
-                  })`
+                  })`,
                 }}
               />
               <SentenceInfo>
@@ -107,7 +108,7 @@ export default compose(
                       <DeleteValidation validationId={val.id} eventId={data.economicEvent.id}/>
                     ) : null}
                   </ValidationsItem>
-                );
+                )
               })}
             </Validations>
             {data.economicEvent.validations.findIndex(
@@ -121,7 +122,7 @@ export default compose(
                     marginTop: "0px",
                     marginBottom: "0px",
                     marginLeft: "-16px",
-                    marginRight: "-16px"
+                    marginRight: "-16px",
                   }}
                 >
                   <Field
@@ -133,26 +134,26 @@ export default compose(
                 </div>
 
                 <Footer>
-                  <CreateValidation  eventId={contributionId} providerId={myId} note={values.note} />
+                  <CreateValidation eventId={contributionId} providerId={myId} note={values.note} />
                 </Footer>
               </div>
             )}
           </div>
-        );
+        )
       }}
     </Query>
-  );
-});
+  )
+})
 
 const Title = styled.h3`
   color: ${props => props.theme.color.p900};
   letter-spacing: 0.5px;
   margin-bottom: 16px;
-`;
+`
 
 const Sentence = styled.div`
   ${clearFix()};
-`;
+`
 
 const Photo = styled.div`
   float: left;
@@ -162,7 +163,7 @@ const Photo = styled.div`
   background: ${props => props.theme.color.p900};
   display: block;
   background-size: cover;
-`;
+`
 
 const SentenceText = styled.div`
   font-size: 16px;
@@ -173,15 +174,15 @@ const SentenceText = styled.div`
     font-weight: 500;
     color: ${props => props.theme.color.p900};
   }
-`;
+`
 const SentenceInfo = styled.div`
   float: left;
   margin-left: 8px;
-`;
+`
 const Secondary = styled.div`
 ${clearFix()};
 margin-top: 8px;
-`;
+`
 
 const Date = styled.div`
   float: left;
@@ -189,14 +190,14 @@ const Date = styled.div`
   color: #73808f;
   line-height: 21px;
   font-weight: 300;
-`;
+`
 
 const Note = styled.div`
   color: ${props => props.theme.color.p800};
   margin-top: 5px;
   font-size: 14px;
   letter-spacing: 0.5px;
-`;
+`
 
 const Plan = styled.div`
 float:left;
@@ -209,23 +210,23 @@ margin-left: 8px;
     font-size: 12px;
     color: ${props => props.theme.color.b100};
   }
-`;
+`
 
 const Validations = styled.div`
   margin-top: 24px;
   background: #ebebeb;
   margin-left: -16px;
   margin-right: -16px;
-`;
+`
 
 const ValidationsItem = styled.div`
   border-top: 1px solid #dedede;
   padding: 16px;
-`;
+`
 
 const ValMain = styled.div`
   ${clearFix()};
-`;
+`
 const ValMainName = styled.div`
   font-size: 14px;
   font-weight: 500;
@@ -233,7 +234,7 @@ const ValMainName = styled.div`
   margin-left: 8px;
   letter-spacing: 0.5px;
   float: left;
-`;
+`
 
 const ValMainNote = styled.div`
   font-weight: 300;
@@ -242,10 +243,10 @@ const ValMainNote = styled.div`
   margin-top: 4px;
   color: ${props => props.theme.color.p900};
   max-width: 480px;
-`;
+`
 
 const Footer = styled.div`
   background: #e5e5e5;
   margin-right: -16px;
   lost-utility: clearfix;
-`;
+`

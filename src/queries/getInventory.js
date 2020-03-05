@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 export default gql`
   query($token: String, $id: Int!) {
@@ -25,4 +25,4 @@ export default gql`
       }
     }
   }
-`;
+`

@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from "react"
+import styled from "styled-components"
 
 const Wrapper = styled.div`
   border-radius: 4px;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   padding: 0 10px;
   font-size: 14px;
   margin-top: 2px;
-`;
-const Alert = ({ children }) => <Wrapper>{children}</Wrapper>;
+`
+const Alert = ({ children }) => <Wrapper>{children}</Wrapper>
 
-export default Alert;
+export default Alert

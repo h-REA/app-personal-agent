@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { clearFix } from "polished";
-import { AvatarTitle } from "../../atoms/avatar";
-import Individual from "../../atoms/paw_print.png";
-import Group from "../../atoms/paws.png";
+import React from "react"
+import styled from "styled-components"
+import { clearFix } from "polished"
+import { AvatarTitle } from "../../atoms/avatar"
+import Individual from "../../atoms/paw_print.png"
+import Group from "../../atoms/paws.png"
 
 const ProfileHeader = ({
   providerName,
@@ -22,7 +22,7 @@ const ProfileHeader = ({
         {type === "Person" ? 'Human' : type}
       </Type>
   </Profile>
-);
+)
 
 const SpanIcon = styled.div`
   cursor: pointer;
@@ -32,11 +32,11 @@ const SpanIcon = styled.div`
   height: 18px;
   background-size: contain;
   vertical-align: sub;
-`;
+`
 
 const Header = styled.div`
   ${clearFix()};
-`;
+`
 const Type = styled.div`
   ${clearFix()};
   color: #f0f0f060;
@@ -45,9 +45,9 @@ const Type = styled.div`
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
-`;
+`
 
-const Profile = styled.div``;
+const Profile = styled.div``
 
 const Title = styled(AvatarTitle)`
   line-height: 26px;
@@ -55,6 +55,6 @@ const Title = styled(AvatarTitle)`
   margin-left: 0;
   font-size: 18px;
   font-weight: 500;
-`;
+`
 
-export default ProfileHeader;
+export default ProfileHeader

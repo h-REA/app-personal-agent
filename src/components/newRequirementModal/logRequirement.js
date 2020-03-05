@@ -1,16 +1,16 @@
-import { compose } from "recompose";
-import Component from "../logEvent/logEvent";
-import moment from "moment";
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import createEvent from "../../mutations/createEvent";
-import updateNotification from "../../mutations/updateNotification";
-import deleteNotification from "../../mutations/deleteNotification";
-import React from "react";
+import { compose } from "recompose"
+import Component from "../logEvent/logEvent"
+import moment from "moment"
+import { withFormik } from "formik"
+import * as Yup from "yup"
+import createEvent from "../../mutations/createEvent"
+import updateNotification from "../../mutations/updateNotification"
+import deleteNotification from "../../mutations/deleteNotification"
+import React from "react"
 import Icons from '../../atoms/icons'
-import { graphql } from "react-apollo";
-import queryEvents from "../../queries/getFeed";
-import getComm from "../../queries/getCommitment";
+import { graphql } from "react-apollo"
+import queryEvents from "../../queries/getFeed"
+import getComm from "../../queries/getCommitment"
 
 const wrapperComponent = compose(
   graphql(createEvent, { name: "createEventMutation" }),
@@ -21,19 +21,19 @@ const wrapperComponent = compose(
     mapPropsToValues: props => ({
       action: { value: props.action, label: props.action } || {
         value: "",
-        label: ""
+        label: "",
       },
       note: "",
       numericValue: "00.00" || "",
       unit: { value: props.unitId, label: props.unit } || {
         value: "",
-        label: ""
+        label: "",
       },
       date: moment(),
       affectedResourceClassifiedAsId: {
         value: props.resourceId,
-        label: props.resource
-      } || { value: "", label: "" }
+        label: props.resource,
+      } || { value: "", label: "" },
     }),
     validationSchema: Yup.object().shape({
       action: Yup.object().required(),
@@ -43,11 +43,11 @@ const wrapperComponent = compose(
       date: Yup.string(),
       affectedResourceClassifiedAsId: Yup.object().required(
         "Classification is a required field"
-      )
+      ),
     }),
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
-      let date = moment(values.date).format("YYYY-MM-DD");
-      let eventMutationVariables = {
+      const date = moment(values.date).format("YYYY-MM-DD")
+      const eventMutationVariables = {
         id: props.providerId,
         providerId: props.providerId,
         receiverId: props.scopeId,
@@ -59,24 +59,24 @@ const wrapperComponent = compose(
         affectedUnitId: values.unit.value,
         start: date,
         affectedResourceClassifiedAsId:
-          values.affectedResourceClassifiedAsId.value
-      };
+          values.affectedResourceClassifiedAsId.value,
+      }
       return props
         .createEventMutation({
           variables: eventMutationVariables,
           update: (store, { data }) => {
-            let EventsCache = store.readQuery({
+            const EventsCache = store.readQuery({
               query: queryEvents,
               variables: {
-                id: props.scopeId
-              }
-            });
-            let CommitmentCache = store.readQuery({
+                id: props.scopeId,
+              },
+            })
+            const CommitmentCache = store.readQuery({
               query: getComm,
               variables: {
-                id: props.commitmentId
-              }
-            });
+                id: props.commitmentId,
+              },
+            })
             const ev = {
               __typename: "EconomicEvent",
               action: data.createEconomicEvent.economicEvent.action,
@@ -102,10 +102,10 @@ const wrapperComponent = compose(
                   name:
                     data.createEconomicEvent.economicEvent.affects
                       .resourceClassifiedAs.name,
-                  __typename: "ResourceClassification"
+                  __typename: "ResourceClassification",
                 },
                 note: data.createEconomicEvent.economicEvent.affects.note,
-                __typename: "EconomicResource"
+                __typename: "EconomicResource",
               },
               affectedQuantity: {
                 numericValue:
@@ -118,31 +118,31 @@ const wrapperComponent = compose(
                   name:
                     data.createEconomicEvent.economicEvent.affectedQuantity.unit
                       .name,
-                  __typename: "Unit"
+                  __typename: "Unit",
                 },
-                __typename: "QuantityValue"
-              }
-            };
+                __typename: "QuantityValue",
+              },
+            }
             // Add the last economicevent to the events list cache, related to its commitment
-            EventsCache.agent.agentEconomicEvents.unshift(ev);
+            EventsCache.agent.agentEconomicEvents.unshift(ev)
             CommitmentCache.commitment.fulfilledBy.unshift({
               fulfilledBy: ev,
-              __typename: "Fulfillment"
-            });
+              __typename: "Fulfillment",
+            })
             store.writeQuery({
               query: queryEvents,
               variables: {
-                id: props.scopeId
+                id: props.scopeId,
               },
-            });
+            })
             store.writeQuery({
               query: getComm,
               variables: {
-                id: props.scopeId
+                id: props.scopeId,
               },
-            });
+            })
             return null
-          }
+          },
         })
         .then(data =>
           props
@@ -156,19 +156,19 @@ const wrapperComponent = compose(
                     Event logged successfully!
                   </div>
                 ),
-                type: "success"
-              }
+                type: "success",
+              },
             })
             .then(res => {
               setTimeout(() => {
                 props.deleteNotification({
-                  variables: { id: res.data.addNotification.id }
-                });
-              }, 1000);
+                  variables: { id: res.data.addNotification.id },
+                })
+              }, 1000)
             })
         )
         .catch(e => {
-          const errors = e.graphQLErrors.map(error => error.message);
+          const errors = e.graphQLErrors.map(error => error.message)
           props
             .updateNotification({
               variables: {
@@ -180,19 +180,19 @@ const wrapperComponent = compose(
                     {errors}
                   </div>
                 ),
-                type: "alert"
-              }
+                type: "alert",
+              },
             })
             .then(res => {
               setTimeout(() => {
                 props.deleteNotification({
-                  variables: { id: res.data.addNotification.id }
-                });
-              }, 1000);
-            });
-        });
-    }
+                  variables: { id: res.data.addNotification.id },
+                })
+              }, 1000)
+            })
+        })
+    },
   })
-)(Component);
+)(Component)
 
-export default wrapperComponent;
+export default wrapperComponent

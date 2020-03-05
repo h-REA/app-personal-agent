@@ -1,10 +1,10 @@
-import React from "react";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import getCommitments from "../../queries/getCommitments";
-import Todo from "../../components/todo";
-import { PropsRoute } from "../../helpers/router";
-import { compose, withState } from "recompose";
+import React from "react"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import getCommitments from "../../queries/getCommitments"
+import Todo from "../../components/todo"
+import { PropsRoute } from "../../helpers/router"
+import { compose, withState } from "recompose"
 
 export default compose(
   withState('filter', 'onFilter', null),
@@ -12,35 +12,36 @@ export default compose(
   <Query
     query={getCommitments}
     variables={{
-      id: props.param
+      id: props.param,
     }}
   >
     {({ loading, error, data, client, refetch }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+ return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
-      let intents = data.agent.agentCommitments;
-      let filteredIntents = [];
+        ) 
+}
+      const intents = data.agent.agentCommitments
+      let filteredIntents = []
       if (props.filter === 'active') {
-        filteredIntents = intents.filter(i => !i.isFinished);
+        filteredIntents = intents.filter(i => !i.isFinished)
       } else if (props.filter === 'completed') {
-        filteredIntents = intents.filter(i => i.isFinished);
+        filteredIntents = intents.filter(i => i.isFinished)
       } else if (props.filter === 'committed') {
-        filteredIntents = intents.filter(i => i.provider ? i.provider.id === props.providerId : null);
+        filteredIntents = intents.filter(i => i.provider ? i.provider.id === props.providerId : null)
       } else if (props.filter === 'without process') {
         filteredIntents = intents.filter(i => !i.inputOf && !i.outputOf)
       } else if (props.filter === 'with process') {
         filteredIntents = intents.filter(i => i.inputOf || i.outputOf)
       } else {
-        filteredIntents = intents;
+        filteredIntents = intents
       }
 
       return (
         <div style={{ display: "flex", height: "100%" }}>
           <PropsRoute
-            exact
+            exact={true}
             filter={props.filter}
             onFilter={props.onFilter}
             component={Todo}
@@ -61,7 +62,7 @@ export default compose(
           />
 
         </div>
-      );
+      )
     }}
   </Query>
-));
+))

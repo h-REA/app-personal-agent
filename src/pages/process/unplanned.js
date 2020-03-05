@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import moment from "moment";
-import Feed from "../../components/FeedItem";
-import LogEvent from '../../components/logEvent/logEvent';
-import { compose } from "recompose";
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import createEvent from "../../mutations/createEvent";
-import { graphql } from "react-apollo";
-import { event } from "../../fragments/economicEvents";
-import gql from "graphql-tag";
-import withNotif from "../../components/notification";
+import moment from "moment"
+import Feed from "../../components/FeedItem"
+import LogEvent from '../../components/logEvent/logEvent'
+import { compose } from "recompose"
+import { withFormik } from "formik"
+import * as Yup from "yup"
+import createEvent from "../../mutations/createEvent"
+import { graphql } from "react-apollo"
+import { event } from "../../fragments/economicEvents"
+import gql from "graphql-tag"
+import withNotif from "../../components/notification"
 
 export default compose(
     withNotif(
@@ -22,19 +22,19 @@ export default compose(
       mapPropsToValues: props => ({
         action: { value: props.action, label: props.action } || {
           value: "",
-          label: ""
+          label: "",
         },
         note: "",
         numericValue: "00.00" || "",
         unit: { value: props.unitId, label: props.unit } || {
           value: "",
-          label: ""
+          label: "",
         },
         date: moment(),
         affectedResourceClassifiedAsId: {
           value: props.resourceId,
-          label: props.resource
-        } || { value: "", label: "" }
+          label: props.resource,
+        } || { value: "", label: "" },
       }),
       validationSchema: Yup.object().shape({
         action: Yup.object().required(),
@@ -44,11 +44,11 @@ export default compose(
         date: Yup.string(),
         affectedResourceClassifiedAsId: Yup.object().required(
           "Classification is a required field"
-        )
+        ),
       }),
       handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
-        let date = moment(values.date).format("YYYY-MM-DD");
-        let eventMutationVariables = {
+        const date = moment(values.date).format("YYYY-MM-DD")
+        const eventMutationVariables = {
           id: props.providerId,
           providerId: props.providerId,
           receiverId: props.scopeId,
@@ -62,8 +62,8 @@ export default compose(
           affectedUnitId: values.unit.value,
           start: date,
           affectedResourceClassifiedAsId:
-          values.affectedResourceClassifiedAsId.value
-        };
+          values.affectedResourceClassifiedAsId.value,
+        }
         return props
           .createEventMutation({
             variables: eventMutationVariables,
@@ -83,7 +83,7 @@ export default compose(
                 }`,
                 fragment: fragment,
                 fragmentName: "Comm",
-              });
+              })
               console.log(process)
               const ev = {
                 __typename: "EconomicEvent",
@@ -99,13 +99,13 @@ export default compose(
                 fulfills: data.createEconomicEvent.economicEvent.fulfills,
                 validations: [],
                 affects: data.createEconomicEvent.economicEvent.affects,
-                affectedQuantity: data.createEconomicEvent.economicEvent.affectedQuantity
-              };
+                affectedQuantity: data.createEconomicEvent.economicEvent.affectedQuantity,
+              }
 
               process.unplannedEconomicEvents.unshift({
                 ...ev,
-                __typename: "EconomicEvent"
-              });
+                __typename: "EconomicEvent",
+              })
               store.writeFragment({
                 id: `Process-${
                   props.processId
@@ -113,14 +113,14 @@ export default compose(
                 fragment: fragment,
                 fragmentName: "Comm",
                 data: process,
-              });
-            }
+              })
+            },
           })
           .then(res => {
             return props.onSuccess()
           })
-          .catch(err => props.onError());
-      }
+          .catch(err => props.onError())
+      },
     })
   )(props => (
     <FeedList>
@@ -148,7 +148,7 @@ export default compose(
         id={ev.id}
         loggedUserId={props.providerId}
         providerId={ev.provider.id}
-        withDelete
+        withDelete={true}
 
         validations={ev.validations}
         openValidationModal={props.openValidationModal}
@@ -175,7 +175,7 @@ const WrapperLogEvent = styled.div`
   margin-top: -20px;
   margin-bottom: 10px;
   background: #eff1f4;
-`;
+`
 
 const Title = styled.div`
     height: 30px;
@@ -187,20 +187,20 @@ const Title = styled.div`
     color: #1c1e22b5;
     letter-spacing: 0.5px;
     font-weight: 500;
-`;
+`
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color:  ${props => props.theme.color.p900};
-`;
+`
 
 const B = styled.b`
   text-decoration: underline;
   font-weight: 500;
   color: ${props => props.theme.color.p900};
-`;
+`
 
 const FeedList = styled.div`
   margin-top: 0;
   margin-bottom: 0;
-`;
+`

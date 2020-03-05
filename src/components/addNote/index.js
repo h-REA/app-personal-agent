@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from "react"
+import styled from "styled-components"
 import Textarea from '../../atoms/textarea'
 import Icons from '../../atoms/icons'
-import { clearFix, placeholder } from "polished";
-import { Field } from "formik";
+import { clearFix, placeholder } from "polished"
+import { Field } from "formik"
 
 export default props => (
   <Note>
@@ -22,14 +22,14 @@ export default props => (
       )}
     />
   </Note>
-);
+)
 
 
 const NoteIcon = styled.div`
   position: absolute;
   top: 17px;
   left: 0px;
-`;
+`
 
 const Note = styled.div`
 position: relative;
@@ -67,4 +67,4 @@ ${clearFix()}
     }
     ${placeholder({ color: "#b2b2bc6" })};
   }
-`;
+`

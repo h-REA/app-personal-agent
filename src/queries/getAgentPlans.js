@@ -11,6 +11,6 @@ const agentPlans = gql`
       }
     }
   }
-`;
+`
 
 export default agentPlans

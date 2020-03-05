@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 const getResourcesQuery = gql`
 query ($token: String) {
@@ -14,7 +14,7 @@ query ($token: String) {
       }
     }
   }
-}`;
+}`
 
 export const getRerourcesByAction = gql`
 query ($token: String, $action: Action) {
@@ -33,4 +33,4 @@ query ($token: String, $action: Action) {
 }
 `
 
-export default getResourcesQuery;
+export default getResourcesQuery

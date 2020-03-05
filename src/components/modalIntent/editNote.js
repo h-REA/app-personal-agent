@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import Button from "../../atoms/button";
-import Textarea from "../../atoms/textarea";
-import { Mutation } from "react-apollo";
-import UPDATE_COMMITMENT from "../../mutations/updateCommitment";
-import withNotif from "../notification";
-import { compose } from "react-apollo";
-import { withFormik, Field } from "formik";
-import * as Yup from "yup";
-import gql from "graphql-tag";
+import React from "react"
+import styled from "styled-components"
+import Button from "../../atoms/button"
+import Textarea from "../../atoms/textarea"
+import { Mutation } from "react-apollo"
+import UPDATE_COMMITMENT from "../../mutations/updateCommitment"
+import withNotif from "../notification"
+import { compose } from "react-apollo"
+import { withFormik, Field } from "formik"
+import * as Yup from "yup"
+import gql from "graphql-tag"
 
 export default compose(
   withNotif(
@@ -17,13 +17,13 @@ export default compose(
   ),
   withFormik({
     mapPropsToValues: props => ({
-      note: props.intent.note
+      note: props.intent.note,
     }),
     validationSchema: Yup.object().shape({
-      note: Yup.string()
-    })
+      note: Yup.string(),
+    }),
   })
-)(({ handleNoteOpen, intent, values,  onError, onSuccess }) => (
+)(({ handleNoteOpen, intent, values, onError, onSuccess }) => (
   <Mutation
     mutation={UPDATE_COMMITMENT}
     onError={onError}
@@ -40,11 +40,11 @@ export default compose(
         `,
         data: {
           __typename: 'Commitment',
-          note: updateCommitment.commitment.note
-        }
-      });
-      handleNoteOpen();
-      return onSuccess();
+          note: updateCommitment.commitment.note,
+        },
+      })
+      handleNoteOpen()
+      return onSuccess()
     }}
   >
     {(editSentence, { data }) => (
@@ -53,7 +53,7 @@ export default compose(
           <Field
             name={"note"}
             render={({ field }) => {
-              return  <Textarea
+              return <Textarea
               value={field.value}
               name={field.name}
               onChange={field.onChange}
@@ -63,7 +63,7 @@ export default compose(
           />
         </WrapperTextarea>
         <EditButtons>
-          <Button gray onClick={handleNoteOpen}>
+          <Button gray={true} onClick={handleNoteOpen}>
             Cancel
           </Button>
           <Button
@@ -71,8 +71,8 @@ export default compose(
               editSentence({
                 variables: {
                   id: intent.id,
-                  note: values.note
-                }
+                  note: values.note,
+                },
               })
             }
           >
@@ -82,17 +82,17 @@ export default compose(
       </Wrapper>
     )}
   </Mutation>
-));
+))
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div``
 
 const WrapperTextarea = styled.div`
   height: 80px;
-`;
+`
 
 const EditButtons = styled.div`
   margin-top: 8px;
   & button {
     margin-right: 8px;
   }
-`;
+`

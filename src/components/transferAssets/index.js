@@ -1,17 +1,17 @@
-import React from "react";
-import Log from "../logEvent/styled";
-import Button from "../../atoms/button";
-import Textarea from "../../atoms/textarea";
-import Input from "../../atoms/input";
-import Select from "react-select";
-import CreatableSelect from "react-select/lib/Creatable";
-import styled from "styled-components";
-import { clearFix, placeholder } from "polished";
-import { withFormik, Form, Field } from "formik";
-import Alert from "../../components/alert";
-import * as Yup from "yup";
-import { compose } from "recompose";
-import media from "styled-media-query";
+import React from "react"
+import Log from "../logEvent/styled"
+import Button from "../../atoms/button"
+import Textarea from "../../atoms/textarea"
+import Input from "../../atoms/input"
+import Select from "react-select"
+import CreatableSelect from "react-select/lib/Creatable"
+import styled from "styled-components"
+import { clearFix, placeholder } from "polished"
+import { withFormik, Form, Field } from "formik"
+import Alert from "../../components/alert"
+import * as Yup from "yup"
+import { compose } from "recompose"
+import media from "styled-media-query"
 import axios from 'axios'
 
 const customStyles = {
@@ -22,28 +22,28 @@ const customStyles = {
     marginRight: "10px",
     background: "#4F576C",
     border: "1px solid #7D849A50",
-    color: "#f0f0f0"
+    color: "#f0f0f0",
   }),
   placeholder: base => ({
     ...base,
     color: "#f0f0f0",
-    fontSize: "14px"
-  })
-};
+    fontSize: "14px",
+  }),
+}
 
 const tagStyles = {
   control: base => ({
     ...base,
     border: "none",
     backgroundColor: "#42495c",
-    borderRadius: 0
+    borderRadius: 0,
   }),
   placeholder: base => ({
     ...base,
     color: "#f0f0f0",
-    fontSize: "14px"
-  })
-};
+    fontSize: "14px",
+  }),
+}
 
 const First = styled.div`
   margin: 8px;
@@ -61,7 +61,7 @@ const First = styled.div`
     margin: 0;
     `};
   }
-`;
+`
 const Qty = styled.div`
   float: left;
   width: 203px;
@@ -83,8 +83,8 @@ const Qty = styled.div`
     border: 1px solid #7d849a50;
     ${placeholder({ color: "#f0f0f0" })};
   }
-`;
-const Second = styled.div``;
+`
+const Second = styled.div``
 
 const Transfer = ({
   handleMenuSelection,
@@ -96,15 +96,15 @@ const Transfer = ({
   setFieldValue,
   txs,
   addTx,
-  menuSelected
+  menuSelected,
 }) => {
-  let options = [];
+  const options = []
   agents.map((agent, i) =>
     options.push({
       value: agent.subject.id,
-      label: agent.subject.name
+      label: agent.subject.name,
     })
-  );
+  )
   return (
     <Form>
       <Log.Module>
@@ -151,13 +151,13 @@ const Transfer = ({
             name="tag"
             render={({ field }) => (
               <CreatableSelect
-                isClearable
+                isClearable={true}
                 styles={tagStyles}
                 onChange={value => {
-                  let newarr = value.map(val => val.value);
-                  return setFieldValue("tag", newarr);
+                  const newarr = value.map(val => val.value)
+                  return setFieldValue("tag", newarr)
                 }}
-                isMulti
+                isMulti={true}
                 placeholder="Select one or more tags"
               />
             )}
@@ -169,8 +169,8 @@ const Transfer = ({
         </Log.PublishActions>
       </Log.Module>
     </Form>
-  );
-};
+  )
+}
 
 export default compose(
   withFormik({
@@ -178,7 +178,7 @@ export default compose(
     validationSchema: Yup.object().shape({
       username: Yup.string().required(),
       amount: Yup.number().required(),
-      tag: Yup.array()
+      tag: Yup.array(),
     }),
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
       axios({
@@ -190,18 +190,18 @@ export default compose(
           "from-id": String(props.id),
           "to-id": String(values.username),
           "amount": String(values.amount),
-          "tags": values.tag
+          "tags": values.tag,
 
-        })
+        }),
       })
         .then(res => {
-         let tx = props.addTx(props.agents, res.data)
+         const tx = props.addTx(props.agents, res.data)
          return props.addToTxChain(tx)
         })
-        .catch(err => console.log(err));
-    }
+        .catch(err => console.log(err))
+    },
   })
-)(Transfer);
+)(Transfer)
 // export default props => (
 //   <div className={style.wrapper}>
 //     <h2 className={style.wrapper_title}>Publish a new transaction</h2>

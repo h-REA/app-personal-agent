@@ -27,11 +27,11 @@ export default ({ onPlanQuery }) => (
       <Item>
         <Option>
           <input
-            style={{marginRight: '10px'}}
+            style={{ marginRight: '10px' }}
             id="active"
             type="radio"
             name="plans"
-            defaultChecked
+            defaultChecked={true}
             onChange={() => onPlanQuery("Active")}
           />
           <label htmlFor="active">Show only active plans</label>
@@ -40,7 +40,7 @@ export default ({ onPlanQuery }) => (
       <Item>
         <Option>
           <input
-          style={{marginRight: '10px'}}
+          style={{ marginRight: '10px' }}
             id="all"
             type="radio"
             name="plans"
@@ -52,7 +52,7 @@ export default ({ onPlanQuery }) => (
       <Item>
         <Option>
           <input
-          style={{marginRight: '10px'}}
+          style={{ marginRight: '10px' }}
             id="closed"
             type="radio"
             name="plans"
@@ -62,4 +62,4 @@ export default ({ onPlanQuery }) => (
         </Option>
       </Item>
     </Form>
-  );
+  )

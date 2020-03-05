@@ -11,7 +11,7 @@ const theme = {
     p900: '#282B30',
     b100: '#3B99FC',
     b200: '#2F4F70',
-    g100: '#328461'
+    g100: '#328461',
   },
   fontSize: {
     h1: '24px',
@@ -19,13 +19,13 @@ const theme = {
     h3: '14px',
     h4: '12px',
     h5: '11px',
-    p: '14px'
+    p: '14px',
   },
   avatar: {
     size: '36px',
     radius: '4px',
-    mini: '28px'
-  }
-};
+    mini: '28px',
+  },
+}
 
-export default theme;
+export default theme

@@ -1,17 +1,17 @@
-import DateRangeSelect from "../dateRangeSelect";
-import React from "react";
+import DateRangeSelect from "../dateRangeSelect"
+import React from "react"
 import Icons from '../../atoms/icons'
-import Button from "../../atoms/button";
-import Input from "../../atoms/input";
-import Textarea from "../../atoms/textarea";
-import { Field } from "formik";
-import { ApolloConsumer } from "react-apollo";
-import styled from "styled-components";
-import AsyncSelect from "react-select/lib/Async";
-import Alert from "../alert";
-import { clearFix, placeholder } from "polished";
-import media from "styled-media-query";
-import { getResourcesByAction } from "../../helpers/asyncQueries";
+import Button from "../../atoms/button"
+import Input from "../../atoms/input"
+import Textarea from "../../atoms/textarea"
+import { Field } from "formik"
+import { ApolloConsumer } from "react-apollo"
+import styled from "styled-components"
+import AsyncSelect from "react-select/lib/Async"
+import Alert from "../alert"
+import { clearFix, placeholder } from "polished"
+import media from "styled-media-query"
+import { getResourcesByAction } from "../../helpers/asyncQueries"
 
 export default ({
   values,
@@ -21,7 +21,7 @@ export default ({
   action,
   handleSubmit,
   avoidNote,
-  scopeId
+  scopeId,
 }) => {
   return (
     <ApolloConsumer>
@@ -55,18 +55,18 @@ export default ({
                 render={({ field }) => (
                   <AsyncSelect
                     placeholder="Select a classification..."
-                    defaultOptions
-                    cacheOptions
+                    defaultOptions={true}
+                    cacheOptions={true}
                     value={field.value}
                     onChange={val => {
                       setFieldValue("unit", {
                         value: val.value.unitId,
-                        label: val.value.unitName
-                      });
+                        label: val.value.unitName,
+                      })
                       return setFieldValue("affectedResourceClassifiedAsId", {
                         value: val.value.value,
-                        label: val.label
-                      });
+                        label: val.label,
+                      })
                     }}
                     loadOptions={val =>
                       getResourcesByAction(client, action, scopeId, val)
@@ -80,7 +80,7 @@ export default ({
                 )}
             </Resource>
           </Row>
-          {avoidNote ?  null : <Note>
+          {avoidNote ? null : <Note>
             <NoteIcon>
               <Icons.Text width="16" height="16" color="#b7bfc6" />
             </NoteIcon>
@@ -117,14 +117,14 @@ export default ({
         </Module>
       )}
     </ApolloConsumer>
-  );
-};
+  )
+}
 
 const NoteIcon = styled.div`
   position: absolute;
   top: 17px;
   left: 0px;
-`;
+`
 
 const Module = styled.div`
   ${clearFix()};
@@ -133,10 +133,10 @@ const Module = styled.div`
   left: 0;
   margin: 0;
 `};
-`;
+`
 const WrapperDate = styled.div`
   ${clearFix()};
-`;
+`
 
 const PublishActions = styled.div`
   background: #ecedee;
@@ -161,9 +161,9 @@ const PublishActions = styled.div`
     border-radius: 2px;
     border: 1px solid #2a668f;
   }
-`;
+`
 
-const Value = styled.div``;
+const Value = styled.div``
 
 const Qty = styled.div`
   max-height: 38px;
@@ -185,7 +185,7 @@ const Qty = styled.div`
     font-size: 16px;
     ${placeholder({ color: "hsl(0,0%,50%) !important", fontSize: "16px" })};
   }
-`;
+`
 
 const Unit = styled.div`
   height: 36px;
@@ -202,13 +202,13 @@ const Unit = styled.div`
   padding: 0 12px;
   color: hsl(0, 0%, 100%);
   background: #0a3649;
-`;
+`
 
 const Resource = styled.div`
   margin-bottom: 8px;
   z-index: 999;
     position: relative;
-`;
+`
 const Row = styled.div`
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -216,7 +216,7 @@ const Row = styled.div`
   & input {
     ${placeholder({ color: "#333" })};
   }
-`;
+`
 
 const Note = styled.div`
 position: relative;
@@ -253,4 +253,4 @@ ${clearFix()}
   }
   ${placeholder({ color: "#b2b2bc6" })};
 }
-`;
+`

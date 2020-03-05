@@ -1,7 +1,7 @@
-import React from "react";
-import Wrapper from "./index";
-import Modal from "../../components/modal";
-import {withRouter} from 'react-router-dom'
+import React from "react"
+import Wrapper from "./index"
+import Modal from "../../components/modal"
+import { withRouter } from 'react-router-dom'
 
 class ProcessModal extends React.Component {
     componentDidMount() {
@@ -10,7 +10,7 @@ class ProcessModal extends React.Component {
         }
     }
     render() {
-        const {toggleModal, modalIsOpen, location, providerId} = this.props
+        const { toggleModal, modalIsOpen, location, providerId } = this.props
       return (
         <Modal isOpen={modalIsOpen} toggleModal={toggleModal}>
         <Wrapper

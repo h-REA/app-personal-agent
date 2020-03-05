@@ -1,21 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import moment from "moment";
-import Feed from "../../components/FeedItem";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import getFeed from "../../queries/getFeed";
-import { Query } from "react-apollo";
+import React from "react"
+import styled from "styled-components"
+import moment from "moment"
+import Feed from "../../components/FeedItem"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import getFeed from "../../queries/getFeed"
+import { Query } from "react-apollo"
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color: #f0f0f0bd;
-`;
+`
 
 const B = styled.b`
   text-decoration: underline;
   font-weight: 500;
   color: ${props => props.theme.color.p100};
-`;
+`
 
 const FeedList = styled.div`
   padding: 8px;
@@ -23,21 +23,22 @@ const FeedList = styled.div`
   background: #333d47;
   margin-top: 0;
   margin-bottom: 0;
-`;
+`
 
 export default ({ id, openValidationModal, providerId }) => (
   <Query
     query={getFeed}
     variables={{
-      id: id
+      id: id,
     }}
   >
     {({ loading, error, data, refetch }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+ return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
+        ) 
+}
       return (
         <FeedList>
           {data.agent.agentEconomicEvents.map((ev, i) => (
@@ -49,8 +50,8 @@ export default ({ id, openValidationModal, providerId }) => (
               id={ev.id}
               loggedUserId={providerId}
               providerId={ev.provider.id}
-              withValidation
-              withDelete
+              withValidation={true}
+              withDelete={true}
               validations={ev.validations}
               openValidationModal={openValidationModal}
               primary={
@@ -70,7 +71,7 @@ export default ({ id, openValidationModal, providerId }) => (
             />
           ))}
         </FeedList>
-      );
+      )
     }}
   </Query>
-);
+)

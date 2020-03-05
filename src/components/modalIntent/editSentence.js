@@ -1,38 +1,38 @@
-import React from "react";
-import styled from "styled-components";
-import { compose } from "react-apollo";
-import { withFormik, Field } from "formik";
-import * as Yup from "yup";
-import Events from "../logEvent/events";
-import Units from "../logEvent/unit";
-import Select from "react-select";
-import Button from "../../atoms/button";
-import AsyncSelect from "react-select/lib/Async";
-import getResourcesQuery from "../../queries/getResources";
-import { Mutation } from "react-apollo";
-import UPDATE_COMMITMENT from "../../mutations/updateCommitment";
-import withNotif from "../notification";
-import gql from "graphql-tag";
+import React from "react"
+import styled from "styled-components"
+import { compose } from "react-apollo"
+import { withFormik, Field } from "formik"
+import * as Yup from "yup"
+import Events from "../logEvent/events"
+import Units from "../logEvent/unit"
+import Select from "react-select"
+import Button from "../../atoms/button"
+import AsyncSelect from "react-select/lib/Async"
+import getResourcesQuery from "../../queries/getResources"
+import { Mutation } from "react-apollo"
+import UPDATE_COMMITMENT from "../../mutations/updateCommitment"
+import withNotif from "../notification"
+import gql from "graphql-tag"
 
 const customStyles = {
   control: base => ({
     ...base,
-    color: "#333"
+    color: "#333",
   }),
   input: base => ({
     ...base,
-    color: "#333"
+    color: "#333",
   }),
   singleValue: base => ({
     ...base,
-    color: "#333"
+    color: "#333",
   }),
   placeholder: base => ({
     ...base,
     color: "#333",
-    fontSize: "14px"
-  })
-};
+    fontSize: "14px",
+  }),
+}
 
 export default compose(
   withNotif('Requirement successfully updated', "error! Requirement had not been updated"),
@@ -42,12 +42,12 @@ export default compose(
       numericValue: props.intent.committedQuantity.numericValue,
       unit: {
         value: props.intent.committedQuantity.unit.id,
-        label: props.intent.committedQuantity.unit.name
+        label: props.intent.committedQuantity.unit.name,
       },
       affectedResourceClassifiedAsId: {
         value: props.intent.resourceClassifiedAs.id,
-        label: props.intent.resourceClassifiedAs.name
-      }
+        label: props.intent.resourceClassifiedAs.name,
+      },
     }),
     validationSchema: Yup.object().shape({
       action: Yup.object().required(),
@@ -57,30 +57,30 @@ export default compose(
       date: Yup.string(),
       affectedResourceClassifiedAsId: Yup.object().required(
         "Classification is a required field"
-      )
-    })
+      ),
+    }),
 })
 )(({ intent, values, onError, onSuccess, setFieldValue, handleSentenceOpen, client }) => {
   const promiseOptions = (client, val) => {
     return client
       .query({
         query: getResourcesQuery,
-        variables: { token: localStorage.getItem("oce_token") }
+        variables: { token: localStorage.getItem("oce_token") },
       })
       .then(res => {
-        let options = res.data.allResourceClassifications.map(
+        const options = res.data.allResourceClassifications.map(
           resource => ({
             value: resource.id,
-            label: resource.name
+            label: resource.name,
           })
-        );
-        let newOpt = options.filter(i =>
+        )
+        const newOpt = options.filter(i =>
           i.label.toLowerCase().includes(val.toLowerCase())
-        );
-        return newOpt;
+        )
+        return newOpt
       })
-      .catch(err => console.log(err));
-  };
+      .catch(err => console.log(err))
+  }
   return (
     <Mutation
       mutation={UPDATE_COMMITMENT}
@@ -106,11 +106,11 @@ export default compose(
                 id
               }
             }
-          `
-        });
-        commitment.action = updateCommitment.commitment.action;
-        commitment.committedQuantity = updateCommitment.commitment.committedQuantity;
-        commitment.resourceClassifiedAs = updateCommitment.commitment.resourceClassifiedAs;
+          `,
+        })
+        commitment.action = updateCommitment.commitment.action
+        commitment.committedQuantity = updateCommitment.commitment.committedQuantity
+        commitment.resourceClassifiedAs = updateCommitment.commitment.resourceClassifiedAs
         store.writeFragment({
           id: `${updateCommitment.commitment.__typename}-${
             updateCommitment.commitment.id
@@ -132,10 +132,10 @@ export default compose(
               }
             }
           `,
-          data: commitment
-        });
+          data: commitment,
+        })
         handleSentenceOpen()
-        return onSuccess();
+        return onSuccess()
       }}
     >
       {(editSentence, { data }) => (
@@ -152,11 +152,11 @@ export default compose(
                     onChange={val =>
                       setFieldValue("action", {
                         value: val.value,
-                        label: val.label
+                        label: val.label,
                       })
                     }
                   />
-                );
+                )
               }}
             />
             <Field
@@ -185,11 +185,11 @@ export default compose(
                     onChange={val =>
                       setFieldValue("unit", {
                         value: val.value,
-                        label: val.label
+                        label: val.label,
                       })
                     }
                   />
-                );
+                )
               }}
             />
             <Field
@@ -197,14 +197,14 @@ export default compose(
               render={({ field }) => (
                 <AsyncSelect
                   placeholder="Select a classification..."
-                  defaultOptions
-                  cacheOptions
+                  defaultOptions={true}
+                  cacheOptions={true}
                   value={field.value}
                   styles={customStyles}
                   onChange={val =>
                     setFieldValue("affectedResourceClassifiedAsId", {
                       value: val.value,
-                      label: val.label
+                      label: val.label,
                     })
                   }
                   loadOptions={val => promiseOptions(client, val)}
@@ -213,7 +213,7 @@ export default compose(
             />
           </EditSentence>
           <EditButtons>
-            <Button gray onClick={handleSentenceOpen}>
+            <Button gray={true} onClick={handleSentenceOpen}>
               Cancel
             </Button>
             <Button
@@ -225,7 +225,7 @@ export default compose(
                     committedResourceClassifiedAsId: values.affectedResourceClassifiedAsId.value,
                     committedUnitId: values.unit.value,
                     committedNumericValue: values.numericValue,
-                  }
+                  },
                 })
               }
             >
@@ -235,8 +235,8 @@ export default compose(
         </WrapperEdit>
       )}
     </Mutation>
-  );
-});
+  )
+})
 
 const EditSentence = styled.div`
   z-index: 999999999999;
@@ -244,14 +244,14 @@ const EditSentence = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 3fr;
   grid-column-gap: 4px;
-`;
+`
 
 const EditButtons = styled.div`
   margin-top: 8px;
   & button {
     margin-right: 8px;
   }
-`;
+`
 
 const Input = styled.input`
   border: 1px solid #dadada;
@@ -259,8 +259,8 @@ const Input = styled.input`
   font-size: 14px;
   box-shadow: none;
   text-align: center;
-`;
+`
 
 const WrapperEdit = styled.div`
 margin-bottom: 8px;
-`;
+`

@@ -1,12 +1,12 @@
-import { Mutation } from "react-apollo";
+import { Mutation } from "react-apollo"
 import Icons from '../../atoms/icons'
-import React from "react";
-import styled from "styled-components";
-import getComm from "../../queries/getCommitment";
-import { compose } from "recompose";
-import UPDATE_COMMITMENT from "../../mutations/updateCommitment";
-import gql from "graphql-tag";
-import withNotif from "../notification";
+import React from "react"
+import styled from "styled-components"
+import getComm from "../../queries/getCommitment"
+import { compose } from "recompose"
+import UPDATE_COMMITMENT from "../../mutations/updateCommitment"
+import gql from "graphql-tag"
+import withNotif from "../notification"
 
 export default compose(
   withNotif("Provider is successfully updated", "Provider is not updated")
@@ -16,18 +16,18 @@ export default compose(
       mutation={UPDATE_COMMITMENT}
       onError={onError}
       update={(store, { data: { updateCommitment } }) => {
-        let commCache = store.readQuery({
+        const commCache = store.readQuery({
           query: getComm,
           variables: {
-            id: intentId
-          }
-        });
-        commCache.provider = updateCommitment.commitment.provider;
+            id: intentId,
+          },
+        })
+        commCache.provider = updateCommitment.commitment.provider
         store.writeQuery({
           query: getComm,
-          data: commCache
-        });
-        return onSuccess();
+          data: commCache,
+        })
+        return onSuccess()
       }}
     >
       {(addProvider, { data }) => (
@@ -36,17 +36,17 @@ export default compose(
             addProvider({
               variables: {
                 id: intentId,
-                providerId: providerId
-              }
+                providerId: providerId,
+              },
             })
           }
         >
-          <Icons.Star width='18' height='18' color='#dadada'/>
+          <Icons.Star width="18" height="18" color="#dadada"/>
         </Span>
       )}
     </Mutation>
-  );
-});
+  )
+})
 
 export const DeleteProvider = compose(
   withNotif("Provider is successfully updated", "Provider is not updated")
@@ -67,9 +67,9 @@ export const DeleteProvider = compose(
                 }
               }
             }
-          `
-        });
-        commitment.fulfilledBy.provider = null;
+          `,
+        })
+        commitment.fulfilledBy.provider = null
         store.writeFragment({
           id: `Commitment-${intentId}`,
           fragment: gql`
@@ -82,9 +82,9 @@ export const DeleteProvider = compose(
               }
             }
           `,
-          data: commitment
-        });
-        return onSuccess();
+          data: commitment,
+        })
+        return onSuccess()
       }}
     >
       {(addProvider, { data }) => (
@@ -93,20 +93,20 @@ export const DeleteProvider = compose(
             addProvider({
               variables: {
                 id: intentId,
-                providerId: 0
-              }
+                providerId: 0,
+              },
             })
           }
         >
-         <Icons.Star width='18' height='18' color='#FFD054'/>
+         <Icons.Star width="18" height="18" color="#FFD054"/>
         </Span>
       )}
     </Mutation>
-  );
-});
+  )
+})
 
 const Span = styled.span`
   display: inline-block;
   vertical-align: sub;
   margin-right: 8px;
-`;
+`

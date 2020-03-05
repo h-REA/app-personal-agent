@@ -1,9 +1,9 @@
-import React from "react";
-import { compose } from "recompose";
-import DELETE_COMMITMENT from "../../mutations/deleteCommitment";
+import React from "react"
+import { compose } from "recompose"
+import DELETE_COMMITMENT from "../../mutations/deleteCommitment"
 import getCommitments from '../../queries/getCommitments'
-import withNotif from "../notification";
-import { Mutation } from "react-apollo";
+import withNotif from "../notification"
+import { Mutation } from "react-apollo"
 
 export default compose(
   withNotif(
@@ -16,30 +16,30 @@ export default compose(
     onError={onError}
     update={(store, { data }) => {
         console.log(scopeId)
-        let comm = store.readQuery({
+        const comm = store.readQuery({
             query: getCommitments,
-            variables: {id: scopeId
-            }
-          });
-          let i =comm.agent.agentCommitments.findIndex(comm => comm.id === intentId)
-          let newlist = comm.agent.agentCommitments.splice(i, 1)
+            variables: { id: scopeId,
+            },
+          })
+          const i = comm.agent.agentCommitments.findIndex(comm => comm.id === intentId)
+          const newlist = comm.agent.agentCommitments.splice(i, 1)
           console.log(newlist)
           store.writeQuery({
             query: getCommitments,
             data: newlist,
-            variables: {id: scopeId
-            }
-          });
+            variables: { id: scopeId,
+            },
+          })
       toggleModal()
-      return onSuccess();
+      return onSuccess()
     }}
   >
     {(deleteCommitment, { data }) => (
       <div
         onClick={() =>
           deleteCommitment({
-            variables: {id: intentId,
-            }
+            variables: { id: intentId,
+            },
           })
         }
       >
@@ -47,4 +47,4 @@ export default compose(
       </div>
     )}
   </Mutation>
-));
+))

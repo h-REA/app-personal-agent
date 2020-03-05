@@ -1,11 +1,11 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { NavLink } from "react-router-dom";
-import media from "styled-media-query";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import Profile from "./profile";
-import { LoadingMini, ErrorMini } from "../loading";
+import React from "react"
+import styled, { css } from "styled-components"
+import { NavLink } from "react-router-dom"
+import media from "styled-media-query"
+import { Query } from "react-apollo"
+import gql from "graphql-tag"
+import Profile from "./profile"
+import { LoadingMini, ErrorMini } from "../loading"
 import Overview from '../../atoms/astronaut_y2.png'
 import Flail from '../../atoms/flail.png'
 import Requirement from '../../atoms/shining_star.png'
@@ -26,7 +26,7 @@ const SidebarData = gql`
       }
     }
   }
-`;
+`
 
 const Sidebar = props => {
   return (
@@ -34,18 +34,19 @@ const Sidebar = props => {
       <Query
         query={SidebarData}
         variables={{
-          id: props.param ? props.param : props.providerId
+          id: props.param ? props.param : props.providerId,
         }}
       >
         {({ loading, error, data, refetch, client }) => {
-          if (loading) return <LoadingMini />;
-          if (error)
-            return (
+          if (loading) return <LoadingMini />
+          if (error) {
+return (
               <ErrorMini
                 refetch={refetch}
                 message={`Error! ${error.message}`}
               />
-            );
+            )
+}
           return (
             <React.Fragment>
               <Profile
@@ -64,7 +65,7 @@ const Sidebar = props => {
                             location.pathname === `/agent/${props.param}/` ||
                             location.pathname === "/" ||
                             location.pathname === `/agent/${props.param}`
-                          );
+                          )
                         }}
                         to={
                           props.param && props.location.pathname.includes("/agent/")
@@ -76,10 +77,10 @@ const Sidebar = props => {
                           fontWeight: '500',
                           borderRadius: '2px',
                           background: 'rgba(252, 254, 255, 0.14)',
-                          border: '1px solid rgba(221, 223, 226, 0.16)'
+                          border: '1px solid rgba(221, 223, 226, 0.16)',
                         }}
                       >
-                        <SpanIcon style={{backgroundImage: `url(${Overview})`}}/>
+                        <SpanIcon style={{ backgroundImage: `url(${Overview})` }}/>
                         Overview
                       </NavLink>
                     </Item>
@@ -90,7 +91,7 @@ const Sidebar = props => {
                             location.pathname === `/agent/${props.param}/inventory` ||
                             location.pathname === "/inventory" ||
                             location.pathname === `/agent/${props.param}/inventory/`
-                          );
+                          )
                         }}
                         to={
                           props.param && props.location.pathname.includes("/agent/")
@@ -102,10 +103,10 @@ const Sidebar = props => {
                           fontWeight: '500',
                           borderRadius: '2px',
                           background: 'rgba(252, 254, 255, 0.14)',
-                          border: '1px solid rgba(221, 223, 226, 0.16)'
+                          border: '1px solid rgba(221, 223, 226, 0.16)',
                         }}
                       >
-                        <SpanIcon style={{backgroundImage: `url(${Flail})`}}/>
+                        <SpanIcon style={{ backgroundImage: `url(${Flail})` }}/>
                         Inventory
                       </NavLink>
                     </Item>
@@ -116,8 +117,8 @@ const Sidebar = props => {
                             location.pathname ===
                               `/agent/${props.param}/requirements` ||
                             location.pathname === "/requirements" ||
-                            location.pathname ===`/agent/${props.param}/requirements/`
-                          );
+                            location.pathname === `/agent/${props.param}/requirements/`
+                          )
                         }}
                         to={
                           props.param &&
@@ -130,10 +131,10 @@ const Sidebar = props => {
                           fontWeight: '500',
                           borderRadius: '2px',
                           background: 'rgba(252, 254, 255, 0.14)',
-                          border: '1px solid rgba(221, 223, 226, 0.16)'
+                          border: '1px solid rgba(221, 223, 226, 0.16)',
                         }}
                       >
-                        <SpanIcon style={{backgroundImage: `url(${Requirement})`}}/>
+                        <SpanIcon style={{ backgroundImage: `url(${Requirement})` }}/>
                         Requirements
                       </NavLink>
                     </Item>
@@ -146,7 +147,7 @@ const Sidebar = props => {
                           location.pathname === "/processes" ||
                           location.pathname ===
                             `/agent/${props.param}/processes`
-                        );
+                        )
                       }}
                       to={
                         props.param &&
@@ -159,28 +160,28 @@ const Sidebar = props => {
                         fontWeight: '500',
                         borderRadius: '2px',
                         background: 'rgba(252, 254, 255, 0.14)',
-                        border: '1px solid rgba(221, 223, 226, 0.16)'
+                        border: '1px solid rgba(221, 223, 226, 0.16)',
                       }}
                     >
-                      <SpanIcon style={{backgroundImage: `url(${Process})`}}/>
+                      <SpanIcon style={{ backgroundImage: `url(${Process})` }}/>
                       Processes
                     </NavLink>
                   </Item>
                   <Item>
                       <NavLink to={'#'}>
-                        <SpanIcon style={{backgroundImage: `url(${Plan})`}}/>
+                        <SpanIcon style={{ backgroundImage: `url(${Plan})` }}/>
                         Plans
                       </NavLink>
                     </Item>
                   <Item>
                       <NavLink to={'#'}>
-                        <SpanIcon style={{backgroundImage: `url(${Exchange})`}}/>
+                        <SpanIcon style={{ backgroundImage: `url(${Exchange})` }}/>
                         Exchange
                       </NavLink>
                     </Item>
                     <Item>
                       <NavLink to={'#'}>
-                        <SpanIcon style={{backgroundImage: `url(${Money})`}}/>
+                        <SpanIcon style={{ backgroundImage: `url(${Money})` }}/>
                         Wallet
                       </NavLink>
                     </Item>
@@ -200,24 +201,24 @@ const Sidebar = props => {
                           fontWeight: '500',
                           borderRadius: '2px',
                           background: 'rgba(252, 254, 255, 0.14)',
-                          border: '1px solid rgba(221, 223, 226, 0.16)'
+                          border: '1px solid rgba(221, 223, 226, 0.16)',
                         }}
                       >
-                        <SpanIcon style={{backgroundImage: `url(${Matched})`}}/>
+                        <SpanIcon style={{ backgroundImage: `url(${Matched})` }}/>
                         Matched
                       </NavLink>
                     </Item> : null }
                   </List>
               </Menu>
             </React.Fragment>
-          );
+          )
         }}
       </Query>
     </Wrapper>
-  );
-};
+  )
+}
 
-const Menu = styled.div``;
+const Menu = styled.div``
 
 const Wrapper = styled.div`
   display: flex;
@@ -240,7 +241,7 @@ const Wrapper = styled.div`
       width: 100%;
     `};
   `};
-`;
+`
 
 const SpanIcon = styled.div`
   cursor: pointer;
@@ -250,13 +251,13 @@ const SpanIcon = styled.div`
   height: 18px;
   background-size: contain;
   vertical-align: sub;
-`;
+`
 
 const List = styled.div`
   & a {
     display: block;
   }
-`;
+`
 
 
 
@@ -275,6 +276,6 @@ const Item = styled.h3`
     padding: 0 8px;
     margin-left: -8px;
   }
-`;
+`
 
-export default Sidebar;
+export default Sidebar

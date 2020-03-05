@@ -1,15 +1,15 @@
-import React from "react";
-import s from "styled-components";
-import { clearFix } from "polished";
-import Button from "../../atoms/button";
-import Input from "../../atoms/input";
-import Textarea from "../../atoms/textarea";
-import { Form, Field, withFormik } from "formik";
-import Alert from "../../components/alert";
-import * as Yup from "yup";
-import { compose } from "recompose";
-import withNotif from "../../components/notification";
-import { graphql } from "react-apollo";
+import React from "react"
+import s from "styled-components"
+import { clearFix } from "polished"
+import Button from "../../atoms/button"
+import Input from "../../atoms/input"
+import Textarea from "../../atoms/textarea"
+import { Form, Field, withFormik } from "formik"
+import Alert from "../../components/alert"
+import * as Yup from "yup"
+import { compose } from "recompose"
+import withNotif from "../../components/notification"
+import { graphql } from "react-apollo"
 import updateSettings from '../../mutations/updateSettings'
 
 export default compose(
@@ -17,17 +17,17 @@ export default compose(
         "Personal info are successfully updated",
         "Error, info has not been updated correctly"
     ),
-    graphql(updateSettings, {name: 'mutateSettings'}),
+    graphql(updateSettings, { name: 'mutateSettings' }),
     withFormik({
       mapPropsToValues: props => ({
         name: props.agent.name || "",
         email: props.agent.email || "",
-        note: props.agent.note || ""
+        note: props.agent.note || "",
       }),
       validationSchema: Yup.object().shape({
         name: Yup.string(),
         email: Yup.string(),
-        note: Yup.string()
+        note: Yup.string(),
       }),
       handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
         return props
@@ -38,13 +38,13 @@ export default compose(
               email: values.email,
               image: values.image,
               note: values.note,
-            }
+            },
           })
           .then(res => props.onSuccess())
-        .catch(err => props.onError());
-      }
+        .catch(err => props.onError())
+      },
     })
-  )(({agent, errors, touched}) => (
+  )(({ agent, errors, touched }) => (
   <Form>
     <Item>
       <Photo style={{ backgroundImage: `url(${agent.image})` }} />
@@ -64,9 +64,9 @@ export default compose(
       <Field name="note" render={({ field }) => <Textarea {...field} />} />
       {errors.note && touched.note && <Alert>{errors.note}</Alert>}
     </Item>
-    <Button type='submit'>Save changes</Button>
+    <Button type="submit">Save changes</Button>
   </Form>
-));
+))
 
 
 const H5 = s.h5`
@@ -75,7 +75,7 @@ const H5 = s.h5`
   font-weight: 400;
   margin: 0;
   margin-bottom: 5px;
-`;
+`
 const Photo = s.div`
 float: left;
 margin-left: 10px;
@@ -86,8 +86,8 @@ background: #DCDCDC;
 margin: 0 auto;
 margin-top: 10px;
 background-size: cover;
-`;
+`
 const Item = s.div`
 ${clearFix()}
 margin-bottom: 16px;
-`;
+`

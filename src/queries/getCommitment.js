@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { event } from "../fragments/economicEvents";
+import { event } from "../fragments/economicEvents"
 
 const GetCommitment = gql`
 query ($token: String, $id: Int!) {

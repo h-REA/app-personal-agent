@@ -1,27 +1,27 @@
-import React from "react";
-import { graphql, compose } from "react-apollo";
-import Icons from "../../atoms/icons";
-import Button from "../../atoms/button";
-import Input from "../../atoms/input";
-import { withFormik, Form, Field } from "formik";
-import * as Yup from "yup";
-import Alert from "../../components/alert";
-import LoginMutation from "../../mutations/login";
-import updateNotification from "../../mutations/updateNotification";
-import deleteNotification from "../../mutations/deleteNotification";
-import styled from "styled-components";
+import React from "react"
+import { graphql, compose } from "react-apollo"
+import Icons from "../../atoms/icons"
+import Button from "../../atoms/button"
+import Input from "../../atoms/input"
+import { withFormik, Form, Field } from "formik"
+import * as Yup from "yup"
+import Alert from "../../components/alert"
+import LoginMutation from "../../mutations/login"
+import updateNotification from "../../mutations/updateNotification"
+import deleteNotification from "../../mutations/deleteNotification"
+import styled from "styled-components"
 
 const Wrapper = styled.div`
   width: 320px;
   margin: 0 auto;
   margin-top: 20px;
-`;
+`
 
 const Title = styled.h3`
   margin-top: 80px;
   font-size: 16px;
   letter-spacing: 3px;
-`;
+`
 
 const Header = styled.div`
   margin-top: 40px;
@@ -34,7 +34,7 @@ const Header = styled.div`
     margin-top: 16px;
     font-weight: 300;
   }
-`;
+`
 
 const Body = styled.div`
   & input {
@@ -42,7 +42,7 @@ const Body = styled.div`
     background: #1f2129;
     color: #f0f0f0;
   }
-`;
+`
 
 const Login = ({ touched, errors }) => {
   return (
@@ -87,12 +87,12 @@ const Login = ({ touched, errors }) => {
             {touched.password &&
               errors.password && <Alert>{errors.password}</Alert>}
           </div>
-          <Button type='submit' data-testid="login">login</Button>
+          <Button type="submit" data-testid="login">login</Button>
         </Form>
       </Body>
     </Wrapper>
-  );
-};
+  )
+}
 
 export default compose(
   graphql(LoginMutation),
@@ -104,12 +104,12 @@ export default compose(
       username: Yup.string().required(),
       password: Yup.string()
         .min(4)
-        .required()
+        .required(),
     }),
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
       props
         .mutate({
-          variables: { username: values.username, password: values.password }
+          variables: { username: values.username, password: values.password },
         })
         .then(
           data => {
@@ -124,22 +124,22 @@ export default compose(
                       Welcome :)
                     </div>
                   ),
-                  type: "success"
-                }
+                  type: "success",
+                },
               })
               .then(res => {
                 setTimeout(() => {
                   props.deleteNotification({
-                    variables: { id: res.data.addNotification.id }
-                  });
-                }, 1000);
-              });
-            localStorage.setItem("oce_token", data.data.createToken.token);
-            localStorage.setItem("agent_id", data.data.createToken.id);
-            return props.history.replace("/");
+                    variables: { id: res.data.addNotification.id },
+                  })
+                }, 1000)
+              })
+            localStorage.setItem("oce_token", data.data.createToken.token)
+            localStorage.setItem("agent_id", data.data.createToken.id)
+            return props.history.replace("/")
           },
           e => {
-            const errors = e.graphQLErrors.map(error => error.message);
+            const errors = e.graphQLErrors.map(error => error.message)
             props
               .updateNotification({
                 variables: {
@@ -151,19 +151,19 @@ export default compose(
                       {errors}
                     </div>
                   ),
-                  type: "alert"
-                }
+                  type: "alert",
+                },
               })
               .then(res => {
                 setTimeout(() => {
                   props.deleteNotification({
-                    variables: { id: res.data.addNotification.id }
-                  });
-                }, 1000);
-              });
-            setSubmitting(false);
+                    variables: { id: res.data.addNotification.id },
+                  })
+                }, 1000)
+              })
+            setSubmitting(false)
           }
-        );
-    }
+        )
+    },
   })
-)(Login);
+)(Login)

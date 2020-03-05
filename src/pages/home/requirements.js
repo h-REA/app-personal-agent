@@ -1,10 +1,10 @@
-import React from "react";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import getCommitments from "../../queries/getCommitments";
-import { PropsRoute } from "../../helpers/router";
-import Todo from "../../components/todo";
-import { compose, withState } from "recompose";
+import React from "react"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import getCommitments from "../../queries/getCommitments"
+import { PropsRoute } from "../../helpers/router"
+import Todo from "../../components/todo"
+import { compose, withState } from "recompose"
 
 export default compose(
   withState('filter', 'onFilter', null),
@@ -12,38 +12,39 @@ export default compose(
   <Query
     query={getCommitments}
     variables={{
-      id: props.providerId
+      id: props.providerId,
     }}
   >
     {({ loading, error, data, client, refetch }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+ return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
-      let intents = data.agent.agentCommitments;
-      let filteredIntents = [];
+        ) 
+}
+      const intents = data.agent.agentCommitments
+      let filteredIntents = []
       if (props.filter === 'active') {
-        filteredIntents = intents.filter(i => !i.isFinished);
+        filteredIntents = intents.filter(i => !i.isFinished)
       } else if (props.filter === 'completed') {
-        filteredIntents = intents.filter(i => i.isFinished);
+        filteredIntents = intents.filter(i => i.isFinished)
       } else if (props.filter === 'committed') {
-        filteredIntents = intents.filter(i => i.provider ? i.provider.id === props.providerId : null);
+        filteredIntents = intents.filter(i => i.provider ? i.provider.id === props.providerId : null)
       } else if (props.filter === 'without process') {
         filteredIntents = intents.filter(i => !i.inputOf && !i.outputOf)
       } else if (props.filter === 'with process') {
         filteredIntents = intents.filter(i => i.inputOf || i.outputOf)
       } else {
-        filteredIntents = intents;
+        filteredIntents = intents
       }
       // MATCHED
-      let allmatchedIntents = data.agent.commitmentsMatchingSkills;
-      let matched = allmatchedIntents.filter(i => !i.isFinished);
-      let matchedCompleted = allmatchedIntents.filter(i => i.isFinished);
+      const allmatchedIntents = data.agent.commitmentsMatchingSkills
+      const matched = allmatchedIntents.filter(i => !i.isFinished)
+      const matchedCompleted = allmatchedIntents.filter(i => i.isFinished)
       return (
         <React.Fragment>
           <PropsRoute
-            exact
+            exact={true}
             component={Todo}
             activeIntents={filteredIntents}
             path={props.match.path}
@@ -65,7 +66,7 @@ export default compose(
           />
           <PropsRoute
             component={Todo}
-            exact
+            exact={true}
             path={"/requirements/matched"}
             activeIntents={matched}
             completed={matchedCompleted}
@@ -83,7 +84,7 @@ export default compose(
             handleCompletedOpen={props.handleCompletedOpen}
           />
         </React.Fragment>
-      );
+      )
     }}
   </Query>
-));
+))

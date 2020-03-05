@@ -1,22 +1,22 @@
-import React from "react";
-import styled from "styled-components";
-import Button from "../../atoms/button";
-import { Form, Field } from "formik";
-import Alert from "../../components/alert";
-import Textarea from "../../atoms/textarea";
-import  Icons  from "../../atoms/icons";
-import Input from "../../atoms/input";
-import { clearFix, placeholder } from "polished";
-import moment from "moment";
-import { compose, withState, withHandlers } from "recompose";
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import { event } from "../../fragments/economicEvents";
-import gql from "graphql-tag";
-import { graphql } from "react-apollo";
-import withNotif from "../../components/notification";
-import createResource from "../../mutations/createResource";
-import Feed from "../../components/FeedItem";
+import React from "react"
+import styled from "styled-components"
+import Button from "../../atoms/button"
+import { Form, Field } from "formik"
+import Alert from "../../components/alert"
+import Textarea from "../../atoms/textarea"
+import  Icons  from "../../atoms/icons"
+import Input from "../../atoms/input"
+import { clearFix, placeholder } from "polished"
+import moment from "moment"
+import { compose, withState, withHandlers } from "recompose"
+import { withFormik } from "formik"
+import * as Yup from "yup"
+import { event } from "../../fragments/economicEvents"
+import gql from "graphql-tag"
+import { graphql } from "react-apollo"
+import withNotif from "../../components/notification"
+import createResource from "../../mutations/createResource"
+import Feed from "../../components/FeedItem"
 
 export default compose(
   withNotif(
@@ -26,24 +26,24 @@ export default compose(
   graphql(createResource, { name: "createEventMutation" }),
   withState("output", "onOutput", false),
   withHandlers({
-    toggleOutput: props => () =>  props.onOutput(!props.output)
+    toggleOutput: props => () => props.onOutput(!props.output),
   }),
   withFormik({
     mapPropsToValues: props => ({
       note: "",
       numericValue: "00.00" || "",
       date: moment(),
-      url: ""
+      url: "",
     }),
     validationSchema: Yup.object().shape({
       note: Yup.string(),
       numericValue: Yup.number(),
       date: Yup.string(),
-      url: Yup.string()
+      url: Yup.string(),
     }),
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
-      let date = moment(values.date).format("YYYY-MM-DD");
-      let eventMutationVariables = {
+      const date = moment(values.date).format("YYYY-MM-DD")
+      const eventMutationVariables = {
         id: props.providerId,
         createResource: true,
         providerId: props.providerId,
@@ -56,8 +56,8 @@ export default compose(
         note: values.note,
         affectedNumericValue: values.numericValue,
         start: date,
-        affectedResourceClassifiedAsId: props.data.resourceClassifiedAs.id
-      };
+        affectedResourceClassifiedAsId: props.data.resourceClassifiedAs.id,
+      }
       return props
         .createEventMutation({
           variables: eventMutationVariables,
@@ -75,12 +75,12 @@ export default compose(
                 }
               }
               ${event}
-            `;
+            `
             const process = store.readFragment({
               id: `Process-${props.processId}`,
               fragment: fragment,
-              fragmentName: "Comm"
-            });
+              fragmentName: "Comm",
+            })
             const ev = {
                 __typename: "Fulfillment",
                 fulfilledBy: {
@@ -99,26 +99,26 @@ export default compose(
                 validations: [],
                 affects: data.createEconomicEvent.economicEvent.affects,
                 affectedQuantity:
-                data.createEconomicEvent.economicEvent.affectedQuantity
-              }
-            };
-            let index = process.committedOutputs.findIndex(x => x.id === props.data.id)
+                data.createEconomicEvent.economicEvent.affectedQuantity,
+              },
+            }
+            const index = process.committedOutputs.findIndex(x => x.id === props.data.id)
             process.committedOutputs[index].fulfilledBy.unshift({
-              ...ev
-            });
+              ...ev,
+            })
             store.writeFragment({
               id: `Process-${props.processId}`,
               fragment: fragment,
               fragmentName: "Comm",
-              data: process
-            });
-          }
+              data: process,
+            })
+          },
         })
         .then(res => {
-          return props.onSuccess();
+          return props.onSuccess()
         })
-        .catch(err => props.onError());
-    }
+        .catch(err => props.onError())
+    },
   })
 )(props => (
   <Wrapper>
@@ -146,7 +146,7 @@ export default compose(
             id={ev.id}
             loggedUserId={props.providerId}
             providerId={ev.fulfilledBy.provider ? ev.fulfilledBy.provider.id : null}
-            withDelete
+            withDelete={true}
             validations={ev.fulfilledBy.validations}
             openValidationModal={props.openValidationModal}
             primary={
@@ -211,7 +211,7 @@ export default compose(
                   <Url>
                     <Input placeholder="Type an url..." />
                   </Url>
-                  <Button gray onClick={props.toggleOutput}>
+                  <Button gray={true} onClick={props.toggleOutput}>
                     Cancel
                   </Button>
                   <Button type="submit">Create</Button>
@@ -229,7 +229,7 @@ export default compose(
       </Container>
     </Result>
   </Wrapper>
-));
+))
 
 const Qty = styled.div`
   border-radius: 3px;
@@ -258,11 +258,11 @@ const Qty = styled.div`
     border-radius: 4px;
     ${placeholder({ color: "#333" })};
   }
-`;
+`
 
 const Url = styled.div`
   margin: 0 10px;
-`;
+`
 
 const Footer = styled.div`
   ${clearFix()};
@@ -272,19 +272,19 @@ const Footer = styled.div`
     padding: 0 4px;
     margin-bottom: 0px;
     border-radius: 2px;
-`;
+`
 
 const NoteIcon = styled.div`
   position: absolute;
   top: 17px;
   left: 0px;
-`;
+`
 
 const WrapperLogEvent = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   background: #eff1f4;
-`;
+`
 
 const RightButton = styled(Button)`
   float: right;
@@ -306,7 +306,7 @@ const RightButton = styled(Button)`
   font-size: 13px;
   border: 1px solid #396d91;
   margin: 4px 0px !important;
-`;
+`
 
 const ResourceNote = styled.div`
 position: relative;
@@ -343,7 +343,7 @@ ${clearFix()}
     }
     ${placeholder({ color: "#b2b2bc6" })};
   }
-`;
+`
 
 const Title = styled.div`
   height: 30px;
@@ -355,31 +355,31 @@ const Title = styled.div`
   color: #1c1e22b5;
   letter-spacing: 0.5px;
   font-weight: 500;
-`;
+`
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color: ${props => props.theme.color.p900};
-`;
+`
 
 const B = styled.b`
   text-decoration: underline;
   font-weight: 500;
   color: ${props => props.theme.color.p900};
-`;
+`
 
 const FeedList = styled.div`
   margin-top: 0;
   margin-bottom: 0;
-`;
+`
 
 const Wrapper = styled.div`
   display: grid;
   margin-top: 26px;
   grid-template-columns: 1fr;
   grid-column-gap: 24px;
-`;
-const Result = styled.div``;
+`
+const Result = styled.div``
 
 const Container = styled.div`
   background: #ffffff;
@@ -392,14 +392,14 @@ const Container = styled.div`
     float: right;
     margin-bottom: 8px;
   }
-`;
+`
 const ResultTitle = styled.h2`
   color: ${props => props.theme.color.p900};
   font-size: ${props => props.theme.fontSize.h2};
   letter-spazing: 0.5px;
   margin-bottom: 16px;
   margin-top: 8px;
-`;
+`
 const Note = styled.h3`
   font-weight: 300;
   color: #603e30;
@@ -419,7 +419,7 @@ const Note = styled.h3`
     background: #dadada;
     display: block;
   }
-`;
+`
 const Date = styled.div`
   background: #f6f6f6;
   border-radius: 5px;
@@ -436,7 +436,7 @@ const Date = styled.div`
     vertical-align: sub;
     display: inline-block;
   }
-`;
+`
 const Actions = styled.div`
   margin-top: 8px;
   & button {
@@ -452,7 +452,7 @@ const Actions = styled.div`
     height: 34px;
     line-height: 34px;
   }
-`;
+`
 const Bar = styled.div`
   height: 4px;
   border-radius: 14px;
@@ -472,4 +472,4 @@ const Bar = styled.div`
     left: 0;
     top: -3px;
   }
-`;
+`

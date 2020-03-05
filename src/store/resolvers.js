@@ -1,15 +1,15 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 export const defaults = {
-  notifications: []
-};
+  notifications: [],
+}
 
-let nextNotifId = 0;
+let nextNotifId = 0
 
 export const resolvers = {
   Mutation: {
     addNotification: (_, { message, type }, { cache }) => {
-      let newId = nextNotifId++;
+      const newId = nextNotifId++
       const query = gql`
         query GetNotifications {
           notifications @client {
@@ -19,19 +19,19 @@ export const resolvers = {
             type
           }
         }
-      `;
-      const previousState = cache.readQuery({ query });
+      `
+      const previousState = cache.readQuery({ query })
       const newNotif = {
         id: newId,
         message,
         type,
-        __typename: "Notification"
-      };
+        __typename: "Notification",
+      }
       const data = {
-        notifications: previousState.notifications.concat([newNotif])
-      };
-      cache.writeQuery({ query, data: data });
-      return newNotif;
+        notifications: previousState.notifications.concat([newNotif]),
+      }
+      cache.writeQuery({ query, data: data })
+      return newNotif
     },
     deleteNotification: (_, { id }, { cache }) => {
       const query = gql`
@@ -43,15 +43,15 @@ export const resolvers = {
             type
           }
         }
-      `;
-      const previousState = cache.readQuery({ query });
+      `
+      const previousState = cache.readQuery({ query })
       const data = {
         notifications: previousState.notifications.filter(
           item => item.id !== id
-        )
-      };
-      cache.writeQuery({ query, data });
-      return data;
-    }
-  }
-};
+        ),
+      }
+      cache.writeQuery({ query, data })
+      return data
+    },
+  },
+}

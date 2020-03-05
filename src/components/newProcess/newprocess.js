@@ -1,21 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import { clearFix, placeholder } from "polished";
-import LogEvent from "../createReqInProcess/";
-import Select from "react-select";
-import { compose, withState, withHandlers } from "recompose";
-import { withFormik, Field, Form } from "formik";
-import * as Yup from "yup";
-import moment from "moment";
-import { graphql } from "react-apollo";
-import Input from "../../atoms/input";
-import Alert from "../alert";
-import { inputReqs } from "../../atoms/eventTypes";
-import Button from "../../atoms/button";
-import withNotif from "../notification";
-import CreateProcess from "../../mutations/createProcess";
-import CreateCommitment from "../../mutations/CreateCommitment";
-import DateRangeSelect from "../dateRangeSelect";
+import React from "react"
+import styled from "styled-components"
+import { clearFix, placeholder } from "polished"
+import LogEvent from "../createReqInProcess/"
+import Select from "react-select"
+import { compose, withState, withHandlers } from "recompose"
+import { withFormik, Field, Form } from "formik"
+import * as Yup from "yup"
+import moment from "moment"
+import { graphql } from "react-apollo"
+import Input from "../../atoms/input"
+import Alert from "../alert"
+import { inputReqs } from "../../atoms/eventTypes"
+import Button from "../../atoms/button"
+import withNotif from "../notification"
+import CreateProcess from "../../mutations/createProcess"
+import CreateCommitment from "../../mutations/CreateCommitment"
+import DateRangeSelect from "../dateRangeSelect"
 // import Timeline from "./timeline";
 import Requirement from '../../atoms/shining_star.png'
 import Process from '../../atoms/shooting_star.png'
@@ -32,13 +32,13 @@ class NewProcess extends React.Component {
       onInput,
       values,
       toggleModal,
-      addIntent
-    } = this.props;
+      addIntent,
+    } = this.props
     return (
       <Form>
         <PlanWrapper>
           <ProcessInput>
-             <SpanIcon style={{backgroundImage: `url(${Process})`}}/>
+             <SpanIcon style={{ backgroundImage: `url(${Process})` }}/>
             <Field
               name="title"
               render={({ field }) => (
@@ -65,13 +65,13 @@ class NewProcess extends React.Component {
         <Wrapper>
             <Actions>
               <CommitmentWrapper>
-                <SpanIcon style={{backgroundImage: `url(${Requirement})`}}/>
+                <SpanIcon style={{ backgroundImage: `url(${Requirement})` }}/>
                 <SelectInput>
                   <Field
                     name="inputAction"
                     render={({ field }) => (
                       <Select
-                        isClearable
+                        isClearable={true}
                         name={field.name}
                         onChange={val =>
                           setFieldValue("inputAction", val ? val.value : null)
@@ -112,13 +112,13 @@ class NewProcess extends React.Component {
         {values.inputAction ? null : (
           <ActionsProcess>
             <Button type="submit">Create process</Button>
-            <Button outline onClick={toggleModal}>
+            <Button outline={true} onClick={toggleModal}>
               Cancel
             </Button>
           </ActionsProcess>
         )}
       </Form>
-    );
+    )
   }
 }
 
@@ -131,9 +131,9 @@ export default compose(
   withState("outputs", "onOutput", []),
   withHandlers({
     deleteReq: props => i => {
-      props.inputs.splice(i, 1);
-      return props.onInput(props.inputs);
-    }
+      props.inputs.splice(i, 1)
+      return props.onInput(props.inputs)
+    },
   }),
   graphql(CreateProcess, { name: "createProcessMutation" }),
   graphql(CreateCommitment, { name: "CreateCommitmentMutation" }),
@@ -144,34 +144,34 @@ export default compose(
       outputAction: null,
       title: "",
       start: moment(),
-      due: moment()
+      due: moment(),
     }),
     validationSchema: Yup.object().shape({
       due: Yup.object().required(),
       start: Yup.object().required(),
-      title: Yup.string().required()
+      title: Yup.string().required(),
     }),
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
-      let due = moment(values.due).format("YYYY-MM-DD");
-      let start = moment(values.start).format("YYYY-MM-DD");
-      setSubmitting(true);
-      let vars = {
+      const due = moment(values.due).format("YYYY-MM-DD")
+      const start = moment(values.start).format("YYYY-MM-DD")
+      setSubmitting(true)
+      const vars = {
         name: values.title,
         note: props.note,
         scope: props.scopeId,
         due: due,
-        start: start
-      };
+        start: start,
+      }
       return props
         .createProcessMutation({
-          variables: vars
+          variables: vars,
         })
         .then(res => {
           return Promise.all(
             props.inputs.map(input => {
-              let due = moment(input.due).format("YYYY-MM-DD");
-              let start = moment(input.start).format("YYYY-MM-DD");
-              let inputVars = {
+              const due = moment(input.due).format("YYYY-MM-DD")
+              const start = moment(input.start).format("YYYY-MM-DD")
+              const inputVars = {
                 action: input.action.toLowerCase(),
                 due: due,
                 start: start,
@@ -181,39 +181,39 @@ export default compose(
                 committedUnitId: input.unit.value,
                 committedNumericValue: input.numericValue,
                 inputOfId: res.data.createProcess.process.id,
-                scopeId: props.scopeId
-              };
+                scopeId: props.scopeId,
+              }
               return props.CreateCommitmentMutation({
-                variables: inputVars
-              });
+                variables: inputVars,
+              })
             })
-          );
+          )
         })
         .then(res => {
-          let processId = res[0].data.createCommitment.commitment.inputOf
+          const processId = res[0].data.createCommitment.commitment.inputOf
             ? res[0].data.createCommitment.commitment.inputOf.id
             : res[0].data.createCommitment.commitment.outputOf.id
-            props.onSuccess();
+            props.onSuccess()
           props.toggleModal()
-          props.history.push("/process/" + processId);
-          return null;
+          props.history.push("/process/" + processId)
+          return null
         })
         .catch(err => {
-          return props.onError();
-        });
-    }
+          return props.onError()
+        })
+    },
   })
-)(NewProcess);
+)(NewProcess)
 
 const Actions = styled.div`
   ${clearFix()};
-`;
+`
 const SelectInput = styled.div`
   flex: 1;
   margin-left: 8px;
   position: relative;
   z-index: 999999999999999999999999999999999999999;
-`;
+`
 
 const SpanIcon = styled.span`
   ${clearFix()};
@@ -224,7 +224,7 @@ const SpanIcon = styled.span`
   height: 18px;
   background-size: contain;
   vertical-align: sub;
-`;
+`
 
 const ActionsProcess = styled.div`
   ${clearFix()};
@@ -234,17 +234,17 @@ const ActionsProcess = styled.div`
     float: right;
     margin-left: 8px;
   }
-`;
+`
 const Grid = styled.div`
   ${clearFix()};
   margin-left: -10px;
-`;
+`
 
 const CommitmentWrapper = styled.div`
   margin: 10px;
   display: flex;
   align-items: center;
-`;
+`
 
 const ProcessInput = styled.div`
   margin-right: 10px;
@@ -258,10 +258,10 @@ const ProcessInput = styled.div`
     ${placeholder({
       color: "#282B30",
       fontSize: "14px",
-      letterSpacing: ".5px"
+      letterSpacing: ".5px",
     })};
   }
-`;
+`
 
 const PlanWrapper = styled.div`
   ${clearFix()};
@@ -278,16 +278,16 @@ const PlanWrapper = styled.div`
     ${placeholder({
       color: "#282B30",
       fontSize: "16px",
-      letterSpacing: "1px"
+      letterSpacing: "1px",
     })};
   }
   & textarea {
   }
-`;
+`
 
 const Wrapper = styled.div`
   ${clearFix()};
   margin-bottom: 5px;
   position: relative;
   z-index: 99999;
-`;
+`

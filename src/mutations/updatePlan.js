@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 const updatePlan = gql`
 mutation ($token: String!, $id: Int!, $name: String, $note: String, $due: String) {
@@ -12,6 +12,6 @@ mutation ($token: String!, $id: Int!, $name: String, $note: String, $due: String
       }
     }
   }
-`;
+`
 
 export default updatePlan

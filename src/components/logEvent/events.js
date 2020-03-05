@@ -7,13 +7,13 @@ const events = [
     "produce",
     "take",
     "use",
-    "work"
-  ];
+    "work",
+  ]
 
   const eventOptions = events.map((ev) => ({
     value: ev,
-    label: ev
-  }));
+    label: ev,
+  }))
 
   export default eventOptions
   

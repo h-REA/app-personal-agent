@@ -1,26 +1,26 @@
 export default [
     {
       value: "11",
-      label: "Share"
+      label: "Share",
     },
     {
       value: "3",
-      label: "Day"
+      label: "Day",
     },
     {
       value: "4",
-      label: "Each"
+      label: "Each",
     },
     {
       value: "2",
-      label: "Hours"
+      label: "Hours",
     },
     {
       value: "9",
-      label: "Kilos"
+      label: "Kilos",
     },
     {
       value: "6",
-      label: "Words"
-    }
-];
+      label: "Words",
+    },
+]

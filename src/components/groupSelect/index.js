@@ -1,9 +1,9 @@
-import React from "react";
-import { getRelationships } from "../../helpers/asyncQueries";
-import AsyncSelect from "react-select/lib/Async";
-import { ApolloConsumer, graphql } from "react-apollo";
+import React from "react"
+import { getRelationships } from "../../helpers/asyncQueries"
+import AsyncSelect from "react-select/lib/Async"
+import { ApolloConsumer, graphql } from "react-apollo"
 import Icons from '../../atoms/icons'
-import { Field } from "formik";
+import { Field } from "formik"
 import styled from 'styled-components'
 
 
@@ -19,14 +19,14 @@ export default props => (
           render={({ field }) => (
             <AsyncSelect
               placeholder={"Select a group..."}
-              defaultOptions
-              cacheOptions
+              defaultOptions={true}
+              cacheOptions={true}
               styles={customStyles}
               value={field.label}
               onChange={val =>
                 props.setFieldValue("scope", {
                   value: val.value,
-                  label: val.label
+                  label: val.label,
                 })
               }
               loadOptions={val => getRelationships(client, val)}
@@ -36,7 +36,7 @@ export default props => (
       )}
     </ApolloConsumer>
   </GroupWrapper>
-);
+)
 
 const GroupWrapper = styled.div`
   background: transparent;
@@ -78,7 +78,7 @@ const GroupWrapper = styled.div`
     font-size: 13px;
     font-weight: 400;
   }
-`;
+`
 
 const Span = styled.span`
   box-sizing: border-box;
@@ -99,27 +99,27 @@ const Span = styled.span`
   flex-shrink: 0;
   justify-content: center;
   transition: none;
-`;
+`
 
 const customStyles = {
     control: base => ({
       ...base,
       color: "#333",
-      height: "30px"
+      height: "30px",
     }),
     input: base => ({
       ...base,
       color: "#333",
-      height: "30px"
+      height: "30px",
     }),
     singleValue: base => ({
       ...base,
-      color: "#333"
+      color: "#333",
     }),
     placeholder: base => ({
       ...base,
       color: "#333",
-      fontSize: "14px"
-    })
-  };
+      fontSize: "14px",
+    }),
+  }
   

@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 export default gql`
   query($token: String, $id: Int) {
@@ -18,7 +18,7 @@ export default gql`
       }
     }
   }
-`;
+`
 
 export const getResourcesByContextByAction = gql`
   query($token: String, $action: String, $id: Int) {
@@ -38,4 +38,4 @@ export const getResourcesByContextByAction = gql`
       }
     }
   }
-`;
+`

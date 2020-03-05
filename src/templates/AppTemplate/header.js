@@ -1,12 +1,12 @@
-import React from "react";
-import s from "styled-components";
-import { NavLink } from "react-router-dom";
-import { clearFix, ellipsis } from "polished";
-import Icons from "../../atoms/icons";
-import { compose, withState, withHandlers } from "recompose";
-import OutsideClickHandler from "react-outside-click-handler";
-import SkillsModal from "../../components/skillsModal";
-import InfoModal from "../../components/infoModal";
+import React from "react"
+import s from "styled-components"
+import { NavLink } from "react-router-dom"
+import { clearFix, ellipsis } from "polished"
+import Icons from "../../atoms/icons"
+import { compose, withState, withHandlers } from "recompose"
+import OutsideClickHandler from "react-outside-click-handler"
+import SkillsModal from "../../components/skillsModal"
+import InfoModal from "../../components/infoModal"
 
 export default compose(
   withState("isOpen", "handleMenu", false),
@@ -14,19 +14,20 @@ export default compose(
   withState("info", "onInfo", false),
   withHandlers({
     toggleMenu: props => () => {
-      props.handleMenu(!props.isOpen);
+      props.handleMenu(!props.isOpen)
     },
     toggleSkills: props => () => {
-      props.handleMenu(false);
-      props.onSkills(!props.skills)},
+      props.handleMenu(false)
+      props.onSkills(!props.skills) 
+},
     toggleInfo: props => () => {
-      props.handleMenu(false);
+      props.handleMenu(false)
       props.onInfo(!props.info)
     },
     logout: props => event => {
-      localStorage.removeItem("oce_token");
-      window.location.reload();
-    }
+      localStorage.removeItem("oce_token")
+      window.location.reload()
+    },
   })
 )(
   ({
@@ -40,7 +41,7 @@ export default compose(
     agents,
     providerImage,
     providerId,
-    logout
+    logout,
   }) => (
     <React.Fragment>
       <HeaderWrapper>
@@ -56,7 +57,7 @@ export default compose(
             </Navigation>
           </LeftHeader>
           <Title>
-            <NavLink to={'/'}><span role='img' aria-label='shroom'>🍄</span></NavLink>
+            <NavLink to={'/'}><span role="img" aria-label="shroom">🍄</span></NavLink>
           </Title>
           <WrapperNew>
             <Img
@@ -74,10 +75,10 @@ export default compose(
                             return (
                               location.pathname === `/agent/${a.object.id}/` ||
                               location.pathname === `/agent/${a.object.id}`
-                            );
+                            )
                           }}
                           activeStyle={{
-                            background: "#ced7f6"
+                            background: "#ced7f6",
                           }}
                           to={"/agent/" + a.object.id}
                         >
@@ -105,7 +106,7 @@ export default compose(
       <InfoModal toggleModal={toggleInfo} modalIsOpen={info} />
     </React.Fragment>
   )
-);
+)
 
 const Menu = s.div`
   background: #fff;
@@ -118,7 +119,7 @@ const Menu = s.div`
   right: 0px;
   border: 1px solid #d5dce0;
   width: 220px;
-`;
+`
 const List = s.div`
 padding: 5px 0;
 border-bottom: 1px solid #e0e6e8;
@@ -129,7 +130,7 @@ border-bottom: 1px solid #e0e6e8;
 &:last-of-type {
   border-bottom: 0px;
 }
-`;
+`
 const Item = s.div`
   color: ${props => props.theme.color.p900};
   padding: 0 10px;
@@ -142,12 +143,12 @@ const Item = s.div`
     background: #d6eaff;
   }
 
-`;
+`
 
 const LeftHeader = s.div`
   ${clearFix()};
   width: 61px;
-`;
+`
 
 const Img = s.div`
 width: 28px;
@@ -159,7 +160,7 @@ border-radius: 100px;
 background-color: #aac6e3;
 background-size: cover;
 
-`;
+`
 
 const Title = s.div`
 margin-top: 4px;
@@ -181,7 +182,7 @@ a {
   font-size: 16px;
   padding-left: 5px;
 }
-`;
+`
 
 const Navigation = s.div`
   vertical-align: middle;
@@ -216,7 +217,7 @@ const Navigation = s.div`
       margin-top: 3px;
     }
   }
-  `;
+  `
 const WrapperNew = s.div`
   cursor: pointer;
   margin-top: 4px;
@@ -224,14 +225,14 @@ const WrapperNew = s.div`
   position: relative;
   z-index: 99999;
   width: 30px;
-`;
+`
 
 const Content = s.div`
 max-width: 1010px;
 margin: 0 auto;
 margin-top: 4px;
 display: flex;
-`;
+`
 
 const HeaderWrapper = s.div`
   height: 46px;
@@ -245,4 +246,4 @@ const HeaderWrapper = s.div`
   top: 0;
   right: 0;
   z-index: 999999;;
-  `;
+  `

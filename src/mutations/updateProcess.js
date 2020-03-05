@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 export const UpdateProcess = gql`
   mutation(
@@ -39,6 +39,6 @@ export const UpdateProcess = gql`
       }
     }
   }
-`;
+`
 
-export default UpdateProcess;
+export default UpdateProcess

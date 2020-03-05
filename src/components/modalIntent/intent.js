@@ -1,20 +1,20 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { clearFix } from "polished";
-import moment from "moment";
+import React from "react"
+import styled, { css } from "styled-components"
+import { clearFix } from "polished"
+import moment from "moment"
 import Icons from '../../atoms/icons'
-import { NavLink } from "react-router-dom";
-import LogEvent from "../logEvent/index";
-import Feed from "../../components/FeedItem";
-import AddProvider, { DeleteProvider } from "../addProvider";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import getComm from "../../queries/getCommitment";
-import CommitmentStatus from "../commitmentStatus";
-import EditDueDate from "../editDueDate";
-import { withHandlers, withState, compose } from "recompose";
-import EditSentence from "./editSentence";
-import EditNote from "./editNote";
+import { NavLink } from "react-router-dom"
+import LogEvent from "../logEvent/index"
+import Feed from "../../components/FeedItem"
+import AddProvider, { DeleteProvider } from "../addProvider"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import getComm from "../../queries/getCommitment"
+import CommitmentStatus from "../commitmentStatus"
+import EditDueDate from "../editDueDate"
+import { withHandlers, withState, compose } from "recompose"
+import EditSentence from "./editSentence"
+import EditNote from "./editNote"
 import ButtonDeleteIntent from '../deleteIntent'
 
 const Intent = ({
@@ -26,22 +26,23 @@ const Intent = ({
   handleSentenceOpen,
   handleNoteOpen,
   scopeId,
-  toggleModal
+  toggleModal,
 }) => {
   return (
     <Query
       query={getComm}
       variables={{
-        id: intentId
+        id: intentId,
       }}
     >
       {({ loading, error, data, refetch, fetchMore, client }) => {
-        if (loading) return <LoadingMini />;
-        if (error)
-          return (
+        if (loading) return <LoadingMini />
+        if (error) {
+return (
             <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-          );
-        let intent = data.commitment;
+          ) 
+}
+        const intent = data.commitment
         return (
           <Wrapper>
             <First>
@@ -112,7 +113,7 @@ const Intent = ({
                 </Nav>
               ) : null}
               {intent.inputOf || intent.outputOf ? (
-                <Nav process>
+                <Nav process={true}>
                   <span>Process</span>{" "}
                   <NavLink to="">
                     <Process>
@@ -133,13 +134,13 @@ const Intent = ({
                     <Feed
                       commitmentId={intent.id}
                       scopeId={scopeId}
-                      light
+                      light={true}
                       loggedUserId={providerId}
                       providerId={ev.fulfilledBy.provider.id}
                       image={ev.fulfilledBy.provider.image}
                       key={i}
                       id={ev.fulfilledBy.id}
-                      withDelete
+                      withDelete={true}
                       primary={
                         <FeedItem>
                           <B>{ev.fulfilledBy.provider.name}</B>{" "}
@@ -180,40 +181,40 @@ const Intent = ({
             : null
           }
           </Wrapper>
-        );
+        )
       }}
     </Query>
-  );
-};
+  )
+}
 
 export default compose(
   withState("isSentenceOpen", "onSentenceOpen", false),
   withState("isNoteOpen", "onNoteOpen", false),
   withHandlers({
     handleSentenceOpen: props => () => {
-      props.onSentenceOpen(!props.isSentenceOpen);
+      props.onSentenceOpen(!props.isSentenceOpen)
     },
     handleNoteOpen: props => () => {
-      props.onNoteOpen(!props.isNoteOpen);
-    }
+      props.onNoteOpen(!props.isNoteOpen)
+    },
   })
-)(Intent);
+)(Intent)
 
 const DeleteIntent = styled.div`
   height: 30px;
   margin-top: 30px;
-`;
+`
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color: ${props => props.theme.color.p800};
-`;
+`
 
 const B = styled.b`
   text-decoration: underline;
   font-weight: 500;
   color: ${props => props.theme.color.p800};
-`;
+`
 
 const Suptitle = styled.h3`
   font-weight: 500;
@@ -223,7 +224,7 @@ const Suptitle = styled.h3`
   letter-spacing: 1px;
   margin-bottom: 8px;
   margin-top: 16px;
-`;
+`
 
 const AddNote = styled.div`
   color: ${props => props.theme.color.p800};
@@ -244,13 +245,13 @@ const AddNote = styled.div`
     background: #bacbe1;
     border-color: ${props => props.theme.color.b100};
   }
-`;
+`
 
 const Members = styled.div`
   float: left;
   margin-left: 4px;
   ${clearFix()};
-`;
+`
 const Span = styled.div`
   float: left;
   width: 24px;
@@ -260,7 +261,7 @@ const Span = styled.div`
   & svg {
     margin-top: 2px;
   }
-`;
+`
 const Img = styled.div`
   float: left;
   width: 24px;
@@ -270,17 +271,17 @@ const Img = styled.div`
   background-repeat: no-repeat;
   margin-right: 4px;
   background-color: #dedede;
-`;
+`
 
 const Wrapper = styled.div`
   padding: 16px;
   padding-top: 8px;
   position: relative;
-`;
+`
 const Section = styled.div`
   margin-top: 24px;
   position: relative;
-`;
+`
 const Nav = styled.div`
   position: relative;
   font-size: 14px;
@@ -315,7 +316,7 @@ const Nav = styled.div`
     margin-top: 13px;
     margin-left: 8px;
   }
-`;
+`
 
 const Actions = styled.div`
   background: #434a5b;
@@ -323,12 +324,12 @@ const Actions = styled.div`
   margin-bottom: -16px;
   margin-right: -16px;
   ${clearFix()};
-`;
+`
 
 const First = styled.div`
   ${clearFix()};
   margin-bottom: 8px;
-`;
+`
 
 const Sentence = styled.h2`
   font-weight: 600;
@@ -344,7 +345,7 @@ const Sentence = styled.h2`
   &:hover {
     background: #e3e3e3;
   }
-`;
+`
 
 const Note = styled.h3`
   margin-top: 8px;
@@ -353,12 +354,12 @@ const Note = styled.h3`
   font-size: 13px;
   letter-spacing: 0.4px;
   color: ${props => props.theme.color.p800};
-`;
+`
 
 const Second = styled.div`
   ${clearFix()};
   margin-top: 16px;
-`;
+`
 
 const ContainerTitle = styled.div`
   ${clearFix()};
@@ -372,7 +373,7 @@ const ContainerTitle = styled.div`
   line-height: 20px;
   line-height: 23px;
   margin-right: 4px;
-`;
+`
 const Content = styled.div`
   ${clearFix()};
   display: inline-block;
@@ -383,7 +384,7 @@ const Content = styled.div`
   height: 20px;
   text-decoration: underline;
   line-height: 20px;
-`;
+`
 
 const Process = styled.div`
   ${clearFix()};
@@ -394,4 +395,4 @@ const Process = styled.div`
   margin: 0;
   height: 20px;
   line-height: 20px;
-`;
+`

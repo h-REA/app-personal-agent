@@ -1,34 +1,35 @@
-import React from "react";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import { PropsRoute } from "../../helpers/router";
-import getAgentProcesses from "../../queries/getAgentProcesses";
-import processTodo from "../../components/processTodo";
-import ProcessModal from "../process/wrapper";
-import { compose, withState } from "recompose";
+import React from "react"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import { PropsRoute } from "../../helpers/router"
+import getAgentProcesses from "../../queries/getAgentProcesses"
+import processTodo from "../../components/processTodo"
+import ProcessModal from "../process/wrapper"
+import { compose, withState } from "recompose"
 
-export default  compose(
+export default compose(
   withState('filter', 'onFilter', null),
 )(props => (
   <Query
     query={getAgentProcesses}
     variables={{
-      id: props.param
+      id: props.param,
     }}
   >
     {({ loading, error, data, client, refetch }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+ return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
+        ) 
+}
 
-        let filteredProcesses= []
-        let processes = data.agent.agentProcesses;
+        let filteredProcesses = []
+        const processes = data.agent.agentProcesses
         if (props.filter === 'active') {
-          filteredProcesses = processes.filter(i => !i.isFinished);
+          filteredProcesses = processes.filter(i => !i.isFinished)
         } else if (props.filter === 'completed') {
-          filteredProcesses = processes.filter(i => i.isFinished);
+          filteredProcesses = processes.filter(i => i.isFinished)
         } else {
           filteredProcesses = processes
         }
@@ -44,7 +45,7 @@ export default  compose(
               providerId={props.providerId}
             />
           <PropsRoute
-            exact
+            exact={true}
             filter={props.filter}
             onFilter={props.onFilter}
             component={processTodo}
@@ -60,7 +61,7 @@ export default  compose(
             handleProcess={props.handleProcess}
           />
         </div>
-      );
+      )
     }}
   </Query>
-));
+))

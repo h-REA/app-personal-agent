@@ -1,6 +1,6 @@
-import React from "react";
-import Modal from "../modal";
-import styled from "styled-components";
+import React from "react"
+import Modal from "../modal"
+import styled from "styled-components"
 
 const H1 = styled.h2`
   color: ${props => props.theme.color.p800}
@@ -30,7 +30,7 @@ const Code = styled.pre`
 
 const HelperModal = ({
   modalIsOpen,
-  toggleModal
+  toggleModal,
 }) => {
   return (
     <Modal isOpen={modalIsOpen} toggleModal={toggleModal}>
@@ -50,7 +50,7 @@ const HelperModal = ({
             If you fulfill all the mandatory fields, the right cross icon will be replaced by another one and you can publish your activity.
         </Wrapper>
     </Modal>
-  );
-};
+  )
+}
 
-export default HelperModal;
+export default HelperModal

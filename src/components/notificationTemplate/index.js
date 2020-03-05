@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { clearFix, animation } from "polished";
-import Icons from "../../atoms/icons";
+import React from "react"
+import styled, { css } from "styled-components"
+import { clearFix, animation } from "polished"
+import Icons from "../../atoms/icons"
 
 const Wrapper = styled.div`
   background-color: #0052CC;
@@ -28,7 +28,7 @@ const Wrapper = styled.div`
       background: #36b37e;
       color: #091e42;
     `}
-`;
+`
 
 const Content = styled.div`
   width: 90%;
@@ -49,15 +49,15 @@ const Content = styled.div`
     css`
       color: #091e42;
     `}
-`;
+`
 
 const Actions = styled.div`
   float: right;
   cursor: pointer;
   height: 18px;
-`;
+`
 
-const Container = styled.div``;
+const Container = styled.div``
 
 const Notification = ({ notifications, dismiss }) => {
   return (
@@ -69,8 +69,8 @@ const Notification = ({ notifications, dismiss }) => {
             onClick={() =>
               dismiss({
                 variables: {
-                  id: el.id
-                }
+                  id: el.id,
+                },
               })
             }
           >
@@ -79,7 +79,7 @@ const Notification = ({ notifications, dismiss }) => {
         </Wrapper>
       ))}
     </Container>
-  );
-};
+  )
+}
 
-export default Notification;
+export default Notification

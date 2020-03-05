@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 export default gql`
 mutation ($token: String!, $agentId: Int!, $skillId: Int!) {
@@ -16,6 +16,6 @@ mutation ($token: String!, $agentId: Int!, $skillId: Int!) {
       }
     }
   }
-`;
+`
 
 

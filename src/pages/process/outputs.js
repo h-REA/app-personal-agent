@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import Output from './output'
 export default props =>
   props.outputs.map((output, i) => (

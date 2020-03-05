@@ -1,20 +1,20 @@
-import React from "react";
-import styled from "styled-components";
-import { clearFix } from "polished";
-import LogEvent from "../createReqInProcess/logEvent";
-import { compose, withState } from "recompose";
-import { withFormik, Field } from "formik";
-import * as Yup from "yup";
-import moment from "moment";
-import { graphql } from "react-apollo";
-import ProcessSelect from "./processSelect";
-import withNotif from "../notification";
-import CreateCommitment from "../../mutations/CreateCommitment";
-import getCommitments from "../../queries/getCommitments";
-import GroupSelect from "../groupSelect";
-import { inputReqs } from "../../atoms/eventTypes";
+import React from "react"
+import styled from "styled-components"
+import { clearFix } from "polished"
+import LogEvent from "../createReqInProcess/logEvent"
+import { compose, withState } from "recompose"
+import { withFormik, Field } from "formik"
+import * as Yup from "yup"
+import moment from "moment"
+import { graphql } from "react-apollo"
+import ProcessSelect from "./processSelect"
+import withNotif from "../notification"
+import CreateCommitment from "../../mutations/CreateCommitment"
+import getCommitments from "../../queries/getCommitments"
+import GroupSelect from "../groupSelect"
+import { inputReqs } from "../../atoms/eventTypes"
 import Icons from '../../atoms/icons'
-import Select from "react-select";
+import Select from "react-select"
 
 export default compose(
   withNotif("Commitment is successfully created", "Commitment is not created"),
@@ -30,7 +30,7 @@ export default compose(
       unit: "",
       start: moment(),
       due: moment(),
-      affectedResourceClassifiedAsId: ""
+      affectedResourceClassifiedAsId: "",
     }),
     validationSchema: Yup.object().shape({
       action: Yup.string().required(),
@@ -40,14 +40,14 @@ export default compose(
       unit: Yup.object(),
       start: Yup.string().required(),
       due: Yup.string().required(),
-      affectedResourceClassifiedAsId: Yup.object().required()
+      affectedResourceClassifiedAsId: Yup.object().required(),
     }),
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
 
-      let date = moment(values.due).format("YYYY-MM-DD");
-      let start = moment(values.start).format("YYYY-MM-DD");
-      setSubmitting(true);
-      let MutationVariables = {
+      const date = moment(values.due).format("YYYY-MM-DD")
+      const start = moment(values.start).format("YYYY-MM-DD")
+      setSubmitting(true)
+      const MutationVariables = {
         action: values.action.toLowerCase(),
         start: start,
         due: date,
@@ -58,33 +58,33 @@ export default compose(
         committedNumericValue: values.numericValue,
         inputOfId: values.process ? values.process.value : null,
         outputOfId: values.process ? values.process.value : null,
-        scopeId: values.scope.value
-      };
+        scopeId: values.scope.value,
+      }
       return props
         .createCommitment({
           variables: MutationVariables,
           update: (store, { data }) => {
-            let comm = store.readQuery({
+            const comm = store.readQuery({
               query: getCommitments,
               variables: {
-                id: values.scope.value
-              }
-            });
+                id: values.scope.value,
+              },
+            })
             comm.agent.agentCommitments.push(
               data.createCommitment.commitment
-            );
+            )
             store.writeQuery({
               query: getCommitments,
               data: comm,
               variables: {
-                id: props.scopeId
-              }
-            });
-          }
+                id: props.scopeId,
+              },
+            })
+          },
         })
         .then(res => props.onSuccess())
-        .catch(err => props.onError());
-    }
+        .catch(err => props.onError())
+    },
   })
 )(
   ({
@@ -101,7 +101,7 @@ export default compose(
     values,
     toggleModal,
     addIntent,
-    handleSubmit
+    handleSubmit,
   }) => {
     return (
       <div>
@@ -136,7 +136,7 @@ export default compose(
                   name="action"
                   render={({ field }) => (
                     <Select
-                      isClearable
+                      isClearable={true}
                       name={field.name}
                       onChange={val =>
                         setFieldValue("action", val ? val.value : null)
@@ -172,22 +172,22 @@ export default compose(
           </div>)
         : null}
       </div>
-    );
+    )
   }
-);
+)
 
 
 const SelectInput = styled.div`
   flex: 1;
   margin-left: 8px;
-`;
+`
 
 
 const CommitmentWrapper = styled.div`
   margin: 10px;
   display: flex;
   align-items: center;
-`;
+`
 
 
 const Title = styled.h3`
@@ -196,17 +196,17 @@ const Title = styled.h3`
   margin-bottom: 16px;
   margin-left: 10px;
   margin-top: 20px;
-`;
+`
 
 const Actions = styled.div`
   ${clearFix()};
-`;
+`
 
 const PlanWrapper = styled.div`
   ${clearFix()};
   padding-top: 2px;
   height: 38px;
-`;
+`
 
 const Wrapper = styled.div`
   ${clearFix()};
@@ -217,13 +217,13 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 2fr;
   grid-column-gap: 8px;
-`;
+`
 
 const SelectContainer = styled.div`
   ${clearFix()};
   position: relative;
   z-index: 9999;
-`;
+`
 
 const Span = styled.span`
   ${clearFix()};
@@ -245,4 +245,4 @@ const Span = styled.span`
   flex-shrink: 0;
   justify-content: center;
   transition: none;
-`;
+`

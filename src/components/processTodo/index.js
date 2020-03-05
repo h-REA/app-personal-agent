@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Process from '../process';
-import {compose, withState, withHandlers } from "recompose";
-import OutsideClickHandler from "react-outside-click-handler";
+import Process from '../process'
+import { compose, withState, withHandlers } from "recompose"
+import OutsideClickHandler from "react-outside-click-handler"
 
 const Header = styled.div`
   height: 40px;
@@ -60,7 +60,7 @@ const Item = styled.div`
 export default compose(
   withState('isOpen', 'onOpen', false),
   withHandlers({
-    handleOpen: props => () => props.onOpen(!props.isOpen)
+    handleOpen: props => () => props.onOpen(!props.isOpen),
   })
 )(props => {
   return (
@@ -92,16 +92,17 @@ export default compose(
             ))}
           </ContentIntents>
       </WrapperIntents>
-  )})
+  ) 
+})
 
 
 
 const WrapperIntents = styled.div`
 position: relative;
-`;
+`
 
 const ContentIntents = styled.div`
 margin: 0;
 padding: 0;
 width: 100%;
-`;
+`

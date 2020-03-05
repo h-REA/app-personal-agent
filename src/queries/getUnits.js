@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 const getUnitsQuery = gql`
   query($token: String!) {
@@ -10,6 +10,6 @@ const getUnitsQuery = gql`
       }
     }
   }
-`;
+`
 
-export default getUnitsQuery;
+export default getUnitsQuery

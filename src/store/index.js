@@ -1,29 +1,30 @@
-import {ApolloClient} from 'apollo-client'
+import { ApolloClient } from 'apollo-client'
 // import {HttpLink} from 'apollo-link-http'
 import { SchemaLink } from 'apollo-link-schema'
-import {InMemoryCache, IntrospectionFragmentMatcher} from 'apollo-cache-inmemory'
+import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory'
 import introspectionQueryResultData from '../fragmentTypes.json'
-import { defaults, resolvers } from "./resolvers";
-import {withClientState} from 'apollo-link-state'
-import {ApolloLink} from 'apollo-link'
+import { defaults, resolvers } from "./resolvers"
+import { withClientState } from 'apollo-link-state'
+import { ApolloLink } from 'apollo-link'
 import schema from '@valueflows/vf-graphql-holochain'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData
+  introspectionQueryResultData,
 })
 
 const cache = new InMemoryCache({
   dataIdFromObject: object => {
     const dataId = object.id ? `${object.__typename}-${object.id}` : null
-    return dataId},
+    return dataId 
+},
   addTypename: true,
-  fragmentMatcher
+  fragmentMatcher,
 })
 
 const stateLink = withClientState({
   cache,
   defaults: defaults,
-  resolvers: resolvers
+  resolvers: resolvers,
 })
 
 const link = ApolloLink.from([
@@ -41,6 +42,6 @@ export const client = new ApolloClient({
   ssrMode: true,
   ssrForceFetchDelay: 100,
   connectToDevTools: true,
-  queryDeduplication: true
+  queryDeduplication: true,
 })
 

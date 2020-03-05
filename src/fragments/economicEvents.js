@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 export const event = gql`
   fragment BasicEvent on EconomicEvent {
@@ -33,4 +33,4 @@ export const event = gql`
       trackingIdentifier
     }
   }
-`;
+`

@@ -1,23 +1,24 @@
-import React from "react";
-import getProcessesByAgent from "../../queries/getProcessesByAgent";
-import { LoadingMini, ErrorMini } from "../loading";
-import { Query } from "react-apollo";
-import Select from "react-select";
+import React from "react"
+import getProcessesByAgent from "../../queries/getProcessesByAgent"
+import { LoadingMini, ErrorMini } from "../loading"
+import { Query } from "react-apollo"
+import Select from "react-select"
 
 export default ({ scopeId, setFieldValue, field }) => {
   return (
     <Query
       query={getProcessesByAgent}
       variables={{
-        id: scopeId
+        id: scopeId,
       }}
     >
       {({ loading, error, data, refetch }) => {
-        if (loading) return <LoadingMini />;
-        if (error)
-          return (
+        if (loading) return <LoadingMini />
+        if (error) {
+ return (
             <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-          );
+          ) 
+}
         return (
           <Select
             onChange={val =>
@@ -26,12 +27,12 @@ export default ({ scopeId, setFieldValue, field }) => {
             value={field.value}
             options={data.agent.agentProcesses.map(process => ({
               value: process.id,
-              label: process.name
+              label: process.name,
             }))}
             placeholder={"Is it part of a process ?"}
           />
-        );
+        )
       }}
     </Query>
-  );
-};
+  )
+}

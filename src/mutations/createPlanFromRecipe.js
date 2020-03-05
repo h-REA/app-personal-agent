@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 const createPlanFromRecipe = gql`
   mutation(
@@ -26,6 +26,6 @@ const createPlanFromRecipe = gql`
       }
     }
   }
-`;
+`
 
-export default createPlanFromRecipe;
+export default createPlanFromRecipe

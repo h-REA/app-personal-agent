@@ -29,18 +29,18 @@ font-weight: 500;
 export const LoadingMini = () => (
     <Wrapper>
       <div>
-        <LoaderIcon><Icons.Loading width="24" height="24" color='#606984' /></LoaderIcon>
+        <LoaderIcon><Icons.Loading width="24" height="24" color="#606984" /></LoaderIcon>
         <h1>Loading...</h1>
       </div>
     </Wrapper>
 )
 
 
-export const ErrorMini = ({message, loading, refetch}) => (
+export const ErrorMini = ({ message, loading, refetch }) => (
     <WrapperError>
-        <div><Icons.Cross width='26' height='26' color='#f0f0f0a3' /></div>
+        <div><Icons.Cross width="26" height="26" color="#f0f0f0a3" /></div>
         <h1>{message}</h1>
-        {loading ? <Button disabled>Wait...</Button> : <Button onClick={() => refetch()}>Refresh</Button>}
+        {loading ? <Button disabled={true}>Wait...</Button> : <Button onClick={() => refetch()}>Refresh</Button>}
     </WrapperError>
 )
 

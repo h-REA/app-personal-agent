@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
+import React from "react"
+import styled from "styled-components"
 import Icons from '../../atoms/icons'
-import {placeholder} from 'polished'
-import DatePicker from "react-datepicker";
+import { placeholder } from 'polished'
+import DatePicker from "react-datepicker"
 import Calendar from '../../atoms/calendar.png'
-require("react-datepicker/dist/react-datepicker-cssmodules.css");
+require("react-datepicker/dist/react-datepicker-cssmodules.css")
 
 
 export default props => (
   <ItemDate>
-    <SpanIcon style={{backgroundImage: `url(${Calendar})`}}/>
+    <SpanIcon style={{ backgroundImage: `url(${Calendar})` }}/>
     <StartDate
       value={props.start}
       onChange={props.setFieldValue}
@@ -28,43 +28,43 @@ export default props => (
       touched={props.touched.due}
     />
   </ItemDate>
-);
+)
 
 
 const StartDate = props => {
     const handleChange = value => {
-      props.onChange("start", value);
-    };
+      props.onChange("start", value)
+    }
     return (
       <DatePicker
-        selectsStart
+        selectsStart={true}
         startDate={props.value}
         endDate={props.end}
         selected={props.value}
         onChange={handleChange}
         placeholderText="Start date"
         dateFormat={"DD MMM"}
-        withPortal
+        withPortal={true}
       />
-    );
-  };
+    )
+  }
   const DueDate = props => {
     const handleChange = value => {
-      props.onChange("due", value);
-    };
+      props.onChange("due", value)
+    }
     return (
       <DatePicker
-        selectsEnd
+        selectsEnd={true}
         startDate={props.start}
         endDate={props.value}
         selected={props.value}
         onChange={handleChange}
         placeholderText="Due date"
         dateFormat={"DD MMM"}
-        withPortal
+        withPortal={true}
       />
-    );
-  };
+    )
+  }
   
   const SpanIcon = styled.span`
   cursor: pointer;
@@ -74,7 +74,7 @@ const StartDate = props => {
   height: 18px;
   background-size: contain;
   vertical-align: sub;
-`;
+`
 const ItemDate = styled.div`
   background: transparent;
   border-color: #b7bfc6;
@@ -123,10 +123,10 @@ const ItemDate = styled.div`
     margin: 0;
     width: 80px;
     ${placeholder({
-      fontSize: '13px !important'
+      fontSize: '13px !important',
     })}
   }
-`;
+`
 
 
 const SpanArrow = styled.i`
@@ -135,4 +135,4 @@ const SpanArrow = styled.i`
   vertical-align: sub;
   display: inline-flex;
 
-`;
+`

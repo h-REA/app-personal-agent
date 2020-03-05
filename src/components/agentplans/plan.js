@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import styled from "styled-components"
+import { NavLink } from "react-router-dom"
 
 const Wrapper = styled.div`
 height: 60px;
@@ -10,7 +10,7 @@ border-radius: 4px;
 margin-bottom: 8px;
 box-shadow: 0 2px 2px rgba(0,0,0,.1);
 border-bottom: 1px solid #222326;
-`;
+`
 
 const Title = styled.h3`
 font-weight: 500;
@@ -26,4 +26,4 @@ export default ({ plan }) => (
       <Title>{plan.name}</Title>
     </Wrapper>
   </NavLink>
-);
+)

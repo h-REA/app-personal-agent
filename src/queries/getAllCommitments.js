@@ -1,5 +1,5 @@
-import gql from "graphql-tag";
-import { event } from "../fragments/economicEvents";
+import gql from "graphql-tag"
+import { event } from "../fragments/economicEvents"
 
 export default gql`
   query($token: String, $id: Int) {
@@ -101,4 +101,4 @@ export default gql`
     }
   }
   ${event}
-`;
+`

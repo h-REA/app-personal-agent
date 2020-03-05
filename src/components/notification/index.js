@@ -1,11 +1,11 @@
 import Icons from '../../atoms/icons'
-import updateNotification from "../../mutations/updateNotification";
-import deleteNotification from "../../mutations/deleteNotification";
-import React, { createFactory } from "react";
-import { ApolloConsumer } from "react-apollo";
+import updateNotification from "../../mutations/updateNotification"
+import deleteNotification from "../../mutations/deleteNotification"
+import React, { createFactory } from "react"
+import { ApolloConsumer } from "react-apollo"
 
 export default (onSuccessMessage, onErrorMessage) => BaseComponent => {
-  const factory = createFactory(BaseComponent);
+  const factory = createFactory(BaseComponent)
   const WithNotification = props => {
     return (
       <ApolloConsumer>
@@ -25,17 +25,17 @@ export default (onSuccessMessage, onErrorMessage) => BaseComponent => {
                       {onErrorMessage}
                     </div>
                   ),
-                  type: "alert"
-                }
+                  type: "alert",
+                },
               })
               .then(res =>
                 setTimeout(() => {
                   return client.mutate({
                     mutation: deleteNotification,
-                    variables: { id: res.data.addNotification.id }
-                  });
+                    variables: { id: res.data.addNotification.id },
+                  })
                 }, 1000)
-              );
+              )
           const onSuccessNotif = () =>
             client
               .mutate({
@@ -51,26 +51,26 @@ export default (onSuccessMessage, onErrorMessage) => BaseComponent => {
                       {onSuccessMessage}
                     </div>
                   ),
-                  type: "success"
-                }
+                  type: "success",
+                },
               })
               .then(res =>
                 setTimeout(() => {
                   return client.mutate({
                     mutation: deleteNotification,
-                    variables: { id: res.data.addNotification.id }
-                  });
+                    variables: { id: res.data.addNotification.id },
+                  })
                 }, 1000)
-              );
+              )
           return factory({
             ...props,
             onError: onErrorNotif,
-            onSuccess: onSuccessNotif
-          });
+            onSuccess: onSuccessNotif,
+          })
         }}
       </ApolloConsumer>
-    );
-  };
-  return WithNotification;
-};
+    )
+  }
+  return WithNotification
+}
 

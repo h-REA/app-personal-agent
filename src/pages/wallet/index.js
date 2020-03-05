@@ -1,18 +1,18 @@
-import React from "react";
-import Icons from "../../atoms/icons";
+import React from "react"
+import Icons from "../../atoms/icons"
 import Feed from '../../components/FeedItem'
-import Transfer from "../../components/transferAssets";
-import styled from "styled-components";
-import { clearFix } from "polished";
-import getRelationship from "../../queries/getRelationships";
-import { graphql } from "react-apollo";
-import { compose, withHandlers,lifecycle, withState } from "recompose";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import media from "styled-media-query";
-import getList, { getTxs, balance } from "../../xhr/socialwallet";
-import getTxss from "../../queries/getTxs";
-import moment from "moment";
-import { Query } from "react-apollo";
+import Transfer from "../../components/transferAssets"
+import styled from "styled-components"
+import { clearFix } from "polished"
+import getRelationship from "../../queries/getRelationships"
+import { graphql } from "react-apollo"
+import { compose, withHandlers, lifecycle, withState } from "recompose"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import media from "styled-media-query"
+import getList, { getTxs, balance } from "../../xhr/socialwallet"
+import getTxss from "../../queries/getTxs"
+import moment from "moment"
+import { Query } from "react-apollo"
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-`;
+`
 
 const Header = styled.div`
   position: relative;
@@ -30,7 +30,7 @@ const Header = styled.div`
   color: ${props => props.theme.color.p100};
   ${clearFix()};
   background: ${props => props.theme.color.p900};
-`;
+`
 
 const Content = styled.div`
   background: #282c37;
@@ -40,7 +40,7 @@ const Content = styled.div`
   padding: 8px;
   display: flex;
   flex: 1;
-`;
+`
 
 const Inside = styled.div`
   display: flex;
@@ -51,23 +51,23 @@ const Inside = styled.div`
   overflow-y: overlay;
   position: relative;
   min-height: 100vh;
-`;
+`
 
 const HeaderLeft = styled.div`
   float: left;
   ${clearFix()};
-`;
+`
 
 const HeaderRight = styled.div`
   float: right;
   ${clearFix()};
-`;
+`
 
 const Span = styled.div`
   margin-top: 16px;
   margin-right: 16px;
   cursor: pointer;
-`;
+`
 
 const Img = styled.div`
   float: left;
@@ -79,12 +79,12 @@ const Img = styled.div`
   margin-left: 8px;
   background-size: cover;
   background-color: ${props => props.theme.color.p600};
-`;
+`
 const Title = styled.h2`
   float: left;
   margin-left: 8px;
   line-height: 50px;
-`;
+`
 
 const Overview = styled.div`
   flex: 1;
@@ -97,29 +97,29 @@ const Overview = styled.div`
   ${media.lessThan("medium")`
   width: 100%;
   `};
-`;
+`
 
 const FeedHeader = styled.div`
   height: 40px;
   border-bottom: 1px solid #f0f0f020;
-`;
+`
 const HeaderTitle = styled.h3`
   color: ${props => props.theme.color.p300};
   line-height: 40px;
   margin-left: 8px;
-`;
+`
 
 const FeedList = styled.div`
   margin-top: 8px;
   margin-bottom: 60px;
   padding: 0;
-`;
+`
 const SelectWrapper = styled.div`
   width: 250px;
   margin-top: 5px;
   float: right;
   margin-right: 8px;
-`;
+`
 
 const DataBox = styled.div`
   font-weight: 300;
@@ -139,7 +139,7 @@ const DataBox = styled.div`
     letter-spacing: 1px;
     color: ${props => props.status ? props.theme.color.g100 : 'red'};
   }
-`;
+`
 
 const HeaderSpan = styled.div`
   float: left;
@@ -151,18 +151,18 @@ const HeaderSpan = styled.div`
   ${media.lessThan("medium")`
   display: block;
   `};
-`;
+`
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color: ${props => props.theme.color.p100};
-`;
+`
 
 const B = styled.b`
   text-decoration: underline;
   font-weight: 500;
   color: ${props => props.theme.color.p100};
-`;
+`
 
 const Tag = styled.span`
   border: 1px solid rgb(65, 155, 249);
@@ -176,27 +176,28 @@ const Tag = styled.span`
   font-size: 14px;
   letter-spacing: 1px;
   font-weight: 500;
-`;
+`
 
 // const options = [{ value: "1032", label: "fakecoin" }, {value: ""}];
 const Wallet = props => (
   <Query
     query={getRelationship}
     variables={{
-      id: 1032
+      id: 1032,
     }}
     onCompleted={data => props.getTxs(data)}
   >
     {({ loading, error, data, refetch, networkStatus }) => {
-      if (networkStatus === 4) return "Refetching!";
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (networkStatus === 4) return "Refetching!"
+      if (loading) return <LoadingMini />
+      if (error) {
+ return (
           <ErrorMini
             refetch={props.refetch}
             message={`Error! ${props.error.message}`}
           />
-        );
+        ) 
+}
       return (
         <Wrapper>
           <Header>
@@ -207,7 +208,7 @@ const Wallet = props => (
               <Title>Fakecoin Wallet</Title>
             </HeaderLeft>
             <HeaderRight>
-              <DataBox status={props.balance < 0 ? false : true}>
+              <DataBox status={!(props.balance < 0)}>
                 Your balance: <b>{props.balance}</b>
               </DataBox>
             </HeaderRight>
@@ -256,10 +257,10 @@ const Wallet = props => (
             </Inside>
           </Content>
         </Wrapper>
-      );
+      )
     }}
   </Query>
-);
+)
 export default compose(
   withState("balance", "onBalance", null),
   withState("txs", "onTxs", null),
@@ -267,27 +268,27 @@ export default compose(
     componentDidMount() {
         getList(
           {
-            blockchain: "mongo",
-            "account-id": String(this.props.id)
+            "blockchain": "mongo",
+            "account-id": String(this.props.id),
           },
           balance
         )
           .then(res => res.json())
           .then(res => this.props.onBalance(res.amount))
-          .catch(err => console.log(err));
-      }
+          .catch(err => console.log(err))
+      },
   }),
   withHandlers({
     addToTxChain: props => tx => {
       props.onTxs([tx, ...props.txs])
     },
     addTx: props => (data, tx) => {
-      let provider = data.find(
+      const provider = data.find(
         o2 => Number(tx["from-id"]) === Number(o2.subject.id)
-      );
-      let receiver = data.find(
+      )
+      const receiver = data.find(
         o2 => Number(tx["to-id"]) === Number(o2.subject.id)
-      );
+      )
       return {
         note: tx.tags,
         action: "transfer",
@@ -296,45 +297,45 @@ export default compose(
         start: tx.timestamp,
         affects: {
           resourceClassifiedAs: {
-            name: "FakeCoin"
-          }
+            name: "FakeCoin",
+          },
         },
         affectedQuantity: {
           numericValue: tx.amount,
           unit: {
-            name: "FakeCoin"
-          }
-        }
-      };
-    }}),
+            name: "FakeCoin",
+          },
+        },
+      }
+    } }),
     withHandlers({
     getTxs: props => data => {
       getList(
         {
-          blockchain: "mongo"
+          blockchain: "mongo",
         },
         getTxs
       )
         .then(res => res.json())
         .then(res => {
-          let txs = res.transactions.map(o => props.addTx(data.agent.agentRelationships, o));
-          let newTxs = txs.filter(tx => tx.provider && tx.receiver);
-          return props.onTxs(newTxs);
+          const txs = res.transactions.map(o => props.addTx(data.agent.agentRelationships, o))
+          const newTxs = txs.filter(tx => tx.provider && tx.receiver)
+          return props.onTxs(newTxs)
         })
-        .catch(err => console.log(err));
-    }
+        .catch(err => console.log(err))
+    },
   }),
   graphql(getRelationship, {
     options: props => ({
       variables: {
-        id: 1032
-      }
+        id: 1032,
+      },
     }),
     props: ({ ownProps, data: { viewer, loading, error, refetch } }) => ({
       loading,
       error,
       refetch,
-      agents: viewer ? viewer.agent : null
-    })
+      agents: viewer ? viewer.agent : null,
+    }),
   })
-)(Wallet);
+)(Wallet)

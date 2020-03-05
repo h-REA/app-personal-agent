@@ -1,10 +1,10 @@
-import React from "react";
-import s from "styled-components";
-import  Icons  from "../../atoms/icons";
-import gql from "graphql-tag";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../loading";
-import SkillSelect from "../../pages/settings/skillSelect";
+import React from "react"
+import s from "styled-components"
+import  Icons  from "../../atoms/icons"
+import gql from "graphql-tag"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../loading"
+import SkillSelect from "../../pages/settings/skillSelect"
 
 const GET_SKILLS = gql`
   query($token: String) {
@@ -25,7 +25,7 @@ const GET_SKILLS = gql`
       }
     }
   }
-`;
+`
 
 export default ({ toggleSkills, providerId }) => (
   <Wrapper>
@@ -42,18 +42,19 @@ export default ({ toggleSkills, providerId }) => (
         }}
       >
         {({ loading, error, data, refetch, client }) => {
-          if (loading) return <LoadingMini />;
-          if (error)
-            return (
+          if (loading) return <LoadingMini />
+          if (error) {
+ return (
               <ErrorMini
                 refetch={refetch}
                 message={`Error! ${error.message}`}
               />
-            );
-          let skills = data.myAgent.agentSkillRelationships.map(s => ({
+            ) 
+}
+          const skills = data.myAgent.agentSkillRelationships.map(s => ({
             value: s.resourceClassification.id,
-            label: s.resourceClassification.name
-          }));
+            label: s.resourceClassification.name,
+          }))
           return (
           <SkillsWrapper>
             <SkillSelect providerId={providerId} client={client} data={data} skills={skills} />
@@ -63,16 +64,16 @@ export default ({ toggleSkills, providerId }) => (
       </Query>
     </Body>
   </Wrapper>
-);
+)
 
 
 const Body = s.div`
 
-`;
+`
 
 const SkillsWrapper = s.div`
 
-`;
+`
 
 const Wrapper = s.div`
 position: absolute;
@@ -83,19 +84,19 @@ z-index: 999999999;
 padding: 16px;
 min-height: 100%;
 background: #F0F0F0;
-`;
+`
 const Header = s.div`
 
-`;
+`
 const Span = s.div`
   display: inline-block;
   vertical-align: sub;
   margin-right: 16px;
   cursor: pointer;
-  `;
+  `
 const Title = s.h3`
   display: inline-block;
   color: ${props => props.theme.color.p900};
   letter-spacing: 0.5px;
   margin-bottom: 16px;
-`;
+`

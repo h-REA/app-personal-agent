@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 const AddTxs = gql`
   mutation addTxs(
@@ -26,7 +26,7 @@ const AddTxs = gql`
         timestamp
       }
   }
-`;
+`
 
 
 export default AddTxs

@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import  Icons  from "../../atoms/icons";
-import Button from "../../atoms/button";
-import withNotif from "../notification";
-import { compose } from "recompose";
-import CREATE_VALIDATION from "../../mutations/createValidation";
-import DELETE_VALIDATION from "../../mutations/deleteValidation";
-import gql from "graphql-tag";
+import React from "react"
+import styled from "styled-components"
+import  Icons  from "../../atoms/icons"
+import Button from "../../atoms/button"
+import withNotif from "../notification"
+import { compose } from "recompose"
+import CREATE_VALIDATION from "../../mutations/createValidation"
+import DELETE_VALIDATION from "../../mutations/deleteValidation"
+import gql from "graphql-tag"
 
-import { Mutation } from "react-apollo";
+import { Mutation } from "react-apollo"
 
 const ValidationFragment = gql`
   fragment myEvent on EconomicEvent {
@@ -21,7 +21,7 @@ const ValidationFragment = gql`
       }
     }
   }
-`;
+`
 
 export default compose(
   withNotif("Validation correctly updated", "Validation is not updated")
@@ -33,8 +33,8 @@ export default compose(
       update={(store, { data: { createValidation } }) => {
         const event = store.readFragment({
           id: `EconomicEvent-${eventId}`,
-          fragment: ValidationFragment
-        });
+          fragment: ValidationFragment,
+        })
 
         event.validations.push({
           id: createValidation.validation.id,
@@ -42,17 +42,17 @@ export default compose(
           validatedBy: {
             id: createValidation.validation.validatedBy.id,
             name: createValidation.validation.validatedBy.name,
-            __typename: "Person"
+            __typename: "Person",
           },
-          __typename: "Validation"
-        });
+          __typename: "Validation",
+        })
 
         store.writeFragment({
           id: `EconomicEvent-${eventId}`,
           fragment: ValidationFragment,
-          data: event
-        });
-        return onSuccess();
+          data: event,
+        })
+        return onSuccess()
       }}
     >
       {(createValidation, { data }) => (
@@ -63,8 +63,8 @@ export default compose(
               variables: {
                 validatedById: providerId,
                 economicEventId: eventId,
-                note: note
-              }
+                note: note,
+              },
             })
           }
         >
@@ -72,8 +72,8 @@ export default compose(
         </Button>
       )}
     </Mutation>
-  );
-});
+  )
+})
 
 export const DeleteValidation = compose(
   withNotif("Validation correctly updated", "Validation is not updated")
@@ -84,29 +84,29 @@ export const DeleteValidation = compose(
     update={(store, { data: { createValidation } }) => {
       const event = store.readFragment({
         id: `EconomicEvent-${eventId}`,
-        fragment: ValidationFragment
-      });
+        fragment: ValidationFragment,
+      })
 
-      let ValIndex = event.validations.findIndex(
+      const ValIndex = event.validations.findIndex(
         item => Number(item.id) === Number(validationId)
-      );
-      event.validations.splice(ValIndex, 1);
+      )
+      event.validations.splice(ValIndex, 1)
       store.writeFragment({
         id: `EconomicEvent-${eventId}`,
         fragment: ValidationFragment,
-        data: event
-      });
-      return onSuccess();
+        data: event,
+      })
+      return onSuccess()
     }}
   >
     {(deleteValidation, { data }) => (
       <Button
-        primary
+        primary={true}
         onClick={() =>
           deleteValidation({
             variables: {
-              id: validationId
-            }
+              id: validationId,
+            },
           })
         }
       >
@@ -117,7 +117,7 @@ export const DeleteValidation = compose(
       </Button>
     )}
   </Mutation>
-));
+))
 
 
 const Span = styled.span`

@@ -1,21 +1,21 @@
-import React from "react";
+import React from "react"
 import Icons from '../../atoms/icons'
 import Button from '../../atoms/button'
 import Input from '../../atoms/input'
 import Textarea from '../../atoms/textarea'
-import DatePicker from "react-datepicker";
-import { Form, Field } from "formik";
-import { ApolloConsumer } from "react-apollo";
-import { placeholder } from "polished";
-import Log from "./styled";
-import Select from "react-select";
-import styled from "styled-components";
-import Units from "./unit";
-import Events from "./events";
-import AsyncSelect from "react-select/lib/Async";
-import Alert from "../alert";
-import {getAllResources} from '../../helpers/asyncQueries'
-require("react-datepicker/dist/react-datepicker-cssmodules.css");
+import DatePicker from "react-datepicker"
+import { Form, Field } from "formik"
+import { ApolloConsumer } from "react-apollo"
+import { placeholder } from "polished"
+import Log from "./styled"
+import Select from "react-select"
+import styled from "styled-components"
+import Units from "./unit"
+import Events from "./events"
+import AsyncSelect from "react-select/lib/Async"
+import Alert from "../alert"
+import { getAllResources } from '../../helpers/asyncQueries'
+require("react-datepicker/dist/react-datepicker-cssmodules.css")
 
 
 const LogEvent = ({
@@ -27,7 +27,7 @@ const LogEvent = ({
   closeLogEvent,
   setFieldTouched,
   menuSelected,
-  scopeId
+  scopeId,
 }) => (
     <ApolloConsumer>
       {client => (
@@ -44,7 +44,7 @@ const LogEvent = ({
                           onChange={val =>
                             setFieldValue("action", {
                               value: val.value,
-                              label: val.label
+                              label: val.label,
                             })
                           }
                           options={Events}
@@ -52,7 +52,7 @@ const LogEvent = ({
                           value={field.value}
                           placeholder="Select an event"
                         />
-                      );
+                      )
                     }}
                   />
                   {errors.action &&
@@ -87,7 +87,7 @@ const LogEvent = ({
                           onChange={val =>
                             setFieldValue("unit", {
                               value: val.value,
-                              label: val.label
+                              label: val.label,
                             })
                           }
                           options={Units}
@@ -95,7 +95,7 @@ const LogEvent = ({
                           placeholder="Select a unit"
                           value={field.value}
                         />
-                      );
+                      )
                     }}
                   />
                   {errors.unit && touched.unit && <Alert>{errors.unit}</Alert>}
@@ -106,8 +106,8 @@ const LogEvent = ({
                     render={({ field }) => (
                       <AsyncSelect
                         placeholder="Select a classification..."
-                        defaultOptions
-                        cacheOptions
+                        defaultOptions={true}
+                        cacheOptions={true}
                         value={field.value}
                         // styles={customStyles}
                         onChange={val =>
@@ -129,7 +129,7 @@ const LogEvent = ({
             </Log.Log>
             {/* </div> */}
             <Log.Note>
-              <NoteIcon><Icons.Text width='16' height='16' color='#b7bfc6' /></NoteIcon>
+              <NoteIcon><Icons.Text width="16" height="16" color="#b7bfc6" /></NoteIcon>
               <Field
                 name="note"
                 render={({ field }) => (
@@ -151,16 +151,16 @@ const LogEvent = ({
                 error={errors.start}
                 touched={touched.start}
               />
-              <Button  type="submit">Publish</Button>
-              {closeLogEvent ? <Button outline onClick={closeLogEvent}>Cancel</Button> : null}
+              <Button type="submit">Publish</Button>
+              {closeLogEvent ? <Button outline={true} onClick={closeLogEvent}>Cancel</Button> : null}
             </Log.PublishActions>
           </Log.Module>
         </Form>
       )}
     </ApolloConsumer>
-  );
+  )
 
-const Action = styled.div``;
+const Action = styled.div``
 const Qty = styled.div`
   border-radius: 3px;
   max-height: 36px;
@@ -174,11 +174,11 @@ const Qty = styled.div`
     border: 1px solid #7d849a50;
     ${placeholder({ color: "red" })};
   }
-`;
-const Unit = styled.div``;
+`
+const Unit = styled.div``
 const Resource = styled.div`
   margin-bottom: 8px;
-`;
+`
 const Row = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 2fr 3fr;
@@ -186,7 +186,7 @@ const Row = styled.div`
   & input {
     ${placeholder({ color: "#333" })};
   }
-`;
+`
 
 
 const NoteIcon = styled.div`
@@ -196,23 +196,23 @@ const NoteIcon = styled.div`
 
 const StartDate = props => {
   const handleChange = value => {
-    props.onChange("date", value);
-  };
+    props.onChange("date", value)
+  }
   return (
     <Log.ItemDate>
       <span>
-        <Icons.Calendar  width='16' height='16' color='#b7bfc6' />
+        <Icons.Calendar width="16" height="16" color="#b7bfc6" />
       </span>
       <DatePicker
         selected={props.value}
         onChange={handleChange}
         dateFormat={"DD MMM"}
-        withPortal
+        withPortal={true}
       />
       {/* {props.error && props.touched && <Alert>{props.error}</Alert>} */}
     </Log.ItemDate>
-  );
-};
+  )
+}
 
 
-export default LogEvent;
+export default LogEvent

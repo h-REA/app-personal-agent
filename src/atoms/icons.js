@@ -1,7 +1,7 @@
-import * as React from "react";
-const browser = typeof window !== "undefined";
+import * as React from "react"
+const browser = typeof window !== "undefined"
 
-const nullServerComponent = () => <span />;
+const nullServerComponent = () => <span />
 
 // ACTIVITIES
 export const Activity = !browser
@@ -22,7 +22,7 @@ export const Activity = !browser
       >
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
-    );
+    )
 
 // SIDEBAR
 export const Sidebar = !browser
@@ -68,7 +68,7 @@ export const Sidebar = !browser
           </g>
         </g>
       </svg>
-    );
+    )
 
 // GRID
 export const Grid = !browser
@@ -109,7 +109,7 @@ export const Grid = !browser
           </g>
         </g>
       </svg>
-    );
+    )
 
 // SIDEBAR
 export const Diary = !browser
@@ -131,7 +131,7 @@ export const Diary = !browser
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
         <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
       </svg>
-    );
+    )
 
 // CALENDAR
 export const Calendar = !browser
@@ -155,7 +155,7 @@ export const Calendar = !browser
         <line x1="8" y1="2" x2="8" y2="6" />
         <line x1="3" y1="10" x2="21" y2="10" />
       </svg>
-    );
+    )
 
 // LINK
 export const Link = !browser
@@ -177,7 +177,7 @@ export const Link = !browser
         <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
         <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
       </svg>
-    );
+    )
 
 // EYE
 export const Eye = !browser
@@ -199,7 +199,7 @@ export const Eye = !browser
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
         <circle cx="12" cy="12" r="3" />
       </svg>
-    );
+    )
 
 // INVENTORY
 export const Inventory = !browser
@@ -221,7 +221,7 @@ export const Inventory = !browser
         <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
       </svg>
-    );
+    )
 
 // GLOBE
 export const Globe = !browser
@@ -244,7 +244,7 @@ export const Globe = !browser
         <line x1="2" y1="12" x2="22" y2="12" />
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
       </svg>
-    );
+    )
 
 // HOME
 export const Home = !browser
@@ -266,7 +266,7 @@ export const Home = !browser
         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
         <polyline points="9 22 9 12 15 12 15 22" />
       </svg>
-    );
+    )
 
 // WORK
 export const Work = !browser
@@ -289,7 +289,7 @@ export const Work = !browser
         <circle cx="12" cy="12" r="6" />
         <circle cx="12" cy="12" r="2" />
       </svg>
-    );
+    )
 
 // Search
 export const Search = !browser
@@ -311,7 +311,7 @@ export const Search = !browser
         <circle cx="11" cy="11" r="8" />
         <line x1="21" y1="21" x2="16.65" y2="16.65" />
       </svg>
-    );
+    )
 
 // VALIDATE
 export const Validate = !browser
@@ -335,7 +335,7 @@ export const Validate = !browser
         <path d="M13 6h3a2 2 0 0 1 2 2v7" />
         <line x1="6" y1="9" x2="6" y2="21" />
       </svg>
-    );
+    )
 
 // BELL
 export const Bell = !browser
@@ -356,7 +356,7 @@ export const Bell = !browser
       >
         <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0" />
       </svg>
-    );
+    )
 
 // User
 export const User = !browser
@@ -378,7 +378,7 @@ export const User = !browser
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
       </svg>
-    );
+    )
 // Settings
 export const Settings = !browser
   ? nullServerComponent
@@ -406,7 +406,7 @@ export const Settings = !browser
         <line x1="9" y1="8" x2="15" y2="8" />
         <line x1="17" y1="16" x2="23" y2="16" />
       </svg>
-    );
+    )
 // Power
 export const Power = !browser
   ? nullServerComponent
@@ -427,7 +427,7 @@ export const Power = !browser
         <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
         <line x1="12" y1="2" x2="12" y2="12" />
       </svg>
-    );
+    )
 // Preferites
 export const Preferites = !browser
   ? nullServerComponent
@@ -447,7 +447,7 @@ export const Preferites = !browser
       >
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
       </svg>
-    );
+    )
 
 // MENU
 export const Menu = !browser
@@ -470,7 +470,7 @@ export const Menu = !browser
         <line x1="3" y1="6" x2="21" y2="6" />
         <line x1="3" y1="18" x2="21" y2="18" />
       </svg>
-    );
+    )
 
 // CARD
 export const Card = !browser
@@ -492,7 +492,7 @@ export const Card = !browser
         <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
         <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
       </svg>
-    );
+    )
 
 // LEFT
 export const Left = !browser
@@ -514,7 +514,7 @@ export const Left = !browser
         <line x1="20" y1="12" x2="4" y2="12" />
         <polyline points="10 18 4 12 10 6" />
       </svg>
-    );
+    )
 // ArrowUP
 export const Arrowup = !browser
   ? nullServerComponent
@@ -535,7 +535,7 @@ export const Arrowup = !browser
         <line x1="12" y1="19" x2="12" y2="5" />
         <polyline points="5 12 12 5 19 12" />
       </svg>
-    );
+    )
 
 // RIGHT
 export const ArrowRight = !browser
@@ -557,7 +557,7 @@ export const ArrowRight = !browser
         <line x1="4" y1="12" x2="20" y2="12" />
         <polyline points="14 6 20 12 14 18" />
       </svg>
-    );
+    )
 
 // CLOCK
 export const Clock = !browser
@@ -579,7 +579,7 @@ export const Clock = !browser
         <circle cx="12" cy="12" r="10" />
         <polyline points="12 6 12 12 16 14" />
       </svg>
-    );
+    )
 
 // TEXT
 export const Text = !browser
@@ -603,7 +603,7 @@ export const Text = !browser
         <line x1="21" y1="14" x2="3" y2="14" />
         <line x1="17" y1="18" x2="3" y2="18" />
       </svg>
-    );
+    )
 
 // MESSAGE
 export const Message = !browser
@@ -624,7 +624,7 @@ export const Message = !browser
       >
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
       </svg>
-    );
+    )
 
 // CROSS
 export const Cross = !browser
@@ -634,7 +634,7 @@ export const Cross = !browser
       height = 24,
       strokeWidth = 2,
       color = "#333",
-      stroke = 2
+      stroke = 2,
     }) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -652,7 +652,7 @@ export const Cross = !browser
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
-    );
+    )
 
 // USERS
 export const Users = !browser
@@ -676,7 +676,7 @@ export const Users = !browser
         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
-    );
+    )
 
 // CHECK
 export const Check = !browser
@@ -697,7 +697,7 @@ export const Check = !browser
       >
         <polyline points="20 6 9 17 4 12" />
       </svg>
-    );
+    )
 
 // SHIELD
 export const Shield = !browser
@@ -718,7 +718,7 @@ export const Shield = !browser
       >
         <path d="M12 22s8-4 8-10V4l-8-2-8 2v8c0 6 8 10 8 10z" />
       </svg>
-    );
+    )
 
 // PLUS
 export const Plus = !browser
@@ -740,7 +740,7 @@ export const Plus = !browser
         <line x1="12" y1="5" x2="12" y2="19" />
         <line x1="5" y1="12" x2="19" y2="12" />
       </svg>
-    );
+    )
 
 // Inbox
 export const Inbox = !browser
@@ -762,7 +762,7 @@ export const Inbox = !browser
         <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
         <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
       </svg>
-    );
+    )
 
 // MORE
 export const More = !browser
@@ -785,7 +785,7 @@ export const More = !browser
         <circle cx="19" cy="12" r="1" />
         <circle cx="5" cy="12" r="1" />
       </svg>
-    );
+    )
 
 // EDIT
 export const Edit = !browser
@@ -806,7 +806,7 @@ export const Edit = !browser
       >
         <polygon points="16 3 21 8 8 21 3 21 3 16 16 3" />
       </svg>
-    );
+    )
 
 // SEND
 export const Send = !browser
@@ -828,7 +828,7 @@ export const Send = !browser
         <line x1="22" y1="2" x2="11" y2="13" />
         <polygon points="22 2 15 22 11 13 2 9 22 2" />
       </svg>
-    );
+    )
 
 // Reply
 export const Reply = !browser
@@ -850,7 +850,7 @@ export const Reply = !browser
         <polyline points="9 14 4 9 9 4" />
         <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
       </svg>
-    );
+    )
 
 // Reply
 export const Right = !browser
@@ -871,7 +871,7 @@ export const Right = !browser
       >
         <polyline points="9 18 15 12 9 6" />
       </svg>
-    );
+    )
 
 // Down
 export const Down = !browser
@@ -892,7 +892,7 @@ export const Down = !browser
       >
         <polyline points="6 9 12 15 18 9" />
       </svg>
-    );
+    )
 
 // Share
 export const Share = !browser
@@ -916,7 +916,7 @@ export const Share = !browser
         <polyline points="7 23 3 19 7 15" />
         <path d="M21 13v2a4 4 0 0 1-4 4H3" />
       </svg>
-    );
+    )
 
 // Share
 export const UpRight = !browser
@@ -938,7 +938,7 @@ export const UpRight = !browser
         <polyline points="15 14 20 9 15 4" />
         <path d="M4 20v-7a4 4 0 0 1 4-4h12" />
       </svg>
-    );
+    )
 
 // Share
 export const UpLeft = !browser
@@ -960,7 +960,7 @@ export const UpLeft = !browser
         <polyline points="9 14 4 9 9 4" />
         <path d="M20 20v-7a4 4 0 0 0-4-4H4" />
       </svg>
-    );
+    )
 
 // EDIT-2
 export const Edit2 = !browser
@@ -982,7 +982,7 @@ export const Edit2 = !browser
         <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34" />
         <polygon points="18 2 22 6 12 16 8 16 8 12 18 2" />
       </svg>
-    );
+    )
 
 // TRASH
 export const Trash = !browser
@@ -1006,7 +1006,7 @@ export const Trash = !browser
         <line x1="10" y1="11" x2="10" y2="17" />
         <line x1="14" y1="11" x2="14" y2="17" />
       </svg>
-    );
+    )
 
 // FOLDER
 export const Folder = !browser
@@ -1027,7 +1027,7 @@ export const Folder = !browser
       >
         <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
       </svg>
-    );
+    )
 // UP
 export const Up = !browser
   ? nullServerComponent
@@ -1045,9 +1045,9 @@ export const Up = !browser
         strokeLinejoin="round"
         className="feather feather-users"
       >
-        <polyline points="18 15 12 9 6 15"></polyline>
+        <polyline points="18 15 12 9 6 15" />
       </svg>
-    );
+    )
 
 // NEWFILE
 export const NewFile = !browser
@@ -1071,7 +1071,7 @@ export const NewFile = !browser
         <line x1="12" y1="18" x2="12" y2="12" />
         <line x1="9" y1="15" x2="15" y2="15" />
       </svg>
-    );
+    )
 
 // STAR
 export const Star = !browser
@@ -1092,7 +1092,7 @@ export const Star = !browser
       >
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
-    );
+    )
 
 // TYPE
 export const Type = !browser
@@ -1115,7 +1115,7 @@ export const Type = !browser
         <line x1="9" y1="20" x2="15" y2="20" />
         <line x1="12" y1="4" x2="12" y2="20" />
       </svg>
-    );
+    )
 
 // Dollar
 export const Dollar = !browser
@@ -1137,7 +1137,7 @@ export const Dollar = !browser
         <line x1="12" y1="1" x2="12" y2="23" />
         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
       </svg>
-    );
+    )
 
 // LOCK
 export const Lock = !browser
@@ -1159,7 +1159,7 @@ export const Lock = !browser
         <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
         <path d="M7 11V7a5 5 0 0 1 10 0v4" />
       </svg>
-    );
+    )
 
 // COPY
 export const Copy = !browser
@@ -1181,7 +1181,7 @@ export const Copy = !browser
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
       </svg>
-    );
+    )
 
 // LOADING
 export const Loading = !browser
@@ -1237,7 +1237,7 @@ export const Loading = !browser
           </g>
         </g>
       </svg>
-    );
+    )
 
 export default {
   Activity,
@@ -1291,5 +1291,5 @@ export default {
   Check,
   Shield,
   Plus,
-  More
-};
+  More,
+}

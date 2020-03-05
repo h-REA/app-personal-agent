@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import getReources from "../../queries/getInventory";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import { Query } from "react-apollo";
+import React from "react"
+import styled from "styled-components"
+import getReources from "../../queries/getInventory"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import { Query } from "react-apollo"
 // Import React Table
-import ReactTable from "react-table";
-import "react-table/react-table.css";
+import ReactTable from "react-table"
+import "react-table/react-table.css"
 
 
 const columns = [
@@ -14,42 +14,42 @@ const columns = [
       columns: [
         {
           Header: "Id",
-          accessor: "id"
+          accessor: "id",
         },
         {
           Header: "Name",
           id: "name",
-          accessor: d => d.name
-        }
-      ]
+          accessor: d => d.name,
+        },
+      ],
     },
     {
       Header: "Current Quantity",
       columns: [
         {
           Header: "Quantity",
-          accessor: "quantity"
+          accessor: "quantity",
         },
         {
           Header: "Unit",
-          accessor: "unit"
-        }
-      ]
+          accessor: "unit",
+        },
+      ],
     },
     {
       Header: "Category",
       columns: [
         {
           Header: "Taxonomy",
-          accessor: "taxonomy"
+          accessor: "taxonomy",
         },
         {
             Header: "Process Category",
-            accessor: "processCategory"
-        }
-      ]
-    }
-  ];
+            accessor: "processCategory",
+        },
+      ],
+    },
+  ]
 
 
 const Inventory = props => {
@@ -57,41 +57,43 @@ const Inventory = props => {
   <Query
     query={getReources}
     variables={{
-      id: Number(props.providerId)
+      id: Number(props.providerId),
     }}
   >
     {({ loading, error, data, refetch, client }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+ return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
-      var datat = data.agent.ownedEconomicResources.map(r => ({
+        ) 
+}
+      const datat = data.agent.ownedEconomicResources.map(r => ({
           id: r.id,
           name: r.resourceClassifiedAs.name,
           quantity: r.currentQuantity.numericValue,
           unit: r.currentQuantity.unit.name,
           taxonomy: r.resourceClassifiedAs.category,
-          processCategory: r.resourceClassifiedAs.processCategory
+          processCategory: r.resourceClassifiedAs.processCategory,
       }))
       console.log(data)
       return (
         <Body>
           <ReactTable
           data={datat}
-          filterable
+          filterable={true}
           defaultFilterMethod={(filter, row) =>
             String(row[filter.id]) === filter.value}
           columns={columns}
           defaultPageSize={10}
           className="-striped -highlight"
-          style={{flex: 1}}
+          style={{ flex: 1 }}
         />
         </Body>
-      );
+      )
     }}
   </Query>
-)};
+)
+}
 
 const Body = styled.div`
   flex: 1;
@@ -99,6 +101,6 @@ const Body = styled.div`
   flex-direction: row;
   margin: 8px;
   background: #fff;
-`;
+`
 
-export default Inventory;
+export default Inventory

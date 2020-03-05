@@ -1,10 +1,10 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import Intent from "../../components/agentintents/intents";
+import React from "react"
+import styled, { css } from "styled-components"
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import Intent from "../../components/agentintents/intents"
 import Timeline from './timeline'
 import Unplanned from './unplanned'
-import "react-tabs/style/react-tabs.css";
+import "react-tabs/style/react-tabs.css"
 
 export default props => (
   <Tabs>
@@ -43,18 +43,18 @@ export default props => (
       />
     </StyledTabPanel>
   </Tabs>
-);
+)
 
 const StyledTabList = styled(TabList)`
   border-bottom: 4px solid #d0e1fb40;
   margin: 0 0 10px;
   padding: 0;
   border-radius: 2px;
-`;
+`
 
 const StyledTabPanel = styled(TabPanel)`
   margin-top: 32px;
-`;
+`
 
 const StyledTab = styled(Tab)`
   display: inline-block;
@@ -88,4 +88,4 @@ const StyledTab = styled(Tab)`
         border-radius: 20px;
       }
     `};
-`;
+`

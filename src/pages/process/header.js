@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import  Icons  from "../../atoms/icons";
-import {NavLink} from 'react-router-dom'
-import Agents from "./agents";
+import React from "react"
+import styled from "styled-components"
+import  Icons  from "../../atoms/icons"
+import { NavLink } from 'react-router-dom'
+import Agents from "./agents"
 export default props => (
     <Wrapper>
         <Box>
-            <ScopeImg style={{backgroundImage: `url(${props.scope.image})`}} />
+            <ScopeImg style={{ backgroundImage: `url(${props.scope.image})` }} />
             <NavLink to={`/agent/${props.scope.id}`}><Scope>by {props.scope.name}</Scope></NavLink>
             {props.plan ? 
             <Plan>in {props.plan.name}</Plan>
@@ -16,7 +16,7 @@ export default props => (
             <Title>{props.title}</Title>
             <Note>{props.note}</Note>
             <WrapperAction>
-                <Date><span><Icons.Clock width='16' height='16' color='#F0F0F0' /></span> From {props.from} to {props.to}</Date>
+                <Date><span><Icons.Clock width="16" height="16" color="#F0F0F0" /></span> From {props.from} to {props.to}</Date>
             </WrapperAction>
             <Agents agents={props.agents} />
         </WrapperInfo>
@@ -45,7 +45,7 @@ font-weight: 500;
 margin-top: 4px;
 letter-spacing: 1px;
 line-height: 18px;
-color: ${props=>props.theme.color.p800}
+color: ${props => props.theme.color.p800}
 
 `
 const Plan = styled.h3`
@@ -53,12 +53,12 @@ const Plan = styled.h3`
   margin-top: 8px;
   margin-bottom: 0;
   font-weight: 400;
-  color: ${props=>props.theme.color.p800}
+  color: ${props => props.theme.color.p800}
 `
 const WrapperInfo = styled.div``
 const Title = styled.h1`
   font-size: 22px;
-  color: ${props=>props.theme.color.p900}
+  color: ${props => props.theme.color.p900}
   letter-spacing: 1px;
   margin-bottom: 0px;
   line-height: 40px;
@@ -68,7 +68,7 @@ font-size: 15px;
 line-height: 24px;
 letter-spacing: .5px;
 font-weight: 300;
-color: ${props=>props.theme.color.p900}
+color: ${props => props.theme.color.p900}
 `
 const WrapperAction = styled.div`
 margin-top: 8px;

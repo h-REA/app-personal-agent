@@ -1,10 +1,10 @@
-import React from "react";
-import s from "styled-components";
+import React from "react"
+import s from "styled-components"
 import Icons from '../../atoms/icons'
-import { Query } from "react-apollo";
-import InfoForm from "./infoForm";
-import gql from "graphql-tag";
-import { LoadingMini, ErrorMini } from "../loading";
+import { Query } from "react-apollo"
+import InfoForm from "./infoForm"
+import gql from "graphql-tag"
+import { LoadingMini, ErrorMini } from "../loading"
 
 const GET_AGENT = gql`
   query($token: String) {
@@ -18,7 +18,7 @@ const GET_AGENT = gql`
       }
     }
   }
-`;
+`
 
 export default ({ toggleInfo }) => (
   <Query
@@ -27,11 +27,12 @@ export default ({ toggleInfo }) => (
     }}
   >
     {({ loading, error, data, refetch, client }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+ return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
+        ) 
+}
       return (
         <Wrapper>
           <Header>
@@ -42,10 +43,10 @@ export default ({ toggleInfo }) => (
           </Header>
           <InfoForm agent={data.myAgent}/>
         </Wrapper>
-      );
+      )
     }}
   </Query>
-);
+)
 
 const Wrapper = s.div`
 position: absolute;
@@ -55,21 +56,21 @@ right: 0;
 z-index: 999999999;
 padding: 16px;
 background: #F0F0F0;
-`;
+`
 const Header = s.div`
 
-`;
+`
 
 const Span = s.div`
   display: inline-block;
   vertical-align: sub;
   margin-right: 16px;
   cursor: pointer;
-  `;
+  `
 
 const Title = s.h3`
   display: inline-block;
   color: ${props => props.theme.color.p900};
   letter-spacing: 0.5px;
   margin-bottom: 16px;
-`;
+`

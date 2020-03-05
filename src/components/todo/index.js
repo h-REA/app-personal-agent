@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Intent from "../agentintents/intents";
-import {compose, withState, withHandlers } from "recompose";
-import OutsideClickHandler from "react-outside-click-handler";
+import React from "react"
+import styled from "styled-components"
+import Intent from "../agentintents/intents"
+import { compose, withState, withHandlers } from "recompose"
+import OutsideClickHandler from "react-outside-click-handler"
 
 const Header = styled.div`
   height: 40px;
@@ -59,7 +59,7 @@ const Item = styled.div`
 export default compose(
   withState('isOpen', 'onOpen', false),
   withHandlers({
-    handleOpen: props => () => props.onOpen(!props.isOpen)
+    handleOpen: props => () => props.onOpen(!props.isOpen),
   })
 )(props => {
   return (
@@ -127,18 +127,18 @@ export default compose(
         ) : null}
       </WrapperIntents> */}
     </EventsInfo>
-  );
-});
+  )
+})
 
 const WrapperIntents = styled.div`
   position: relative;
-`;
+`
 
 const ContentIntents = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-`;
+`
 
 const EventsInfo = styled.div`
   will-change: transform;
@@ -146,4 +146,4 @@ const EventsInfo = styled.div`
   flex: 1;
   min-height: 100%;
   flex-direction: column;
-`;
+`

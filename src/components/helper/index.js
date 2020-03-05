@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { clearFix, transitions } from "polished";
+import React from "react"
+import styled from "styled-components"
+import { clearFix, transitions } from "polished"
 import Icons from '../../atoms/icons'
 import Select from 'react-select'
-import media from "styled-media-query";
+import media from "styled-media-query"
 
 const Module = styled.div`
   ${clearFix()};
@@ -31,19 +31,19 @@ const Module = styled.div`
     margin: 0;
     top: 40px;
   `}
-`;
+`
 
 const Header = styled.div`
   ${clearFix()};
   height: 60px;
-`;
+`
 
 const Span = styled.div`
   float: right;
   margin-right: 10px;
   margin-top: 20px;
   cursor: pointer;
-`;
+`
 
 const Title = styled.h2`
   margin-left: 10px;
@@ -51,18 +51,18 @@ const Title = styled.h2`
   float: left;
   color: ${props => props.theme.color.p900};
   font-weight: 300;
-`;
+`
 
 const Item = styled.div`
   font-size: ${props => props.theme.fontSize.h3};;
   color: ${props => props.theme.color.b100};
   font-weight: 500;
   letter-spacing: 0.5px;
-`;
+`
 
 const List = styled.div`
   ${clearFix()};
-`;
+`
 
 const ListItem = styled.div`
   ${clearFix()};
@@ -75,7 +75,7 @@ const ListItem = styled.div`
   &:last-of-type {
       border-bottom: 0;
   }
-`;
+`
 
 
 const Desc = styled.div`
@@ -85,12 +85,12 @@ const Desc = styled.div`
   font-style: italic;
   font-size: ${props => props.theme.fontSize.h3};
   color: ${props => props.theme.color.p200};
-`;
+`
 
 const options = [
     { value: '1', label: 'Write a message' },
     { value: '2', label: 'Log an economic event' },
-    { value: '3', label: 'Transfer a currency' }
+    { value: '3', label: 'Transfer a currency' },
   ]
 
 const customStyles = {
@@ -98,8 +98,8 @@ const customStyles = {
         ...base,
         borderRadius: 0,
         border: 0,
-        background: '#f3f6f9'
-    })
+        background: '#f3f6f9',
+    }),
 }
 
 const Helper = ({ isOpen, toggleModal, menuSelected, handleMenuSelection }) => {
@@ -112,9 +112,10 @@ const Helper = ({ isOpen, toggleModal, menuSelected, handleMenuSelection }) => {
       </Span>
     </Header>
     <List>
-      <Select styles={customStyles} onChange={handleMenuSelection} autoFocus={true} options={options} placeholder='Select an action...' />
+      <Select styles={customStyles} onChange={handleMenuSelection} autoFocus={true} options={options} placeholder="Select an action..." />
     </List>
   </Module>
-)};
+)
+}
 
 export default Helper

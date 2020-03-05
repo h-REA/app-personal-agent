@@ -1,11 +1,11 @@
-import { Mutation } from "react-apollo";
-import React from "react";
-import { compose } from "recompose";
-import UPDATE_COMMITMENT from "../../mutations/updateCommitment";
-import withNotif from "../notification";
-import gql from "graphql-tag";
+import { Mutation } from "react-apollo"
+import React from "react"
+import { compose } from "recompose"
+import UPDATE_COMMITMENT from "../../mutations/updateCommitment"
+import withNotif from "../notification"
+import gql from "graphql-tag"
 import Icons from '../../atoms/icons'
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
 export default compose(
   withNotif("Status is successfully updated", "Error! Status is not updated")
 )(
@@ -13,7 +13,7 @@ export default compose(
     intentId,
     isFinished,
     onError,
-    onSuccess
+    onSuccess,
   }) => {
     return (
       <Mutation
@@ -31,10 +31,10 @@ export default compose(
             `,
             data: {
               __typename: 'Commitment',
-              isFinished: updateCommitment.commitment.isFinished
-            }
-          });
-          return onSuccess();
+              isFinished: updateCommitment.commitment.isFinished,
+            },
+          })
+          return onSuccess()
         }}
       >
         {(editStatus, { data }) => (
@@ -42,14 +42,14 @@ export default compose(
               editStatus({
                 variables: {
                   id: intentId,
-                  isFinished: !isFinished
-                }
-              })} ><Icons.Check width='16' height='16' color='#3497ff' /></Status>
+                  isFinished: !isFinished,
+                },
+              })} ><Icons.Check width="16" height="16" color="#3497ff" /></Status>
         )}
       </Mutation>
-    );
+    )
   }
-);
+)
 
 const Status = styled.span`
 align-items: center;

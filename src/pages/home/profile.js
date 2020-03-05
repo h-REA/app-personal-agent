@@ -1,30 +1,31 @@
-import React from "react";
-import getFeed from "../../queries/getFeed";
-import Feed from "../../components/FeedItem";
-import moment from "moment";
-import { clearFix } from "polished";
-import { Query } from "react-apollo";
-import { LoadingMini, ErrorMini } from "../../components/loading";
-import styled from "styled-components";
+import React from "react"
+import getFeed from "../../queries/getFeed"
+import Feed from "../../components/FeedItem"
+import moment from "moment"
+import { clearFix } from "polished"
+import { Query } from "react-apollo"
+import { LoadingMini, ErrorMini } from "../../components/loading"
+import styled from "styled-components"
 import Beer from '../../atoms/beers.png'
 
 export default props => (
   <Query
     query={getFeed}
     variables={{
-      id: props.providerId
+      id: props.providerId,
     }}
   >
     {({ loading, error, data, client, refetch }) => {
-      if (loading) return <LoadingMini />;
-      if (error)
-        return (
+      if (loading) return <LoadingMini />
+      if (error) {
+return (
           <ErrorMini refetch={refetch} message={`Error! ${error.message}`} />
-        );
-      let feed = data.agent.agentEconomicEvents;
+        ) 
+}
+      const feed = data.agent.agentEconomicEvents
       return (
         <Contribution>
-          <Tagline><Span style={{backgroundImage: `url(${Beer})`}}/>Activities</Tagline>
+          <Tagline><Span style={{ backgroundImage: `url(${Beer})` }}/>Activities</Tagline>
           <Events>
             {feed.map((ev, i) => (
               <Feed
@@ -41,7 +42,7 @@ export default props => (
                 id={ev.id}
                 loggedUserId={props.providerId}
                 providerId={ev.provider.id}
-                withDelete
+                withDelete={true}
                 validations={ev.validations}
                 primary={
                   <FeedItem>
@@ -61,10 +62,10 @@ export default props => (
             ))}
           </Events>
         </Contribution>
-      );
+      )
     }}
   </Query>
-);
+)
 
 const Span = styled.span`
 vertical-align: middle;
@@ -79,24 +80,24 @@ vertical-align: middle;
 const Events = styled.div`
   ${clearFix()};
   position: relative;
-`;
+`
 const Contribution = styled.div`
   padding-left: 8px;
   background: #fff;
   padding: 8px;
   margin: 8px;
   border: 1px solid #e6ecf0;
-`;
+`
 
 const FeedItem = styled.div`
   font-size: ${props => props.theme.fontSize.h3};
   color: ${props => props.theme.color.p900}
-`;
+`
 
 const B = styled.b`
   font-weight: 500;
   color: #32211B;
-`;
+`
 
 const Tagline = styled.h3`
 color: #36393f;
@@ -112,4 +113,4 @@ margin-left: -8px;
 margin-right: -8px;
 line-height: 30px;
 padding: 0 10px;
-`;
+`

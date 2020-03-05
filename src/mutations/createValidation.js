@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from "graphql-tag"
 
 const createValidation = gql`
   mutation(
@@ -36,6 +36,6 @@ const createValidation = gql`
       }
     }
   }
-`;
+`
 
-export default createValidation;
+export default createValidation

@@ -1,13 +1,13 @@
-import { compose } from "recompose";
-import Component from "./logEvent";
-import moment from "moment";
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import createEvent from "../../mutations/createEvent";
-import { graphql } from "react-apollo";
-import { event } from "../../fragments/economicEvents";
-import gql from "graphql-tag";
-import withNotif from "../notification";
+import { compose } from "recompose"
+import Component from "./logEvent"
+import moment from "moment"
+import { withFormik } from "formik"
+import * as Yup from "yup"
+import createEvent from "../../mutations/createEvent"
+import { graphql } from "react-apollo"
+import { event } from "../../fragments/economicEvents"
+import gql from "graphql-tag"
+import withNotif from "../notification"
 
 const wrapperComponent = compose(
   withNotif(
@@ -19,19 +19,19 @@ const wrapperComponent = compose(
     mapPropsToValues: props => ({
       action: { value: props.action, label: props.action } || {
         value: "",
-        label: ""
+        label: "",
       },
       note: "",
       numericValue: "00.00" || "",
       unit: { value: props.unitId, label: props.unit } || {
         value: "",
-        label: ""
+        label: "",
       },
       date: moment(),
       affectedResourceClassifiedAsId: {
         value: props.resourceId,
-        label: props.resource
-      } || { value: "", label: "" }
+        label: props.resource,
+      } || { value: "", label: "" },
     }),
     validationSchema: Yup.object().shape({
       action: Yup.object().required(),
@@ -41,11 +41,11 @@ const wrapperComponent = compose(
       date: Yup.string(),
       affectedResourceClassifiedAsId: Yup.object().required(
         "Classification is a required field"
-      )
+      ),
     }),
     handleSubmit: (values, { props, resetForm, setErrors, setSubmitting }) => {
-      let date = moment(values.date).format("YYYY-MM-DD");
-      let eventMutationVariables = {
+      const date = moment(values.date).format("YYYY-MM-DD")
+      const eventMutationVariables = {
         id: props.providerId,
         providerId: props.providerId,
         receiverId: props.scopeId,
@@ -59,8 +59,8 @@ const wrapperComponent = compose(
         affectedUnitId: values.unit.value,
         start: date,
         affectedResourceClassifiedAsId:
-        values.affectedResourceClassifiedAsId.value
-      };
+        values.affectedResourceClassifiedAsId.value,
+      }
       return props
         .createEventMutation({
           variables: eventMutationVariables,
@@ -82,7 +82,7 @@ const wrapperComponent = compose(
               }`,
               fragment: fragment,
               fragmentName: "Comm",
-            });
+            })
 
             const ev = {
               __typename: "EconomicEvent",
@@ -98,13 +98,13 @@ const wrapperComponent = compose(
               fulfills: data.createEconomicEvent.economicEvent.fulfills,
               validations: [],
               affects: data.createEconomicEvent.economicEvent.affects,
-              affectedQuantity: data.createEconomicEvent.economicEvent.affectedQuantity
-            };
+              affectedQuantity: data.createEconomicEvent.economicEvent.affectedQuantity,
+            }
 
             commitment.fulfilledBy.unshift({
               fulfilledBy: ev,
-              __typename: "Fulfillment"
-            });
+              __typename: "Fulfillment",
+            })
             store.writeFragment({
               id: `Commitment-${
                 props.commitmentId
@@ -112,16 +112,16 @@ const wrapperComponent = compose(
               fragment: fragment,
               fragmentName: "Comm",
               data: commitment,
-            });
-          }
+            })
+          },
         })
         .then(res => {
           props.onSuccess()
           return props.closeLogEvent()
         })
-        .catch(err => props.onError());
-    }
+        .catch(err => props.onError())
+    },
   })
-)(Component);
+)(Component)
 
-export default wrapperComponent;
+export default wrapperComponent

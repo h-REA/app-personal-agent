@@ -1,20 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Login from "./pages/login";
-import { Query, graphql } from "react-apollo";
-import registerServiceWorker from "./registerServiceWorker";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { compose } from "recompose";
-import { ApolloProvider } from "react-apollo";
-import { client } from "./store";
-import AppTemplate from "./templates/AppTemplate";
-import { PrivateRoute } from "./helpers/router";
-import Notifications from "./components/notificationTemplate";
-import getNotification from "./queries/getNotifications";
-import updateNotification from "./mutations/updateNotification";
-import deleteNotification from "./mutations/deleteNotification";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import Dark from "./style/themeDark";
+import React from "react"
+import ReactDOM from "react-dom"
+import Login from "./pages/login"
+import { Query, graphql } from "react-apollo"
+import registerServiceWorker from "./registerServiceWorker"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { compose } from "recompose"
+import { ApolloProvider } from "react-apollo"
+import { client } from "./store"
+import AppTemplate from "./templates/AppTemplate"
+import { PrivateRoute } from "./helpers/router"
+import Notifications from "./components/notificationTemplate"
+import getNotification from "./queries/getNotifications"
+import updateNotification from "./mutations/updateNotification"
+import deleteNotification from "./mutations/deleteNotification"
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components"
+import Dark from "./style/themeDark"
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,400i,500,500i,700');
@@ -98,7 +98,7 @@ const GlobalStyle = createGlobalStyle`
       background: rgba(0,0,0,.1);
   }
 
-`;
+`
 
 const GenericAlert = styled.div`
   position: fixed;
@@ -106,7 +106,7 @@ const GenericAlert = styled.div`
   width: 320px;
   right: 10px;
   z-index: 99999999999999999999999999999999;
-`;
+`
 
 const NotificationsTemplate = props => {
   return (
@@ -116,13 +116,13 @@ const NotificationsTemplate = props => {
         dismiss={props.deleteNotification}
       />
     </GenericAlert>
-  );
-};
+  )
+}
 
 const EhnanchedNotifications = compose(
   graphql(updateNotification, { name: "updateNotification" }),
   graphql(deleteNotification, { name: "deleteNotification" })
-)(NotificationsTemplate);
+)(NotificationsTemplate)
 
 ReactDOM.render(
   <ThemeProvider theme={Dark}>
@@ -150,5 +150,5 @@ ReactDOM.render(
     </ApolloProvider>
   </ThemeProvider>,
   document.getElementById("root")
-);
-registerServiceWorker();
+)
+registerServiceWorker()

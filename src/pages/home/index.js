@@ -1,18 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import media from "styled-media-query";
-import Sidebar from "../../components/sidebar/sidebar";
-import { compose, withState, withHandlers } from "recompose";
-import Profile from "./profile";
-import { PropsRoute } from "../../helpers/router";
-import Requirements from "./requirements";
-import Processes from "./processes";
+import React from "react"
+import styled from "styled-components"
+import media from "styled-media-query"
+import Sidebar from "../../components/sidebar/sidebar"
+import { compose, withState, withHandlers } from "recompose"
+import Profile from "./profile"
+import { PropsRoute } from "../../helpers/router"
+import Requirements from "./requirements"
+import Processes from "./processes"
 import Inventory from '../inventory'
 
 export default compose(
   withState("event", "onEvent", "all"),
   withHandlers({
-    handleEvent: props => val => props.onEvent(val.value)
+    handleEvent: props => val => props.onEvent(val.value),
   })
 )(props => {
   return (
@@ -52,21 +52,21 @@ export default compose(
                 path={"/"}
                 providerId={props.providerId}
                 event={props.event}
-                exact
+                exact={true}
               />
               <PropsRoute
                 component={Inventory}
                 path={"/inventory"}
                 providerId={props.providerId}
-                exact
+                exact={true}
               />
             </Overview>
           </Inside>
         </Content>
       </Wrapper>
     </Body>
-  );
-});
+  )
+})
 
 const Wrapper = styled.div`
   display: flex;
@@ -81,7 +81,7 @@ const Wrapper = styled.div`
   ${media.lessThan("medium")`
     display: ${props => (props.isopen ? "none" : "flex")}
   `};
-`;
+`
 
 const Content = styled.div`
   flex: 1 1 auto;
@@ -91,7 +91,7 @@ const Content = styled.div`
   // background: #fff;
   // padding-top: 8px;
   margin-top: -8px;
-`;
+`
 
 const Inside = styled.div`
   display: flex;
@@ -101,17 +101,17 @@ const Inside = styled.div`
   position: relative;
   overflow-y: overlay;
   position: relative;
-`;
+`
 
 const Overview = styled.div`
   flex: 1;
   ${media.lessThan("medium")`
   width: 100%;
   `};
-`;
+`
 
 const Body = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
-`;
+`

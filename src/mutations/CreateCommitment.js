@@ -1,5 +1,5 @@
-import gql from "graphql-tag";
-import { event } from "../fragments/economicEvents";
+import gql from "graphql-tag"
+import { event } from "../fragments/economicEvents"
 
 const createCommitment = gql`
   mutation(
@@ -77,6 +77,6 @@ const createCommitment = gql`
     }
   }
   ${event}
-`;
+`
 
-export default createCommitment;
+export default createCommitment

@@ -2,7 +2,7 @@ import React from 'react'
 import CardModal from './validation'
 import Modal from '../modal'
 
-const NCModal = ({toggleModal,handleChange, note, myId, modalIsOpen, match, contributionId, createValidation, deleteValidation}) => (
+const NCModal = ({ toggleModal, handleChange, note, myId, modalIsOpen, match, contributionId, createValidation, deleteValidation }) => (
   <Modal
     isOpen={modalIsOpen}
     toggleModal={toggleModal}

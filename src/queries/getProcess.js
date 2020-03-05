@@ -1,5 +1,5 @@
-import gql from "graphql-tag";
-import { event } from "../fragments/economicEvents";
+import gql from "graphql-tag"
+import { event } from "../fragments/economicEvents"
 
 const getProcess = gql`
   query($token: String, $id: Int) {
@@ -85,6 +85,6 @@ const getProcess = gql`
       }
     }
   }
-  ${event}`;
+  ${event}`
 
-export default getProcess;
+export default getProcess

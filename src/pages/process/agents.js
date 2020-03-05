@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
+import React from "react"
+import styled from "styled-components"
 import Icons from '../../atoms/icons'
 
 export default props => (
     <Wrapper>
         <Title>
-            <span><Icons.Users width='16' height='16' color='#BEBEBE' /></span>
+            <span><Icons.Users width="16" height="16" color="#BEBEBE" /></span>
         </Title>
         <Content>
-            {props.agents.map((a,i) => (
+            {props.agents.map((a, i) => (
              <React.Fragment key={i}>
-                <Img key={i} style={{backgroundImage: `url(${a.image})`}} />
+                <Img key={i} style={{ backgroundImage: `url(${a.image})` }} />
              </React.Fragment>    
             ))}
         </Content>

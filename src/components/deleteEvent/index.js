@@ -1,11 +1,11 @@
-import { Mutation } from "react-apollo";
-import DELETE_EVENT from "../../mutations/deleteEvent";
+import { Mutation } from "react-apollo"
+import DELETE_EVENT from "../../mutations/deleteEvent"
 import Icons from '../../atoms/icons'
-import React from "react";
-import styled from "styled-components";
-import { compose } from "recompose";
-import gql from "graphql-tag";
-import withNotif from "../notification";
+import React from "react"
+import styled from "styled-components"
+import { compose } from "recompose"
+import gql from "graphql-tag"
+import withNotif from "../notification"
 
 export default compose(
   withNotif("Event successfully deleted", "error! evet had not been deleted")
@@ -26,13 +26,13 @@ export default compose(
                 }
               }
             }
-          `
-        });
+          `,
+        })
 
-        let eventIndexFromCommitment = commitment.fulfilledBy.findIndex(
+        const eventIndexFromCommitment = commitment.fulfilledBy.findIndex(
           ev => ev.fulfilledBy.id === eventId
-        );
-        commitment.fulfilledBy.splice(eventIndexFromCommitment, 1);
+        )
+        commitment.fulfilledBy.splice(eventIndexFromCommitment, 1)
         store.writeFragment({
           id: `Commitment-${commitmentId}`,
           fragment: gql`
@@ -45,8 +45,8 @@ export default compose(
               }
             }
           `,
-          data: commitment
-        });
+          data: commitment,
+        })
         onSuccess()
       }}
     >
@@ -55,8 +55,8 @@ export default compose(
           onClick={() =>
             deleteEvent({
               variables: {
-                id: eventId
-              }
+                id: eventId,
+              },
             })
           }
         >
@@ -67,8 +67,8 @@ export default compose(
         </Action>
       )}
     </Mutation>
-  );
-});
+  )
+})
 
 const ActionTitle = styled.h3`
   margin-left: 4px;
@@ -80,7 +80,7 @@ const ActionTitle = styled.h3`
   font-size: 12px;
   letter-spacing: 1px;
   color: ${props => props.theme.color.p200};
-`;
+`
 
 const Action = styled.div`
   cursor: pointer;
@@ -100,7 +100,7 @@ const Action = styled.div`
     top: 15px;
     border-radius: 100px;
   }
-`;
+`
 
 const Span = styled.span`
   vertical-align: sub;
@@ -111,4 +111,4 @@ const Span = styled.span`
   & svg {
     height: 30px;
   }
-`;
+`

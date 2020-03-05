@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import { clearFix, placeholder } from "polished";
-import media from "styled-media-query";
+import styled from "styled-components"
+import { clearFix, placeholder } from "polished"
+import media from "styled-media-query"
 
 const Module = styled.div`
   ${clearFix()};
@@ -12,7 +12,7 @@ const Module = styled.div`
     left: 0;
     margin: 0;
   `};
-`;
+`
 
 const Log = styled.div`
   margin-top: 0px;
@@ -25,7 +25,7 @@ const Log = styled.div`
     font-size: 18px;
   }
   ${clearFix()};
-`;
+`
 // TO DELETE!!!!
 const Header = styled.div`
   margin-top: 0px;
@@ -38,14 +38,14 @@ const Header = styled.div`
   ${media.lessThan("medium")`
   padding-left: 4px;
   `};
-`;
+`
 
 const Title = styled.h3`
   float: left;
   color: ${props => props.theme.color.p200};
   height: 40px;
   line-height: 40px;
-`;
+`
 
 const SentenceAction = styled.h3`
   font-size: ${props => props.theme.fontSize.h3};
@@ -60,7 +60,7 @@ const SentenceAction = styled.h3`
   text-overflow: ellipsis;
   overflow: hidden;
   text-transform: capitalize;
-`;
+`
 const Of = styled.span`
   font-size: ${props => props.theme.fontSize.h2};
   color: ${props => props.theme.color.p800};
@@ -70,7 +70,7 @@ const Of = styled.span`
   float: left;
   width: 20px;
   margin-right: 8px;
-`;
+`
 
 const Note = styled.div`
 position: relative;
@@ -107,7 +107,7 @@ ${clearFix()}
     }
     ${placeholder({ color: "#b2b2bc6" })};
   }
-`;
+`
 
 const PublishActions = styled.div`
   height: 36px;
@@ -120,7 +120,7 @@ const PublishActions = styled.div`
     margin-top: 2px;
     margin-left: 8px;
   }
-`;
+`
 
 const ItemDate = styled.div`
   background: transparent;
@@ -197,7 +197,7 @@ const ItemDate = styled.div`
     font-size: 13px;
     font-weight: 400;
   }
-`;
+`
 
 const ItemDistribution = styled.div`
   margin-right: 10px;
@@ -210,7 +210,7 @@ const ItemDistribution = styled.div`
     margin-left: 10px;
     font-size: 13px;
   }
-`;
+`
 
 const Span = styled.span`
   float: left;
@@ -218,7 +218,7 @@ const Span = styled.span`
   margin-top: 10px;
   cursor: pointer;
   margin-right: 10px;
-`;
+`
 
 export default {
   Module,
@@ -231,5 +231,5 @@ export default {
   PublishActions,
   Note,
   SentenceAction,
-  Of
-};
+  Of,
+}
