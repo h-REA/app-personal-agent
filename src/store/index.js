@@ -1,12 +1,12 @@
 import { ApolloClient } from 'apollo-client'
-// import {HttpLink} from 'apollo-link-http'
-import { SchemaLink } from 'apollo-link-schema'
+import { ApolloLink } from 'apollo-link'
+import { withClientState } from 'apollo-link-state'
 import { InMemoryCache, IntrospectionFragmentMatcher } from 'apollo-cache-inmemory'
+
 import introspectionQueryResultData from '../fragmentTypes.json'
 import { defaults, resolvers } from "./resolvers"
-import { withClientState } from 'apollo-link-state'
-import { ApolloLink } from 'apollo-link'
-import schema from '@valueflows/vf-graphql-holochain'
+
+import initGraphQLClient from '@vf-ui/graphql-client'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
@@ -15,33 +15,31 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 const cache = new InMemoryCache({
   dataIdFromObject: object => {
     const dataId = object.id ? `${object.__typename}-${object.id}` : null
-    return dataId 
+    return dataId
 },
   addTypename: true,
   fragmentMatcher,
 })
 
-const stateLink = withClientState({
-  cache,
-  defaults: defaults,
-  resolvers: resolvers,
-})
+/**
+ * Inject client notification state into base GraphQL client
+ */
+export default async function getClient() {
+  const baseClient = await initGraphQLClient()
 
-const link = ApolloLink.from([
-  stateLink,
-  new SchemaLink({ schema }),
-  // new HttpLink({
-  // uri: 'https://ocp.freedomcoop.eu/api/graph'
-  // uri: 'https://testocp.freedomcoop.eu/api/graph'
-  // })
-])
-
-export const client = new ApolloClient({
-  link,
-  cache: cache.restore(window.__APOLLO_CLIENT__),
-  ssrMode: true,
-  ssrForceFetchDelay: 100,
-  connectToDevTools: true,
-  queryDeduplication: true,
-})
-
+  return new ApolloClient({
+    link: ApolloLink.from([
+      withClientState({
+        cache,
+        defaults: defaults,
+        resolvers: resolvers,
+      }),
+      baseClient.link,
+    ]),
+    cache: cache.restore(window.__APOLLO_CLIENT__),
+    ssrMode: true,
+    ssrForceFetchDelay: 100,
+    connectToDevTools: true,
+    queryDeduplication: true,
+  })
+}

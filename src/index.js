@@ -6,7 +6,7 @@ import registerServiceWorker from "./registerServiceWorker"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { compose } from "recompose"
 import { ApolloProvider } from "react-apollo"
-import { client } from "./store"
+import getClient from "./store"
 import AppTemplate from "./templates/AppTemplate"
 import { PrivateRoute } from "./helpers/router"
 import Notifications from "./components/notificationTemplate"
@@ -124,31 +124,40 @@ const EhnanchedNotifications = compose(
   graphql(deleteNotification, { name: "deleteNotification" })
 )(NotificationsTemplate)
 
-ReactDOM.render(
-  <ThemeProvider theme={Dark}>
-    <ApolloProvider client={client}>
-      <GlobalStyle />
-      <Router>
-        <AppTemplate />
-      </Router>
-    {/* <div>
-          <GlobalStyle />
-          <Query query={getNotification}>
-            {({ data: { notifications } }) => {
-              return <EhnanchedNotifications notifications={notifications} />;
-            }}
-          </Query>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <PrivateRoute
-              path="/"
-              component={AppTemplate}
-              redirectTo="/login"
-            />
-          </Switch>
-        </div> */ }
-    </ApolloProvider>
-  </ThemeProvider>,
-  document.getElementById("root")
-)
-registerServiceWorker()
+// :TODO: do a proper loading thing for this
+
+getClient()
+  .then(renderApp)
+  .catch(console.error.bind(console))
+
+
+function renderApp(client) {
+  ReactDOM.render(
+    <ThemeProvider theme={Dark}>
+      <ApolloProvider client={client}>
+        <GlobalStyle />
+        <Router>
+          <AppTemplate />
+        </Router>
+      {/* <div>
+            <GlobalStyle />
+            <Query query={getNotification}>
+              {({ data: { notifications } }) => {
+                return <EhnanchedNotifications notifications={notifications} />;
+              }}
+            </Query>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <PrivateRoute
+                path="/"
+                component={AppTemplate}
+                redirectTo="/login"
+              />
+            </Switch>
+          </div> */ }
+      </ApolloProvider>
+    </ThemeProvider>,
+    document.getElementById("root")
+  )
+  registerServiceWorker()
+}
