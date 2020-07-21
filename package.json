@@ -35,7 +35,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "react-scripts start",
+    "start": "REACT_APP_HC_CONN_URL='ws://localhost:4001' react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
