@@ -1,14 +1,19 @@
 dependencies:
   '@vf-ui/graphql-client': 'link:../app-offers-needs-marketplace/src/graphql-client'
   apollo-boost: 0.1.16_graphql@15.3.0
+  apollo-cache-inmemory: 1.6.6_graphql@15.3.0
+  apollo-client: 2.6.10_graphql@15.3.0
+  apollo-link: 1.2.14_graphql@15.3.0
   apollo-link-schema: 1.2.5_graphql@15.3.0
+  apollo-link-state: 0.4.2_8108cd78cc05493dce00434013882cdf
   axios: 0.19.2
   formik: 1.3.0_react@16.13.1
-  graphql: 15.3.0
+  graphql: 'link:../app-offers-needs-marketplace/node_modules/.pnpm/graphql@14.7.0/node_modules/graphql'
+  graphql-tag: 2.10.4_graphql@15.3.0
   moment: 2.22.2
   polished: 2.0.3
   react: 16.13.1
-  react-apollo: 2.1.11_react@16.13.1
+  react-apollo: 2.1.11_aa19693612fa90a48f4ed04fd8b6fa70
   react-datepicker: 1.6.0_950f3813430dedce50234552436d32a8
   react-dom: 16.5.2_react@16.13.1
   react-outside-click-handler: 1.2.2_react-dom@16.5.2+react@16.13.1
@@ -2271,6 +2276,7 @@ packages:
     dependencies:
       apollo-link: 1.2.14_graphql@15.3.0
       apollo-utilities: 1.3.4_graphql@15.3.0
+      graphql: 15.3.0
       graphql-anywhere: 4.2.7_graphql@15.3.0
     dev: false
     peerDependencies:
@@ -9662,8 +9668,9 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-4Oz8DUIwdvoa5qMJelxipzi/iJIi40O5cGV1wNYp5hvZP8ZN0T+jiNkL0QepXs+EsQ9XJ8ipEDoiH70ySUJP3Q==
-  /react-apollo/2.1.11_react@16.13.1:
+  /react-apollo/2.1.11_aa19693612fa90a48f4ed04fd8b6fa70:
     dependencies:
+      apollo-client: 2.6.10_graphql@15.3.0
       fbjs: 0.8.17
       hoist-non-react-statics: 2.5.5
       invariant: 2.2.4
@@ -12395,12 +12402,17 @@ packages:
 specifiers:
   '@vf-ui/graphql-client': 'link:../app-offers-needs-marketplace/src/graphql-client'
   apollo-boost: 0.1.16
+  apollo-cache-inmemory: ^1.6.6
+  apollo-client: ^2.6.10
+  apollo-link: ^1.2.14
   apollo-link-schema: ^1.2.5
+  apollo-link-state: ^0.4.2
   axios: ^0.19.2
   babel-eslint: ^10.1.0
   eslint-config-pospi: ^1.0.5
   formik: 1.3.0
   graphql: ^15.0.0
+  graphql-tag: ^2.10.4
   moment: 2.22.2
   polished: 2.0.3
   react: ^16.5.1
